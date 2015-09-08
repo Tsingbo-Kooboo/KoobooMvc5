@@ -9,7 +9,7 @@
 using System.Reflection;
 [assembly: AssemblyProduct("Kooboo.CMS")]
 [assembly: AssemblyCompany("Yardi Technology Limited")]
-[assembly: AssemblyCopyright("Copyright © Yari 2009-2013")]
+[assembly: AssemblyCopyright("Copyright © Yardi 2009-2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: AssemblyVersion("4.4.1.0908")]
