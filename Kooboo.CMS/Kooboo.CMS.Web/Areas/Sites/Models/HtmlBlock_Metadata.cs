@@ -36,7 +36,7 @@ namespace Kooboo.CMS.Web.Areas.Sites.Models
         [GridColumn(HeaderText = "Latest modification date", Order = 2, GridColumnType = typeof(SortableGridColumn), GridItemColumnType = typeof(DateTimeGridItemColumn))]
         public string LastUpdateDate { get; set; }
 
-        [GridColumn(HeaderText = "Editor", Order = 3, GridColumnType = typeof(SortableGridColumn), GridItemColumnType = typeof(InheritableEditGridActionItemColumn))]
+        [GridColumn(HeaderText = "Editor", Order = 3, GridColumnType = typeof(SortableGridColumn))]
         public string UserName { get; set; }
 
         [UIHint("Tinymce")]
