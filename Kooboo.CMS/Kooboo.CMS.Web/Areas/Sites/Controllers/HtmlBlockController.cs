@@ -43,7 +43,7 @@ namespace Kooboo.CMS.Web.Areas.Sites.Controllers
 
             var ns = Manager.GetNamespace(Site).GetNamespaceNode(nsStr);
             ViewData["NameSpace"] = ns;
-            return View(List(search, sortField, sortDir));
+            return View(List(search, sortField, sortDir).Select(it => it.AsActual()));
         }
 
         #endregion
