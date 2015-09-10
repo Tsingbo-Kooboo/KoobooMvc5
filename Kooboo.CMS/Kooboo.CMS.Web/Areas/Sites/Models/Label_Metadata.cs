@@ -30,7 +30,7 @@ namespace Kooboo.CMS.Web.Areas.Sites.Models
         [GridColumn(HeaderText = "Creation date", GridColumnType = typeof(SortableGridColumn), GridItemColumnType = typeof(DateTimeGridItemColumn), Order = 4)]
         public DateTime? UtcCreationDate { get; set; }
 
-        [GridColumn(HeaderText = "Lastest modification date", GridColumnType = typeof(SortableGridColumn), GridItemColumnType = typeof(DateTimeGridItemColumn), Order = 5)]
+        [GridColumn(HeaderText = "Latest modification date", GridColumnType = typeof(SortableGridColumn), GridItemColumnType = typeof(DateTimeGridItemColumn), Order = 5)]
         public DateTime? UtcLastestModificationDate { get; set; }
 
         [GridColumn(HeaderText = "Editor", GridColumnType = typeof(SortableGridColumn), Order = 6)]

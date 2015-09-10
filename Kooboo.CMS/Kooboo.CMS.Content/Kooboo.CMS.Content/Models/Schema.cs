@@ -109,7 +109,9 @@ namespace Kooboo.CMS.Content.Models
         public static Column UtcLastModificationDate = new Column()
         {
             Name = "UtcLastModificationDate",
-            Label = "UtcLastModificationDate",
+            Label = "Latest modification date",
+            ShowInGrid = true,
+            Order = 999,
             DataType = Common.DataType.DateTime,
             ControlType = "Hidden"
         };
@@ -145,7 +147,9 @@ namespace Kooboo.CMS.Content.Models
         public static Column UserId = new Column()
         {
             Name = "UserId",
-            Label = "UserId",
+            Label = "Editor",
+            ShowInGrid = true,
+            Order = 1000,
             DataType = DataType.String,
             Length = 36,
             ControlType = "Hidden"
@@ -462,7 +466,7 @@ namespace Kooboo.CMS.Content.Models
 
         IEnumerable<IColumn> ISchema.Columns
         {
-            get { return Columns.Concat(new[] { Column.UtcCreationDate, Column.Published }).OrderBy(it => it.Order); }
+            get { return Columns.Concat(new[] { Column.UtcCreationDate, Column.Published, Column.UtcLastModificationDate, Column.UserId }).OrderBy(it => it.Order); }
         }
         IColumn ISchema.this[string columnName]
         {
