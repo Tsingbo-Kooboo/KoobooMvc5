@@ -1096,7 +1096,7 @@ function parse_JsonResultData(response, statusText, xhr, $form) {
                     $notification.addClass('error');
                 }
                 $notification.animate({ right: 0 }, 'fast');
-                setTimeout(timeoutHide, timeout || 3000);
+                //setTimeout(timeoutHide, timeout || 3000);
             };
             $close.click(function () {
                 hide();
