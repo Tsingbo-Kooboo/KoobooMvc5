@@ -42,7 +42,11 @@ namespace Kooboo.CMS.Web.Areas.Sites.Controllers
             string nsStr = ControllerContext.RequestContext.GetRequestValue("ns");
 
             var ns = Manager.GetNamespace(Site).GetNamespaceNode(nsStr);
-            ViewData["NameSpace"] = ns;
+            if (string.IsNullOrEmpty(search))
+            {
+                // do not show "folders" in search result
+                ViewData["NameSpace"] = ns;
+            }
             return View(List(search, sortField, sortDir).Select(it => it.AsActual()));
         }
 

@@ -34,11 +34,33 @@ namespace Kooboo.CMS.Sites.Services
         {
             if (string.IsNullOrEmpty(ns))
             {
-                return All(site, filter).Where(it => !it.Name.Contains(".", StringComparison.CurrentCultureIgnoreCase));
+                if (string.IsNullOrEmpty(filter))
+                {
+                    return
+                        All(site, filter).Where(it => !it.Name.Contains(".", StringComparison.CurrentCultureIgnoreCase));
+                }
+                //search both in name & body. it's an inefficient way, but it's the only way
+                //return All(site, filter).Where(it => !it.Name.Contains(".", StringComparison.CurrentCultureIgnoreCase));
+                return
+                    All(site, null)
+                        .Where(
+                            it =>
+                                it.Name.Contains(filter, StringComparison.CurrentCultureIgnoreCase) ||
+                                it.AsActual().Body.Contains(filter, StringComparison.CurrentCultureIgnoreCase));
             }
             else
-                return All(site, filter).Where(it => it.Name.StartsWith(ns + ".", StringComparison.CurrentCultureIgnoreCase)
+            {
+                if (string.IsNullOrEmpty(filter))
+                {
+                    return All(site, filter).Where(it => it.Name.StartsWith(ns + ".", StringComparison.CurrentCultureIgnoreCase)
                     && it.Name.Split(".".ToArray(), StringSplitOptions.RemoveEmptyEntries).Length == ns.Split(".".ToArray(), StringSplitOptions.RemoveEmptyEntries).Length + 1);
+
+                }
+                return All(site, null).Where(it => it.Name.StartsWith(ns + ".", StringComparison.CurrentCultureIgnoreCase)
+                    && it.Name.Split(".".ToArray(), StringSplitOptions.RemoveEmptyEntries).Length == ns.Split(".".ToArray(), StringSplitOptions.RemoveEmptyEntries).Length + 1)
+                    .Where(it => it.Name.Contains(filter, StringComparison.CurrentCultureIgnoreCase) || it.AsActual().Body.Contains(filter, StringComparison.CurrentCultureIgnoreCase));
+
+            }
         }
         #endregion
 
