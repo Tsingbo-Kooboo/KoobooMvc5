@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -8,14 +8,14 @@
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{C5803C24-EEEE-4A7E-8F2F-B0FB66287845}</ProjectGuid>
-    <ProjectTypeGuids>{E53F8FEA-EAE0-44A6-8774-FFD645390401};{349C5851-65DF-11DA-9384-00065B846F21};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <ProjectTypeGuids>{349C5851-65DF-11DA-9384-00065B846F21};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Kooboo.CMS.Web</RootNamespace>
     <AssemblyName>Kooboo.CMS.Web</AssemblyName>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <OldToolsVersion>4.0</OldToolsVersion>
@@ -26,6 +26,7 @@
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <MvcProjectUpgradeChecked>true</MvcProjectUpgradeChecked>
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -62,12 +63,15 @@
       <HintPath>..\..\Lib\dotLess\dotless.Core.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\Lib\JSON.NET\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Caching" />
@@ -80,14 +84,36 @@
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions" />
     <Reference Include="System.Web.Extensions" />
-    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Lib\MVC\4.0\System.Web.Mvc.dll</HintPath>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Lib\MVC\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Routing" />
-    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Lib\MVC\4.0\System.Web.WebPages.dll</HintPath>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
@@ -95,7 +121,6 @@
     <Reference Include="CookComputing.XmlRpcV2, Version=2.5.0.0, Culture=neutral, PublicKeyToken=a7d6e17aa302004d">
       <HintPath>..\..\Lib\CookComputing.XmlRpcV2.dll</HintPath>
     </Reference>
-    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\CMSAssemblyInfoGlobal.cs">
@@ -2541,7 +2566,7 @@
     <Content Include="Styles\repository-flowchart.less" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Cms_Data\" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\_ToolbarButton.cshtml" />
@@ -2560,6 +2585,58 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Sites\Views\PageDesign\HtmlBlockItem.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Layouts\member_layout\setting.config" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Layouts\member_layout\template.cshtml" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Layouts\one_column\setting.config" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Layouts\one_column\template.cshtml" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Layouts\two_column\setting.config" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Layouts\two_column\template.cshtml" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Article.Category\setting.config" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Article.Category\template.cshtml" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Article.Detail.Return\setting.config" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Article.Detail.Return\template.cshtml" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Article.Detail\setting.config" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Article.Detail\template.cshtml" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Article.List\ParameterTemplate.cshtml" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Article.List\setting.config" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Article.List\template.cshtml" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Article.Search\setting.config" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Article.Search\template.cshtml" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Contactus\setting.config" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Contactus\template.cshtml" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Footer\setting.config" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Footer\template.cshtml" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\LoginForm\setting.config" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\LoginForm\template.cshtml" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\LoginStatus\setting.config" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\LoginStatus\template.cshtml" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Member.Activate\setting.config" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Member.Activate\template.cshtml" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Member.ChangePassword\setting.config" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Member.ChangePassword\template.cshtml" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Member.ForgotPassword\setting.config" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Member.ForgotPassword\template.cshtml" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Member.Index\setting.config" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Member.Index\template.cshtml" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Member.Login\setting.config" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Member.Login\template.cshtml" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Member.Nav\setting.config" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Member.Nav\template.cshtml" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Member.Register\setting.config" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Member.Register\template.cshtml" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Member.ResetPassword\setting.config" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Member.ResetPassword\template.cshtml" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Menu\setting.config" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Menu\template.cshtml" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\TestListTwo\setting.config" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\TestListTwo\template.cshtml" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\TestList\setting.config" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\TestList\template.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -2602,8 +2679,8 @@
     </MonoDevelop>
   </ProjectExtensions>
   <PropertyGroup>
-    <PostBuildEvent>copy "..\..\..\Lib\MVC\4.0\*.dll"  "$(TargetDir)";
-@echo copy "..\..\..\Lib\SQLCe\*.*" "$(TargetDir)"</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <PreBuildEvent>

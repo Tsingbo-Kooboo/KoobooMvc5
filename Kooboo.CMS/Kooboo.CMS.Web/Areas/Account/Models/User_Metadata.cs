@@ -63,7 +63,7 @@ namespace Kooboo.CMS.Web.Areas.Account.Models
         [DataType(DataType.Password)]
         [Display(Name = "Re-enter password")]
         [Required(ErrorMessage = "Required")]
-        [Compare("NewPassword")]
+        [System.Web.Mvc.Compare("NewPassword")]
         public string NewPassword1 { get; set; }
     }
 

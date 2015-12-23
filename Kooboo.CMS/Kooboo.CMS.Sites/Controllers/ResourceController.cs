@@ -50,7 +50,7 @@ namespace Kooboo.CMS.Sites.Controllers
 
             return null;
         }
-        private string CompressJavascript(IEnumerable<IPath> jsFiles, bool? compressed)
+        protected string CompressJavascript(IEnumerable<IPath> jsFiles, bool? compressed)
         {
             StringBuilder sb = new StringBuilder();
             foreach (var file in jsFiles)
@@ -100,7 +100,7 @@ namespace Kooboo.CMS.Sites.Controllers
             Output(CompressCss(styles), "text/css", 2592000, "*");
             return null;
         }
-        private string CompressCss(IEnumerable<IPath> cssFiles)
+        protected string CompressCss(IEnumerable<IPath> cssFiles)
         {
             StringBuilder sb = new StringBuilder();
             foreach (var file in cssFiles)
@@ -165,7 +165,7 @@ namespace Kooboo.CMS.Sites.Controllers
         #endregion
 
         #region Output
-        private void Output(string content, string contentType, int cacheDuration, params string[] varyByParams)
+        protected void Output(string content, string contentType, int cacheDuration, params string[] varyByParams)
         {
             HttpResponseBase response = Response;
             response.ContentType = contentType;
@@ -278,7 +278,7 @@ namespace Kooboo.CMS.Sites.Controllers
                 return File(cachingPath, IOUtility.MimeType(imageFullPath));
             }
         }
-        private string GetCachingFilePath(string imagePath, int width, int height, bool preserverAspectRatio, int quality)
+        protected string GetCachingFilePath(string imagePath, int width, int height, bool preserverAspectRatio, int quality)
         {
             var lastModeifyDate = System.IO.File.GetLastWriteTimeUtc(imagePath);
             var baseDir = Kooboo.CMS.Common.Runtime.EngineContext.Current.Resolve<IBaseDir>();

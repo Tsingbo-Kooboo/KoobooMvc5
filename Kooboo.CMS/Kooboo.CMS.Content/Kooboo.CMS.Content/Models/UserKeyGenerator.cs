@@ -86,7 +86,7 @@ namespace Kooboo.CMS.Content.Models
             Repository repository = content.GetRepository().AsActual();
             tmpUserKey = Regex.Replace(tmpUserKey, repository.UserKeyReplacePattern, repository.UserKeyHyphens);
 
-            return tmpUserKey;
+            return tmpUserKey.Replace("--","-");
         }
         protected virtual string RemoveDiacritics(string value)
         {

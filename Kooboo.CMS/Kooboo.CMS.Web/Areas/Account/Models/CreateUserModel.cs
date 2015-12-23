@@ -39,7 +39,7 @@ namespace Kooboo.CMS.Web.Areas.Account.Models
 
         [Display(Name = "Confirm password")]
         [DataType(DataType.Password)]
-        [Compare("Password")]
+        [System.Web.Mvc.Compare("Password")]
         public string ConfirmPassword { get; set; }
         [Display(Name = "Is administrator")]
         public bool IsAdministrator { get; set; }
