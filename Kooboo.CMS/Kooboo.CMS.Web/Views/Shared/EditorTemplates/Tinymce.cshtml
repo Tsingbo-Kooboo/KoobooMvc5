@@ -20,7 +20,13 @@
 <tr>
     <th>
         <label for="@ViewData.TemplateInfo.GetFullHtmlFieldId(propertyName)">
-            @ViewData.ModelMetadata.GetDisplayName().Localize()</label>
+            @ViewData.ModelMetadata.GetDisplayName().Localize()
+        </label>
+        <div class="tip">
+            <input type="checkbox" checked="checked" id="@(string.Format("{0}{1}",propertyName,FormHelper.CSSLoadTogglerNameSuffix))" class="@FormHelper.CSSLoadTogglerNameSuffix">
+            <label for="@(string.Format("{0}{1}",propertyName,FormHelper.CSSLoadTogglerNameSuffix))">@("Load site css".Localize())</label>
+        </div>
+
         @if (!string.IsNullOrEmpty(ViewData.ModelMetadata.Description))
         {
             <a href="#" class="tooltip-link" title="@ViewData.ModelMetadata.Description.Localize()"></a>

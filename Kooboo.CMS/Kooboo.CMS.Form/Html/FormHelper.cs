@@ -21,6 +21,13 @@ namespace Kooboo.CMS.Form.Html
 {
     public static class FormHelper
     {
+        #region Constants
+
+        public const string CSSLoadTogglerNameSuffix = "_css_loading_toggler";
+        public const string TinymceIframeIdSuffix = "_ifr";
+        public const string SiteCssPathIdentifier = "/cms_data/sites/";
+        #endregion
+
         #region Static
         static string TemplateDir = "";
         static string TemplateVirtualPath = "";

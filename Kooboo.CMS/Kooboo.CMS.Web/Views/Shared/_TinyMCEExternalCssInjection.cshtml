@@ -25,6 +25,32 @@
                     };
                 }
             }());
+
+            $(function () {
+                setTimeout(function () {
+                    $(".@(FormHelper.CSSLoadTogglerNameSuffix)").each(function () {
+                        var fieldId = $(this).attr("id");
+                        var fieldName = fieldId.substring(0, fieldId.indexOf('@FormHelper.CSSLoadTogglerNameSuffix'));
+                        var $iframeHead = $('#' + fieldName + '@(FormHelper.TinymceIframeIdSuffix)').contents().find('head');
+                        var $siteCssClone = $iframeHead.find('link[rel="stylesheet"]').filter(function () {
+                            return this.href.toLowerCase().indexOf('/cms_data/sites/') > -1;
+                        }).clone();
+
+                        $(this).change(function () {
+                            if ($(this).is(':checked')) {
+                                $iframeHead.append($siteCssClone);
+                            } else {
+                                var $siteCss = $iframeHead.find('link[rel="stylesheet"]').filter(function () {
+                                    return this.href.toLowerCase().indexOf('@FormHelper.SiteCssPathIdentifier') > -1;
+                                });
+                                $siteCss.each(function () {
+                                    $(this).remove();
+                                });
+                            }
+                        });
+                    });
+                }, 1000);
+            });
         </script>
     }
 }
