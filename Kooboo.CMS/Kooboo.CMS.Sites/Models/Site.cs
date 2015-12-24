@@ -103,6 +103,29 @@ namespace Kooboo.CMS.Sites.Models
         }
         #endregion
 
+        #region Root
+        public static Site Root
+        {
+            get
+            {
+                if(Current.Parent == null)
+                {
+                    return Current;
+                }
+
+                var root = Current.Parent;
+                var parent = Current.Parent;
+                while(parent != null)
+                {
+                    root = parent;
+                    parent = parent.Parent;
+                }
+                
+                return root.AsActual();
+            }
+        }
+        #endregion
+
         #region .ctor
         public Site()
         {
