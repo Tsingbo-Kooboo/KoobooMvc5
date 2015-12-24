@@ -36,19 +36,5 @@
             </tbody>
         </table>
     }
-
-    @if (ViewBag.ExternalCssSetting != null)
-    {
-        <script type="text/javascript">
-            (function () {
-                var old = tinymce.getKoobooConfig;
-                tinymce.getKoobooConfig = function () {
-                    var ret = old.apply(this, arguments);
-                    ret.content_css = '@Html.Raw(ViewBag.ExternalCssSetting)';
-                    return ret;
-                };
-            }());
-        </script>
-    }
-
+    @Html.Partial("~/Views/Shared/_TinyMCEExternalCssInjection.cshtml")
 </div>

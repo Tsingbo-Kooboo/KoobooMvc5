@@ -2638,6 +2638,9 @@
     <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\TestList\setting.config" />
     <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\TestList\template.cshtml" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_TinyMCEExternalCssInjection.cshtml" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

@@ -27,6 +27,7 @@
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
     <OldToolsVersion>12.0</OldToolsVersion>
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -2099,6 +2100,7 @@
     <Content Include="Views\Shared\_ToolbarButton.cshtml" />
     <Content Include="Views\Shared\_ToolbarGroupButtons.cshtml" />
     <Content Include="packages.config" />
+    <Content Include="Views\Shared\_TinyMCEExternalCssInjection.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
