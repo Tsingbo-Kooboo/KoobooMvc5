@@ -191,27 +191,28 @@ namespace Kooboo.CMS.Sites.View
         public virtual IHtmlString MediaContentUrl(string fullFoldername, string fileName)
         {
             var mediaFolder = new Kooboo.CMS.Content.Models.MediaFolder(this.Site.GetRepository(), fullFoldername);
+            var htmlString = string.Empty;
 
-            HtmlString htmlString = new HtmlString("");
             if (string.IsNullOrEmpty(fullFoldername))
             {
-                return htmlString;
+                return new HtmlString(htmlString);
             }
+
             if (string.IsNullOrEmpty(fileName))
             {
                 var folderPath = new FolderPath(mediaFolder);
-                htmlString = new HtmlString(this.Url.Content(folderPath.VirtualPath));
+                htmlString = this.Url.Content(folderPath.VirtualPath);
             }
             else
             {
                 var mediaContent = mediaFolder.CreateQuery().WhereEquals("FileName", fileName).FirstOrDefault();
                 if (mediaContent != null)
                 {
-                    htmlString = new HtmlString(this.Url.Content(mediaContent.VirtualPath));
+                    htmlString = this.Url.Content(mediaContent.VirtualPath);
                 }
             }
 
-            return htmlString;
+            return ResourceCDNUrl(htmlString);
 
         }
         /// <summary>
