@@ -35,6 +35,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.Caching;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
@@ -48,6 +49,12 @@ namespace Kooboo.CMS.Sites.View
     /// </summary>
     public class FrontHtmlHelper
     {
+        #region Constants
+
+        private const string HTMLSrcLikeAttributes = "src href poster archive"; //html attributes specified an external resource
+        private const string CDNSupportedElements = "img script link audio video object embed"; //html elements that refered to an exteral resource which can be hosted in CDN
+        #endregion
+
         #region Static
 
         public static string GeneratedByHtmlBlockComment = @"
@@ -306,7 +313,7 @@ namespace Kooboo.CMS.Sites.View
         #region Partial Render
 
         #region Render htmlblock
-        public virtual IHtmlString RenderHtmlBlock(string htmlBlockName)
+        public virtual IHtmlString RenderHtmlBlock(string htmlBlockName, bool resolveCDNResource = true)
         {
             var htmlBlock = (new HtmlBlock(PageContext.PageRequestContext.Site, htmlBlockName).LastVersion()).AsActual();
             var htmlString = new HtmlString("");
@@ -327,11 +334,32 @@ namespace Kooboo.CMS.Sites.View
                 {
                     body = string.Format(GeneratedByHtmlBlockComment, htmlBlockName, body);
                 }
-                htmlString = new HtmlString(body);
+
+                htmlString = resolveCDNResource ? ResolveCDNResourceInHtmlBlock(body) : new HtmlString(body);
             }
 
-            return htmlString;
+            return  htmlString;
 
+        }
+
+        private HtmlString ResolveCDNResourceInHtmlBlock(string html)
+        {
+
+            string strRegex = string.Format("<[{0}].+?[{1}]=[\"'](.+?)[\"'].*?>", CDNSupportedElements, HTMLSrcLikeAttributes);
+            Regex regex = new Regex(strRegex, RegexOptions.IgnoreCase);
+
+            MatchCollection matches = regex.Matches(html);
+            foreach (var match in matches)
+            {
+                string oldUri = ((Match)(match)).Groups[1].Value.ToLower();
+                if (!oldUri.Contains("http://") && !oldUri.Contains("https://") && oldUri.Contains(new BaseDir().Cms_DataPathName.ToLower()))
+                {
+                    string cdnUri = PageContext.FrontUrl.ResourceCDNUrl(oldUri).ToString();
+                    html = Regex.Replace(html, oldUri, cdnUri, RegexOptions.IgnoreCase);
+                }
+            }
+
+            return new HtmlString(html);
         }
         #endregion
 
