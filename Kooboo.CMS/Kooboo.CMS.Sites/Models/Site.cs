@@ -764,6 +764,10 @@ namespace Kooboo.CMS.Sites.Models
         /// </value>
         [DataMember]
         public string UserAgent { get; set; }
+
+
+        [DataMember]
+        public bool LowerCasePageUrl { get; set; }
     }
     #endregion
 }

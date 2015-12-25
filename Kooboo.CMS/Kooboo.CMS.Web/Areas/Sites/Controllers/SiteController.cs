@@ -533,6 +533,7 @@ namespace Kooboo.CMS.Web.Areas.Sites.Controllers
                     site.Membership = model.Membership;
                     site.SSLDetection = model.SSLDetection;
                     site.UserAgent = model.UserAgent;
+                    site.LowerCasePageUrl = model.LowerCasePageUrl;
 
                     ServiceFactory.SiteManager.Update(site);
                     resultData.AddMessage("Site setting has been changed.".Localize());

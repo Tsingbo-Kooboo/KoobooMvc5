@@ -132,5 +132,9 @@ namespace Kooboo.CMS.Web.Areas.Sites.Models
         [DisplayName("Device")]
         [Description("Used to create sites for special devices only, you can define regex expression to match the Browser User-Agent.<br />Only matched devices are allowed to view this site.")]
         public string UserAgent { get; set; }
+
+
+        [DisplayName("Output lower case page urls")]
+        public bool LowerCasePageUrl { get; set; }
     }
 }

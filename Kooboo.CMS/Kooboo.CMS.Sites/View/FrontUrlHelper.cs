@@ -106,7 +106,6 @@ namespace Kooboo.CMS.Sites.View
                 url = url + "/";
             }
 
-
             #region SSL
             if (requireSSL.HasValue)
             {
@@ -129,7 +128,7 @@ namespace Kooboo.CMS.Sites.View
 
             #endregion
 
-            return new HtmlString(url);
+            return new HtmlString(site.LowerCasePageUrl? url.ToLower() : url);
         }
 
         #endregion
