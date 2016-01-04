@@ -84,6 +84,7 @@
     <Compile Include="Html\Controls\ControlBase.cs" />
     <Compile Include="Html\Controls\CLEditor.cs" />
     <Compile Include="Html\Controls\CheckBoxList.cs" />
+    <Compile Include="Html\Controls\DatetTime.cs" />
     <Compile Include="Html\Controls\Password.cs" />
     <Compile Include="Html\Controls\HighlightEditor.cs" />
     <Compile Include="Html\Controls\RadioList.cs" />

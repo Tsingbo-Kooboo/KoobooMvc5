@@ -56,6 +56,7 @@ namespace Kooboo.CMS.Form.Html
             RegisterControl(new Password());
             //RegisterControl(new InputNumber());
             //RegisterControl(new CLEditor());
+            RegisterControl(new DatetTime());
         }
         #endregion
 
