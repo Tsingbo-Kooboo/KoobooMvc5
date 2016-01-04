@@ -768,6 +768,9 @@ namespace Kooboo.CMS.Sites.Models
 
         [DataMember]
         public bool LowerCasePageUrl { get; set; }
+
+        [DataMember]
+        public bool RemoveTrailingSlash { get; set; }
     }
     #endregion
 }

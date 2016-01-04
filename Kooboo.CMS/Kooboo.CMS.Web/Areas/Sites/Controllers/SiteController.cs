@@ -534,6 +534,7 @@ namespace Kooboo.CMS.Web.Areas.Sites.Controllers
                     site.SSLDetection = model.SSLDetection;
                     site.UserAgent = model.UserAgent;
                     site.LowerCasePageUrl = model.LowerCasePageUrl;
+                    site.RemoveTrailingSlash = model.RemoveTrailingSlash;
 
                     ServiceFactory.SiteManager.Update(site);
                     resultData.AddMessage("Site setting has been changed.".Localize());

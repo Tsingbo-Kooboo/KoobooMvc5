@@ -228,6 +228,7 @@
     <Compile Include="Persistence\ISubmissionSettingProvider.cs" />
     <Compile Include="Persistence\FileSystem\SubmissionSettingProvider.cs" />
     <Compile Include="NullSiteContextException.cs" />
+    <Compile Include="SEO\SEORequestModule.cs" />
     <Compile Include="Services\ABPageTestResultManager.cs" />
     <Compile Include="Services\IManager.cs" />
     <Compile Include="Services\PageCachingManager.cs" />
@@ -615,6 +616,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
