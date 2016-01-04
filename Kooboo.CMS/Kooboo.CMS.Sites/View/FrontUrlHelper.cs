@@ -128,7 +128,7 @@ namespace Kooboo.CMS.Sites.View
 
             #endregion
 
-            return new HtmlString(site.LowerCasePageUrl? url.ToLower() : url);
+            return new HtmlString(site.OutputLowerCasePageUrl? url.ToLower() : url);
         }
 
         #endregion

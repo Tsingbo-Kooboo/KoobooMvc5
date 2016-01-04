@@ -6,20 +6,14 @@
 // See the file LICENSE.txt for details.
 // 
 #endregion
+
+using System;
+using System.Web;
 using Kooboo.CMS.Common.Runtime.Dependency;
 using Kooboo.CMS.Sites.Extension;
-using Kooboo.CMS.Sites.Services;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Web;
-using Kooboo.CMS.Sites.Controllers;
 using Kooboo.CMS.Sites.Models;
 
-namespace Kooboo.CMS.Sites.ABTest
+namespace Kooboo.CMS.Sites.SEO
 {
     [Dependency(typeof(IPageRequestModule), Key = "SEORequestModule", Order = 0)]
     public class SEORequestModule : PageRequestModuleBase
@@ -27,37 +21,46 @@ namespace Kooboo.CMS.Sites.ABTest
         public override void OnResolvedSite(HttpContextBase httpContext)
         {
             var site = Site.Current;
-            if (httpContext.Request.HttpMethod.ToLower() != "get")
+            var request = httpContext.Request;
+            var response = httpContext.Response;
+            if (request.HttpMethod.ToUpper() != "GET" || site == null)
             {
                 return;
             }
 
-            string rawPath = httpContext.Request.Path;
+            string rawPath = request.Path;
             string path = rawPath;
-            string query = httpContext.Request.Url.Query;
+            string query = request.Url.Query;
 
-            if (!path.Equals("/"))
+            var redirectUrl = string.Empty;
+
+            if (!path.Equals("/") && site.RemoveTrailingSlash)
             {
-                if (site.LowerCasePageUrl)
-                {
-                    path = path.ToLower();
-                }
+                path = path.TrimEnd('/');
 
-                if (string.IsNullOrEmpty(query))
+                if (!path.Equals(rawPath))
                 {
-                    path = path.TrimEnd('/');
+                    redirectUrl = path + query;
                 }
             }
 
-            bool forceRedirect = site.RemoveTrailingSlash && !path.Equals(rawPath);
-            if (forceRedirect)
+            if (!request.Url.Host.StartsWith("www.") && site.DisableNakedDomain)
             {
-                string redirectUrl = path + query;
-                httpContext.Response.RedirectPermanent(redirectUrl, false);
+                var builder = new UriBuilder(request.Url);
+                builder.Host = "www." + request.Url.Host;
+                builder.Path = path;
+                builder.Query = HttpUtility.ParseQueryString(query).ToString();
+                redirectUrl = builder.ToString();
             }
-            else
+
+            if (site.OutputLowerCasePageUrl)
             {
-                base.OnResolvedSite(httpContext);
+                redirectUrl = redirectUrl.ToLower();
+            }
+
+            if (!string.IsNullOrEmpty(redirectUrl))
+            {
+                response.RedirectPermanent(redirectUrl, false);
             }
         }
     }

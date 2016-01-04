@@ -124,8 +124,9 @@
                             <tr>
                                 <th></th>
                                 <td>
-                                    @Html.EditorFor(m => m.LowerCasePageUrl)
+                                    @Html.EditorFor(m => m.OutputLowerCasePageUrl)
                                     @Html.EditorFor(m => m.RemoveTrailingSlash)
+                                    @Html.EditorFor(m => m.DisableNakedDomain)
                                 </td>
                             </tr>
                         </tbody>

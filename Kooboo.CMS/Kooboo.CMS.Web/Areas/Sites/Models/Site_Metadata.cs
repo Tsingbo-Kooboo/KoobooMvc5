@@ -135,9 +135,12 @@ namespace Kooboo.CMS.Web.Areas.Sites.Models
 
 
         [DisplayName("Output lower case page urls")]
-        public bool LowerCasePageUrl { get; set; }
+        public bool OutputLowerCasePageUrl { get; set; }
 
         [DisplayName("Remove trailing slashes in requested urls")]
         public bool RemoveTrailingSlash { get; set; }
+
+        [DisplayName("Add 'www.' prefix to naked domain")]
+        public bool DisableNakedDomain { get; set; }
     }
 }

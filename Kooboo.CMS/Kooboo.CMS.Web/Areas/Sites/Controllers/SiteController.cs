@@ -533,8 +533,9 @@ namespace Kooboo.CMS.Web.Areas.Sites.Controllers
                     site.Membership = model.Membership;
                     site.SSLDetection = model.SSLDetection;
                     site.UserAgent = model.UserAgent;
-                    site.LowerCasePageUrl = model.LowerCasePageUrl;
+                    site.OutputLowerCasePageUrl = model.OutputLowerCasePageUrl;
                     site.RemoveTrailingSlash = model.RemoveTrailingSlash;
+                    site.DisableNakedDomain = model.DisableNakedDomain;
 
                     ServiceFactory.SiteManager.Update(site);
                     resultData.AddMessage("Site setting has been changed.".Localize());

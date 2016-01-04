@@ -767,10 +767,13 @@ namespace Kooboo.CMS.Sites.Models
 
 
         [DataMember]
-        public bool LowerCasePageUrl { get; set; }
+        public bool OutputLowerCasePageUrl { get; set; }
 
         [DataMember]
         public bool RemoveTrailingSlash { get; set; }
+
+        [DataMember]
+        public bool DisableNakedDomain { get; set; }
     }
     #endregion
 }
