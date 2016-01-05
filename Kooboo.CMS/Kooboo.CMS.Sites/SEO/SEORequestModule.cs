@@ -60,7 +60,9 @@ namespace Kooboo.CMS.Sites.SEO
 
             if (!string.IsNullOrEmpty(redirectUrl))
             {
-                response.RedirectPermanent(redirectUrl, false);
+                response.StatusCode = 301;
+                response.AddHeader("Location", redirectUrl);
+                response.End();
             }
         }
     }
