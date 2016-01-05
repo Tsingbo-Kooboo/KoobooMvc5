@@ -23,7 +23,6 @@ namespace Kooboo.CMS.Form.Html
     {
         #region Constants
 
-        public const string CSSLoadTogglerNameSuffix = "_css_loading_toggler";
         public const string TinymceIframeIdSuffix = "_ifr";
         public const string SiteCssPathIdentifier = "/cms_data/sites/";
         #endregion

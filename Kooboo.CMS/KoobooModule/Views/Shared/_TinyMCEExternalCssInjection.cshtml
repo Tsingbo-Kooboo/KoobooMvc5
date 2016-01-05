@@ -15,15 +15,41 @@
     {
         <script type="text/javascript">
             (function () {
+                var siteCss = '@Html.Raw(css) ';
+                tinymce.PluginManager.add('siteCss', function (editor, url) {
+                    editor.addButton('siteCss', {
+                        text: 'Site CSS',
+                        icon: false,
+                        onclick: function () {
+                            this.active(!this.active());
+                            var buttonPressed = this.active();
+                            var fieldName = editor.id;
+                            var $iframeHead = $('#' + fieldName + '@(FormHelper.TinymceIframeIdSuffix)').contents().find('head');
+                            if (buttonPressed) {
+                                $.each(siteCss.split(','), function (index, url) {
+                                    var link = $(document.createElement('link')).attr({ rel: 'stylesheet', href: url, type: 'text/css' });
+                                    $iframeHead.append(link);
+                                });
+                            } else {
+                                var $siteCss = $iframeHead.find('link[rel="stylesheet"]').filter(function () {
+                                    return this.href.toLowerCase().indexOf('@FormHelper.SiteCssPathIdentifier') > -1;
+                                });
+                                $siteCss.each(function () {
+                                    $(this).remove();
+                                });
+                            }
+
+                        }
+                    });
+                });
+
                 var old = tinymce.getKoobooConfig;
-                var config = old();
-                if (!!!config.content_css) {
-                    tinymce.getKoobooConfig = function () {
-                        var ret = old.apply(this, arguments);
-                        ret.content_css = '@Html.Raw(css) ';
-                        return ret;
-                    };
-                }
+                tinymce.getKoobooConfig = function () {
+                    var ret = old.apply(this, arguments);
+                    ret.plugins.push('siteCss');
+                    ret.toolbar = ret.toolbar + ' | siteCss';
+                    return ret;
+                };
             }());
         </script>
     }
