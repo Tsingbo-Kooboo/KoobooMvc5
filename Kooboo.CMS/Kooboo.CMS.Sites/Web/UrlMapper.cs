@@ -17,7 +17,7 @@ namespace Kooboo.CMS.Sites.Web
 {
     public interface IUrlMapper
     {
-        bool Map(Site site, string inputUrl, out string outputUrl, out RedirectType redirectType);
+        bool Map(Site site, string inputUrl, string inputHost, out string outputUrl, out string outputHost, out RedirectType redirectType);
     }
     public static class UrlMapperFactory
     {
@@ -31,11 +31,12 @@ namespace Kooboo.CMS.Sites.Web
     {
         #region IUrlMapper Members
 
-        public bool Map(Site site, string inputUrl, out string outputUrl, out RedirectType redirectType)
+        public bool Map(Site site, string inputUrl, string inputHost, out string outputUrl, out string outputHost, out RedirectType redirectType)
         {
             outputUrl = string.Empty;
+            outputHost = string.Empty;
             redirectType = RedirectType.Found_Redirect_302;
-            if (string.IsNullOrEmpty(inputUrl))
+            if (string.IsNullOrEmpty(inputUrl) || string.IsNullOrEmpty(inputHost))
             {
                 return false;
             }
@@ -52,10 +53,12 @@ namespace Kooboo.CMS.Sites.Web
                 {
                     try
                     {
-                        if (Regex.IsMatch(inputUrl, inputPattern, RegexOptions.IgnoreCase))
+                        if (Regex.IsMatch(inputUrl, inputPattern, RegexOptions.IgnoreCase)
+                            && (string.IsNullOrEmpty(setting.OutputHost) || inputHost.EqualsOrNullEmpty(setting.InputHost, StringComparison.CurrentCultureIgnoreCase)))
                         {
                             outputUrl = Regex.Replace(inputUrl, inputPattern, setting.OutputUrl, RegexOptions.IgnoreCase);
                             redirectType = setting.RedirectType;
+                            outputHost = setting.OutputHost;
                             return true;
                         }
                     }
@@ -67,10 +70,12 @@ namespace Kooboo.CMS.Sites.Web
                 }
                 else
                 {
-                    if (inputUrl.EqualsOrNullEmpty(inputPattern, StringComparison.CurrentCultureIgnoreCase))
+                    if (inputUrl.EqualsOrNullEmpty(inputPattern, StringComparison.CurrentCultureIgnoreCase) 
+                        && (string.IsNullOrEmpty(setting.OutputHost) || inputHost.EqualsOrNullEmpty(setting.InputHost, StringComparison.CurrentCultureIgnoreCase)))
                     {
                         outputUrl = setting.OutputUrl;
                         redirectType = setting.RedirectType;
+                        outputHost = setting.OutputHost;
                         return true;
                     }
                 }

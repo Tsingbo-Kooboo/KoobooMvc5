@@ -83,6 +83,12 @@ namespace Kooboo.CMS.Sites.Models
         [DataMember]
         public string LastestEditor { get; set; }
 
+        [DataMember]
+        public string InputHost { get; set; }
+
+        [DataMember]
+        public string OutputHost { get; set; }
+
     }
 
     public partial class UrlRedirect : ISiteObject, IFilePersistable, IPersistable, IIdentifiable

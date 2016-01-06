@@ -20,6 +20,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Kooboo.CMS.Web.Areas.Sites.Models.DataSources;
 
 
 namespace Kooboo.CMS.Web.Areas.Sites.Models
@@ -30,23 +31,37 @@ namespace Kooboo.CMS.Web.Areas.Sites.Models
     {
         public UrlRedirect_Metadata()
         {
-            UrlRedirect map = new UrlRedirect();
+            //UrlRedirect map = new UrlRedirect();
         }
 
-        [GridColumn(Order = 1,HeaderText="Input URL/Pattern", GridColumnType = typeof(SortableGridColumn), GridItemColumnType = typeof(EditGridActionItemColumn))]
+        [GridColumn(Order = 1,HeaderText= "Input Domain", GridColumnType = typeof(SortableGridColumn), GridItemColumnType = typeof(EditGridActionItemColumn))]
+        [Required(ErrorMessage = "Required")]
+        [UIHint("DropDownList")]
+        [DataSource(typeof(SiteDomainsDataSource))]
+        [Display(Name = "Input Domain")]
+        public string InputHost { get; set; }
+
+        [GridColumn(Order = 2, HeaderText = "Input URL/Pattern", GridColumnType = typeof(SortableGridColumn), GridItemColumnType = typeof(EditGridActionItemColumn))]
         [Description("An ordinary string OR regular expression to match the request URL, for example: oldpage_(\\w+).")]
         [Required(ErrorMessage = "Required")]
         [Remote("IsInputUrlAvailable", "UrlRedirect", AdditionalFields = "SiteName,old_Key")]
         [Display(Name = "Input URL/Pattern")]
         public string InputUrl { get; set; }
 
-        [GridColumn(Order = 2,HeaderText="Output URL/Pattern", GridColumnType = typeof(SortableGridColumn))]
+        [GridColumn(Order = 3, HeaderText = "Output Domain", GridColumnType = typeof(SortableGridColumn))]
+        [Required(ErrorMessage = "Required")]
+        [UIHint("DropDownList")]
+        [DataSource(typeof(SiteDomainsDataSource))]
+        [Display(Name = "Output Domain")]
+        public string OutputHost { get; set; }
+
+        [GridColumn(Order = 4,HeaderText="Output URL/Pattern", GridColumnType = typeof(SortableGridColumn))]
         [Required(ErrorMessage = "Required")]
         [Description("An ordinary string OR regular expression to replace the matched request URL, for example: newpage_$1.")]
         [Display(Name = "Output URL/Pattern")]
         public string OutputUrl { get; set; }
 
-        [GridColumn(Order = 3, GridColumnType = typeof(SortableGridColumn), HeaderText = "Regex", GridItemColumnType = typeof(BooleanGridItemColumn))]
+        [GridColumn(Order = 5, GridColumnType = typeof(SortableGridColumn), HeaderText = "Regex", GridItemColumnType = typeof(BooleanGridItemColumn))]
         [Description("Use either normal text matching or regular expression")]
         [DisplayName("Regex")]
         [UIHint("RadioButtonList")]

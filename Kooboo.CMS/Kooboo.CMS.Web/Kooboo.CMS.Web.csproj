@@ -250,6 +250,7 @@
     <Compile Include="Areas\Sites\Models\DataSources\MembershipDataSource.cs" />
     <Compile Include="Areas\Sites\Models\DataSources\SiteMembershipGroupDataSource.cs" />
     <Compile Include="Areas\Sites\Models\DataSources\SubmissionPluginsDataSource.cs" />
+    <Compile Include="Areas\Sites\Models\DataSources\SiteDomainsDataSource.cs" />
     <Compile Include="Areas\Sites\Models\Grid2\ABPageTestHitsReport_HitTimes_GridItemColumn.cs" />
     <Compile Include="Areas\Sites\Models\Grid2\ABPageTestHitsReport_ShowTimes_GridItemColumn.cs" />
     <Compile Include="Areas\Sites\Models\Grid2\Inheritable_Status_GridItemColumn.cs" />
