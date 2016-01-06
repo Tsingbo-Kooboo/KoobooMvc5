@@ -73,7 +73,7 @@ namespace Kooboo.Web.Mvc
             var cultures = System.Globalization.CultureInfo.GetCultures(System.Globalization.CultureTypes.SpecificCultures);
             foreach (var c in cultures.OrderBy(c => c.DisplayName))
             {
-                yield return new SelectListItem() { Text = c.NativeName, Value = c.Name, Selected = c.Equals(System.Threading.Thread.CurrentThread.CurrentCulture) };
+                yield return new SelectListItem() { Text = string.Format("{0} | {1}", c.EnglishName, c.NativeName), Value = c.Name, Selected = c.Equals(System.Threading.Thread.CurrentThread.CurrentCulture) };
             }
         }
 
