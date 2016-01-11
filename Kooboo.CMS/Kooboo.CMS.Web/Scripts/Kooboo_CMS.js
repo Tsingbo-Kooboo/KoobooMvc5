@@ -73,7 +73,22 @@ function parse_JsonResultData(response, statusText, xhr, $form) {
 };
 
 
-(function ($) {
+(function ($, ko) {
+    //todo: better module/DI management 
+    var kooboo = this.kooboo = this.kooboo || {};
+    var constants = kooboo.constants = kooboo.constants || {};
+    constants.messageToptics = {
+        'SomeThing_Changed_On_Page': 'Common/PageChanged'
+    };
+    $(function () {
+        //disable save button till someting is changed on page
+        $("button[data-no-change-disabled]").attr("disabled", "disabled");
+        //todo: better pub/sub implementation
+        $.subscribe(kooboo.constants.messageToptics.SomeThing_Changed_On_Page, function (event, info) {
+            $("button[data-no-change-disabled]").removeAttr("disabled");
+        });
+    });
+
     $.fn.dialogLink = function () {
         return this.find('a.dialog-link').one('click', function (e) {
             e.preventDefault();
@@ -1128,6 +1143,7 @@ function parse_JsonResultData(response, statusText, xhr, $form) {
             }
             var stop = function () {
                 canLeave = false;
+                $.publish(kooboo.constants.messageToptics.SomeThing_Changed_On_Page);
             }
             var pass = function () {
                 canLeave = true;
@@ -1347,5 +1363,5 @@ function parse_JsonResultData(response, statusText, xhr, $form) {
             }
         }
     });
-})(jQuery);
+})(jQuery, ko);
 

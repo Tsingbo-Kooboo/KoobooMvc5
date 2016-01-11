@@ -1,7 +1,7 @@
 ﻿@model Kooboo.CMS.Sites.Models.Page
 @{
     ViewBag.Title = "New page".Localize();
-    Layout = "~/Views/Shared/Blank.cshtml";
+    Layout = "~/Views/Shared/Site.cshtml";
     var publishPermission = ServiceFactory.UserManager.Authorize(Kooboo.CMS.Sites.Models.Site.Current, ViewContext.HttpContext.User.Identity.Name, Kooboo.CMS.Account.Models.Permission.Sites_Page_PublishPermission);
 }
 @section Panel{
@@ -9,13 +9,13 @@
         @if (publishPermission)
         {
             <li class="j_DropDown">
-                <a>
+                <button data-no-change-disabled>
                     @Html.IconImage("save")
                     @Html.IconImage("arrow small white-down")
                     @("Save".Localize())
-                </a>
+                </button>
                 <ul class="j_DropDownContent hide">
-                    <li><a data-ajaxform="">@("Save".Localize())</a></li>
+                    <li><a data-ajaxform="" id="save_bar">@("Save".Localize())</a></li>
                     <li><a data-ajaxform=""  href="@Url.Action("CreateEx", "Page", ViewContext.RequestContext.AllRouteValues().Merge("setPublished", "true"))">@("Save & publish".Localize())</a></li>
                 </ul>
             </li>

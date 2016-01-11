@@ -9,11 +9,11 @@
         @if (publishPermission)
         {
             <li class="j_DropDown">
-                <a>
+                <button data-no-change-disabled>
                     @Html.IconImage("save")
                     @Html.IconImage("arrow small white-down")
                     @("Save".Localize())
-                </a>
+                </button>
                 <ul class="j_DropDownContent hide">
                     <li><a data-ajaxform="" id="save_bar">@("Save".Localize())</a></li>
                     <li><a data-ajaxform=""  href="@Url.Action("CreateEx", "Page", ViewContext.RequestContext.AllRouteValues().Merge("setPublished", "true"))">@("Save & publish".Localize())</a></li>

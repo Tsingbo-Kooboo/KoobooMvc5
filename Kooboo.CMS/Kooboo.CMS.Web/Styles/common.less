@@ -98,11 +98,16 @@ body {
 			position: relative;
 		}
 
-		a {
+		a,
+        button{
 			display: block;
 			line-height: 40px;
 			padding: 0 10px;
 			white-space: nowrap;
+            &[disabled]{
+                cursor:not-allowed;
+                opacity:.5;
+            }
 		}
 
 		.active > a {

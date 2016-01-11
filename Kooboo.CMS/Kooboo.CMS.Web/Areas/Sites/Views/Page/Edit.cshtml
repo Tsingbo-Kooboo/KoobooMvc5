@@ -7,11 +7,11 @@
 @section Panel{
     <ul class="panel">
         <li class="j_DropDown">
-            <a>
+            <button data-no-change-disabled>
                 @Html.IconImage("save")
                 @Html.IconImage("arrow small white-down")
                 @("Save".Localize())
-            </a>
+            </button>
             <ul class="j_DropDownContent hide">
                 @if (Model.Published.Value == false || (Model.Published.Value == true && publishPermission))
                 {
