@@ -125,6 +125,7 @@
     <Compile Include="Areas\KoobooModule\Controllers\HomeController.cs" />
     <Compile Include="Areas\KoobooModule\ModuleAreaRegistration.cs" />
     <Compile Include="Areas\KoobooModule\ModuleEvents.cs" />
+    <Compile Include="Areas\Sites\Views\Page\PageIndexToolbarProvider.cs" />
     <Compile Include="Extensions\ABTest\SampleABRule.cs" />
     <Compile Include="Extensions\ContentEvent\CustomContentEventSubscriber.cs" />
     <Compile Include="Extensions\MembershipConnectClient\DictionaryExtensions.cs" />
@@ -303,7 +304,9 @@
     <Content Include="Areas\Membership\Views\Membership\_MembershipNode.cshtml" />
     <Content Include="Areas\Membership\Views\Shared\Site.cshtml" />
     <Content Include="Areas\Membership\Views\Shared\__Sidebar.cshtml" />
-    <Content Include="Areas\Membership\Views\Web.config" />
+    <Content Include="Areas\Membership\Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Areas\Membership\WebResources.config" />
     <Content Include="Areas\Sites\CodeSnippets\NVelocity\ContentQuery\CreateQuery.txt" />
     <Content Include="Areas\Sites\CodeSnippets\NVelocity\ContentQuery\MediaFolder.txt" />
@@ -2101,6 +2104,9 @@
     <Content Include="Views\Shared\_ToolbarGroupButtons.cshtml" />
     <Content Include="packages.config" />
     <Content Include="Views\Shared\_TinyMCEExternalCssInjection.cshtml" />
+    <Content Include="Areas\Sites\Views\HtmlBlock\_Grid2.cshtml" />
+    <Content Include="Areas\Sites\Views\PageDesign\HtmlBlockItem.cshtml" />
+    <Content Include="Areas\Sites\Views\PageDesign\HtmlBlockNamespace.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

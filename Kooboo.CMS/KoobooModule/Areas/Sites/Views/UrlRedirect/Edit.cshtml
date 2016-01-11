@@ -32,7 +32,9 @@
         <table>
             <tbody>
                 @Html.EditorFor(m => m.Regex)
+                @Html.EditorFor(m => m.InputHost, new { HtmlAttributes = new { @class = "medium" } })
                 @Html.EditorFor(m => m.InputUrl, new { HtmlAttributes = new { @class = "medium" } })
+                @Html.EditorFor(m => m.OutputHost, new { HtmlAttributes = new { @class = "medium" } })
                 @Html.EditorFor(m => m.OutputUrl, new { HtmlAttributes = new { @class = "medium" } })
                 @Html.EditorFor(m => m.RedirectType, new { HtmlAttributes = new { @class = "medium" } })
             </tbody>
