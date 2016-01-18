@@ -47,5 +47,8 @@ namespace Kooboo
         /// 
         /// </summary>
         public static readonly string[] CssArray = Css.Split(',');
+
+
+        public const string Script = ".js";
     }
 }

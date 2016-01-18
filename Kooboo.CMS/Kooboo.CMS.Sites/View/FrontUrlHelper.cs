@@ -406,6 +406,17 @@ namespace Kooboo.CMS.Sites.View
             }
             else
             {
+                if (site != null && site.Mode == ReleaseMode.Release)
+                {
+                    if (relativeScriptFilePath.EndsWith(FileExtensions.Script, StringComparison.OrdinalIgnoreCase))
+                    {
+                        var fileName = Path.GetFileName(relativeScriptFilePath);
+                        var path = relativeScriptFilePath.Substring(0, relativeScriptFilePath.Length - fileName.Length);
+                        var baseUri = site.ResourceDomain;
+                        return new HtmlString(UrlUtility.ToHttpAbsolute(baseUri, Url.Action("scripts", "Resource", new { siteName = site.FullName, version = site.VersionUsedInUrl, area = "", compressed = true, name = path, fileName })));
+                    }
+                }
+
                 return new HtmlString(Url.Content(fileVirtualPath));
             }
 

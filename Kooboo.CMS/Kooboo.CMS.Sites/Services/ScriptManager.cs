@@ -55,5 +55,10 @@ namespace Kooboo.CMS.Sites.Services
         {
             get { return "Scripts"; }
         }
+
+        public override IEnumerable<FileEntry> GetFiles(Site site, string dirRelativePath)
+        {
+            return base.GetFiles(site, dirRelativePath).Where(it => it.FileExtension.Equals(FileExtensions.Script, StringComparison.OrdinalIgnoreCase));
+        }
     }
 }
