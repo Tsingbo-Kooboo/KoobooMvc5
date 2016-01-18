@@ -34,7 +34,7 @@
         {
             <li>
                 <a id="delete_bar" href="@Url.Action("Delete", ViewContext.RequestContext.AllRouteValues().Merge("return", ViewContext.HttpContext.Request.RawUrl))" data-show-on-check="Any" data-show-on-selector=".localized" data-command-type="AjaxPost" data-confirm="@("Are you sure you want to delete these items?".Localize())">
-                    @Html.IconImage("delete") @("Delete".Localize())
+                    @Html.IconImage("delete") @("Unlocalize".Localize())
                 </a>
             </li>
 
