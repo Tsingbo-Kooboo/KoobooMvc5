@@ -80,14 +80,17 @@ function parse_JsonResultData(response, statusText, xhr, $form) {
     constants.messageToptics = {
         'SomeThing_Changed_On_Page': 'Common/PageChanged'
     };
-    $(function () {
-        //disable save button till someting is changed on page
-        $("button[data-no-change-disabled]").attr("disabled", "disabled");
-        //todo: better pub/sub implementation
-        $.subscribe(kooboo.constants.messageToptics.SomeThing_Changed_On_Page, function (event, info) {
-            $("button[data-no-change-disabled]").removeAttr("disabled");
+
+    if ($.isFunction($.subscribe)) {
+        $(function () {
+            //disable save button till someting is changed on page
+            $("button[data-no-change-disabled]").attr("disabled", "disabled");
+            //todo: better pub/sub implementation
+            $.subscribe(kooboo.constants.messageToptics.SomeThing_Changed_On_Page, function (event, info) {
+                $("button[data-no-change-disabled]").removeAttr("disabled");
+            });
         });
-    });
+    }
 
     $.fn.dialogLink = function () {
         return this.find('a.dialog-link').one('click', function (e) {
