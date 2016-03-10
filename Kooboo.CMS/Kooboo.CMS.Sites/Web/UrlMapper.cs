@@ -36,7 +36,7 @@ namespace Kooboo.CMS.Sites.Web
             outputUrl = string.Empty;
             outputHost = string.Empty;
             redirectType = RedirectType.Found_Redirect_302;
-            if (string.IsNullOrEmpty(inputUrl) || string.IsNullOrEmpty(inputHost))
+            if (string.IsNullOrEmpty(inputUrl))
             {
                 return false;
             }
@@ -53,8 +53,7 @@ namespace Kooboo.CMS.Sites.Web
                 {
                     try
                     {
-                        if (Regex.IsMatch(inputUrl, inputPattern, RegexOptions.IgnoreCase)
-                            && (string.IsNullOrEmpty(setting.OutputHost) || inputHost.EqualsOrNullEmpty(setting.InputHost, StringComparison.CurrentCultureIgnoreCase)))
+                        if (Regex.IsMatch(inputUrl, inputPattern, RegexOptions.IgnoreCase))
                         {
                             outputUrl = Regex.Replace(inputUrl, inputPattern, setting.OutputUrl, RegexOptions.IgnoreCase);
                             redirectType = setting.RedirectType;
@@ -70,8 +69,7 @@ namespace Kooboo.CMS.Sites.Web
                 }
                 else
                 {
-                    if (inputUrl.EqualsOrNullEmpty(inputPattern, StringComparison.CurrentCultureIgnoreCase) 
-                        && (string.IsNullOrEmpty(setting.OutputHost) || inputHost.EqualsOrNullEmpty(setting.InputHost, StringComparison.CurrentCultureIgnoreCase)))
+                    if (inputUrl.EqualsOrNullEmpty(inputPattern, StringComparison.CurrentCultureIgnoreCase))
                     {
                         outputUrl = setting.OutputUrl;
                         redirectType = setting.RedirectType;
@@ -80,6 +78,7 @@ namespace Kooboo.CMS.Sites.Web
                     }
                 }
             }
+
             return false;
         }
 

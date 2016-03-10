@@ -41,7 +41,7 @@ namespace Kooboo.CMS.Web.Areas.Sites.Models.DataSources
                 }
             }
 
-            return domains.Distinct().Select(it => new SelectListItem() {Text = it, Value = it});
+            return domains.Distinct().Select(it => new SelectListItem() {Text = it, Value = it}).EmptyItem("   ");
         }
 
         #endregion
