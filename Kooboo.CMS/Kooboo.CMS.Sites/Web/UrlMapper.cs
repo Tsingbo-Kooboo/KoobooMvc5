@@ -49,6 +49,10 @@ namespace Kooboo.CMS.Sites.Web
             foreach (var setting in mapSettings)
             {
                 var inputPattern = setting.InputUrl;//.Trim('/');
+                if (!inputPattern.StartsWith("/"))
+                {
+                    inputPattern = "/" + inputPattern;
+                }
                 if (setting.Regex)
                 {
                     try
