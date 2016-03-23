@@ -227,8 +227,16 @@ namespace Kooboo.CMS.Sites.View
                 Func<IHtmlString> renderView = () => this.RenderView(viewPosition.ViewName, PageContext.GetPositionViewData(viewPosition.PagePositionId), viewPosition.ToParameterDictionary(), false);
                 if (viewPosition.EnabledCache)
                 {
-                    var cacheKey = string.Format("View OutputCache - Full page name:{0};Raw request url:{1};PagePositionId:{2};ViewName:{3};LayoutPositionId:{4}"
-                    , PageContext.PageRequestContext.Page.FullName, PageContext.ControllerContext.HttpContext.Request.RawUrl, viewPosition.PagePositionId, viewPosition.ViewName, viewPosition.LayoutPositionId);
+                    var httpContext = PageContext.ControllerContext.HttpContext;
+                    var host = httpContext.Request.Url == null ? "localhost" : httpContext.Request.Url.Host;
+                    var cacheKey = string.Format("View OutputCache - Full page name:{0};Raw request url:{1},{2};PagePositionId:{3};ViewName:{4};LayoutPositionId:{5}",
+                        PageContext.PageRequestContext.Page.FullName,
+                        host,
+                        httpContext.Request.RawUrl,
+                        viewPosition.PagePositionId,
+                        viewPosition.ViewName,
+                        viewPosition.LayoutPositionId);
+
                     var cacheItemPolicy = viewPosition.OutputCache.ToCachePolicy();
                     return this.PageContext.PageRequestContext.Site.ObjectCache().GetCache<IHtmlString>(cacheKey,
                               renderView,
