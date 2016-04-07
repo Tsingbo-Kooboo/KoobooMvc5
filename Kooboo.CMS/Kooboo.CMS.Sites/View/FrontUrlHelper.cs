@@ -376,30 +376,22 @@ namespace Kooboo.CMS.Sites.View
         public virtual IHtmlString ScriptFileUrl(string relativeScriptFilePath, bool withCDNResolving)
         {
             Site site = this.Site;
-            var dir = Path.GetDirectoryName(relativeScriptFilePath);
             var fileVirtualPath = "";
-
-            if (string.IsNullOrEmpty(dir))
+            do
             {
-                fileVirtualPath = new ScriptFile(site, relativeScriptFilePath).VirtualPath;
-            }
-            else
-            {
-                do
+                var scriptsPath = new ScriptFile(site, "");
+                fileVirtualPath = UrlUtility.Combine(scriptsPath.VirtualPath, relativeScriptFilePath);
+                var physicalPath = UrlUtility.MapPath(fileVirtualPath);
+                if (File.Exists(physicalPath))
                 {
-                    var scriptsPath = new ScriptFile(site, "");
-                    fileVirtualPath = UrlUtility.Combine(scriptsPath.VirtualPath, relativeScriptFilePath);
-                    var physicalPath = UrlUtility.MapPath(fileVirtualPath);
-                    if (File.Exists(physicalPath))
-                    {
-                        break;
-                    }
-                    else
-                    {
-                        site = site.Parent;
-                    }
-                } while (site != null);
-            }
+                    break;
+                }
+                else
+                {
+                    site = site.Parent;
+                }
+            } while (site != null);
+
             if (withCDNResolving)
             {
                 return ResourceCDNUrl(fileVirtualPath);
