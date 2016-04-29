@@ -103,6 +103,29 @@ namespace Kooboo.CMS.Sites.Models
         }
         #endregion
 
+        #region Root
+        public static Site Root
+        {
+            get
+            {
+                if(Current.Parent == null)
+                {
+                    return Current;
+                }
+
+                var root = Current.Parent;
+                var parent = Current.Parent;
+                while(parent != null)
+                {
+                    root = parent;
+                    parent = parent.Parent;
+                }
+                
+                return root.AsActual();
+            }
+        }
+        #endregion
+
         #region .ctor
         public Site()
         {
@@ -741,6 +764,16 @@ namespace Kooboo.CMS.Sites.Models
         /// </value>
         [DataMember]
         public string UserAgent { get; set; }
+
+
+        [DataMember]
+        public bool OutputLowerCasePageUrl { get; set; }
+
+        [DataMember]
+        public bool RemoveTrailingSlash { get; set; }
+
+        [DataMember]
+        public bool DisableNakedDomain { get; set; }
     }
     #endregion
 }

@@ -106,7 +106,6 @@ namespace Kooboo.CMS.Sites.View
                 url = url + "/";
             }
 
-
             #region SSL
             if (requireSSL.HasValue)
             {
@@ -129,7 +128,7 @@ namespace Kooboo.CMS.Sites.View
 
             #endregion
 
-            return new HtmlString(url);
+            return new HtmlString(site.OutputLowerCasePageUrl? url.ToLower() : url);
         }
 
         #endregion
@@ -191,27 +190,28 @@ namespace Kooboo.CMS.Sites.View
         public virtual IHtmlString MediaContentUrl(string fullFoldername, string fileName)
         {
             var mediaFolder = new Kooboo.CMS.Content.Models.MediaFolder(this.Site.GetRepository(), fullFoldername);
+            var htmlString = string.Empty;
 
-            HtmlString htmlString = new HtmlString("");
             if (string.IsNullOrEmpty(fullFoldername))
             {
-                return htmlString;
+                return new HtmlString(htmlString);
             }
+
             if (string.IsNullOrEmpty(fileName))
             {
                 var folderPath = new FolderPath(mediaFolder);
-                htmlString = new HtmlString(this.Url.Content(folderPath.VirtualPath));
+                htmlString = this.Url.Content(folderPath.VirtualPath);
             }
             else
             {
                 var mediaContent = mediaFolder.CreateQuery().WhereEquals("FileName", fileName).FirstOrDefault();
                 if (mediaContent != null)
                 {
-                    htmlString = new HtmlString(this.Url.Content(mediaContent.VirtualPath));
+                    htmlString = this.Url.Content(mediaContent.VirtualPath);
                 }
             }
 
-            return htmlString;
+            return ResourceCDNUrl(htmlString);
 
         }
         /// <summary>
@@ -376,36 +376,39 @@ namespace Kooboo.CMS.Sites.View
         public virtual IHtmlString ScriptFileUrl(string relativeScriptFilePath, bool withCDNResolving)
         {
             Site site = this.Site;
-            var dir = Path.GetDirectoryName(relativeScriptFilePath);
             var fileVirtualPath = "";
-
-            if (string.IsNullOrEmpty(dir))
+            do
             {
-                fileVirtualPath = new ScriptFile(site, relativeScriptFilePath).VirtualPath;
-            }
-            else
-            {
-                do
+                var scriptsPath = new ScriptFile(site, "");
+                fileVirtualPath = UrlUtility.Combine(scriptsPath.VirtualPath, relativeScriptFilePath);
+                var physicalPath = UrlUtility.MapPath(fileVirtualPath);
+                if (File.Exists(physicalPath))
                 {
-                    var scriptsPath = new ScriptFile(site, "");
-                    fileVirtualPath = UrlUtility.Combine(scriptsPath.VirtualPath, relativeScriptFilePath);
-                    var physicalPath = UrlUtility.MapPath(fileVirtualPath);
-                    if (File.Exists(physicalPath))
-                    {
-                        break;
-                    }
-                    else
-                    {
-                        site = site.Parent;
-                    }
-                } while (site != null);
-            }
+                    break;
+                }
+                else
+                {
+                    site = site.Parent;
+                }
+            } while (site != null);
+
             if (withCDNResolving)
             {
                 return ResourceCDNUrl(fileVirtualPath);
             }
             else
             {
+                if (site != null && site.Mode == ReleaseMode.Release)
+                {
+                    if (relativeScriptFilePath.EndsWith(FileExtensions.Script, StringComparison.OrdinalIgnoreCase))
+                    {
+                        var fileName = Path.GetFileName(relativeScriptFilePath);
+                        var path = relativeScriptFilePath.Substring(0, relativeScriptFilePath.Length - fileName.Length);
+                        var baseUri = site.ResourceDomain;
+                        return new HtmlString(UrlUtility.ToHttpAbsolute(baseUri, Url.Action("scripts", "Resource", new { siteName = site.FullName, version = site.VersionUsedInUrl, area = "", compressed = true, name = path, fileName })));
+                    }
+                }
+
                 return new HtmlString(Url.Content(fileVirtualPath));
             }
 

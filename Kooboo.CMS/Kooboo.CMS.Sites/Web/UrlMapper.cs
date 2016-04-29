@@ -17,7 +17,7 @@ namespace Kooboo.CMS.Sites.Web
 {
     public interface IUrlMapper
     {
-        bool Map(Site site, string inputUrl, out string outputUrl, out RedirectType redirectType);
+        bool Map(Site site, string inputUrl, string inputHost, out string outputUrl, out string outputHost, out RedirectType redirectType);
     }
     public static class UrlMapperFactory
     {
@@ -31,9 +31,10 @@ namespace Kooboo.CMS.Sites.Web
     {
         #region IUrlMapper Members
 
-        public bool Map(Site site, string inputUrl, out string outputUrl, out RedirectType redirectType)
+        public bool Map(Site site, string inputUrl, string inputHost, out string outputUrl, out string outputHost, out RedirectType redirectType)
         {
             outputUrl = string.Empty;
+            outputHost = string.Empty;
             redirectType = RedirectType.Found_Redirect_302;
             if (string.IsNullOrEmpty(inputUrl))
             {
@@ -48,6 +49,10 @@ namespace Kooboo.CMS.Sites.Web
             foreach (var setting in mapSettings)
             {
                 var inputPattern = setting.InputUrl;//.Trim('/');
+                if (!inputPattern.StartsWith("/"))
+                {
+                    inputPattern = "/" + inputPattern;
+                }
                 if (setting.Regex)
                 {
                     try
@@ -56,6 +61,7 @@ namespace Kooboo.CMS.Sites.Web
                         {
                             outputUrl = Regex.Replace(inputUrl, inputPattern, setting.OutputUrl, RegexOptions.IgnoreCase);
                             redirectType = setting.RedirectType;
+                            outputHost = setting.OutputHost;
                             return true;
                         }
                     }
@@ -71,10 +77,12 @@ namespace Kooboo.CMS.Sites.Web
                     {
                         outputUrl = setting.OutputUrl;
                         redirectType = setting.RedirectType;
+                        outputHost = setting.OutputHost;
                         return true;
                     }
                 }
             }
+
             return false;
         }
 

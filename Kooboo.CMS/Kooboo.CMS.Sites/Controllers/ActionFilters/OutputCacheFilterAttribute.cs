@@ -54,7 +54,8 @@ namespace Kooboo.CMS.Sites.Controllers.ActionFilters
 
         private static string GetOutputCacheKey(HttpContextBase httpContext, Page page)
         {
-            var cacheKey = string.Format("Page OutputCache-Full page name:{0};Raw request url:{1}", page.FullName, httpContext.Request.RawUrl);
+            var host = httpContext.Request.Url == null ? "localhost" : httpContext.Request.Url.Host;
+            var cacheKey = string.Format("Page OutputCache-Full page name:{0};Raw request url:{1},{2}", page.FullName, host, httpContext.Request.RawUrl);
             return cacheKey;
         }
         public override void OnResultExecuted(ResultExecutedContext filterContext)

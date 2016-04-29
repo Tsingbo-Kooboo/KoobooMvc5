@@ -38,11 +38,15 @@ namespace Kooboo.CMS.Web.Areas.Sites.Controllers
         #region .ctor
         IPageProvider PageProvider { get; set; }
         PageCachingManager PageCachingManager { get; set; }
-        public PageController(IPageProvider pageProvider, PageManager manager, PageCachingManager pageCachingManager)
+
+        private UrlRedirectManager UrlRedirectManager { get; set; }
+
+        public PageController(IPageProvider pageProvider, PageManager manager, PageCachingManager pageCachingManager, UrlRedirectManager urlRedirectManage)
             : base(manager)
         {
             this.PageProvider = pageProvider;
             this.PageCachingManager = pageCachingManager;
+            this.UrlRedirectManager = urlRedirectManage;
         }
         #endregion
 
@@ -209,7 +213,62 @@ namespace Kooboo.CMS.Web.Areas.Sites.Controllers
                         {
                             resultData.AddMessage("The item has been saved.".Localize());
                         }
+
                         Manager.Update(Site, newModel, old);
+
+                        //create a 301 url redirect automatically if the user changed the page alternative name
+                        if (!newModel.Route.Identifier.EqualsOrNullEmpty(old.Route.Identifier, StringComparison.CurrentCultureIgnoreCase))
+                        {
+                            var inputUrl = GetPageFriendlyFullPath(old);
+                            var outputUrl = GetPageFriendlyFullPath(newModel);
+                            var newNormalUrlRedirect = new UrlRedirect(Site.Current)
+                            {
+                                InputUrl = inputUrl,
+                                OutputUrl = outputUrl,
+                                RedirectType = RedirectType.Moved_Permanently_301,
+                                UtcCreationDate = DateTime.UtcNow,
+                                UtcLastestModificationDate = DateTime.UtcNow,
+                                LastestEditor = "system"
+                            };
+
+                            var oldUrlRedirect = UrlRedirectManager.GetByInputUrl(Site.Current, inputUrl);
+                            if (oldUrlRedirect != null)
+                            {
+                                UrlRedirectManager.Update(Site.Current, newNormalUrlRedirect, oldUrlRedirect);
+                            }
+                            else
+                            {
+                                UrlRedirectManager.Add(Site.Current, newNormalUrlRedirect);
+                            }
+
+                            if (!string.IsNullOrEmpty(old.Route.RoutePath))
+                            {
+                                var inputUrlRex = inputUrl + "/(\\w*)";
+                                var outputUrlRext = outputUrl + "/$1";
+                                //a regex url redirect is needed as well
+                                var newRexUrlRedirect = new UrlRedirect(Site.Current)
+                                {
+                                    InputUrl = inputUrlRex,
+                                    OutputUrl = outputUrlRext,
+                                    RedirectType = RedirectType.Moved_Permanently_301,
+                                    Regex = true,
+                                    UtcCreationDate = DateTime.UtcNow,
+                                    UtcLastestModificationDate = DateTime.UtcNow,
+                                    LastestEditor = "system"
+                                };
+
+                                var oldRextUrlRedirect = UrlRedirectManager.GetByInputUrl(Site.Current, inputUrlRex);
+                                if (oldRextUrlRedirect != null)
+                                {
+                                    UrlRedirectManager.Update(Site.Current, newRexUrlRedirect, oldRextUrlRedirect);
+                                }
+                                else
+                                {
+                                    UrlRedirectManager.Add(Site.Current, newRexUrlRedirect);
+                                }
+
+                            }
+                        }
 
                     }
 
@@ -250,6 +309,17 @@ namespace Kooboo.CMS.Web.Areas.Sites.Controllers
                 return true;
             }
             return false;
+        }
+
+        private string GetPageFriendlyFullPath(Page page)
+        {
+            var fullPath = string.IsNullOrEmpty(page.Route.Identifier) ? page.Name : page.Route.Identifier;
+            if (page.Parent != null)
+            {
+                fullPath = GetPageFriendlyFullPath(page.Parent.AsActual()) + "/" + fullPath;
+            }
+
+            return fullPath;
         }
         #endregion
 

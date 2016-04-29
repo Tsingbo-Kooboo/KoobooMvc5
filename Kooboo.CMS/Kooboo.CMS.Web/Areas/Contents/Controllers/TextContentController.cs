@@ -924,7 +924,7 @@ namespace Kooboo.CMS.Web.Areas.Contents.Controllers
         }
         #endregion
 
-        #region Localize
+        #region Localize / Unlocalize
         [Kooboo.CMS.Web.Authorizations.Authorization(AreaName = "Contents", Group = "", Name = "Content", Order = 1)]
         [HttpPost]
         public virtual ActionResult Localize(string folderName, string[] docs)
@@ -945,6 +945,48 @@ namespace Kooboo.CMS.Web.Areas.Contents.Controllers
                 }
                 resultData.ReloadPage = true;
             });
+            return Json(data);
+
+        }
+
+        [Kooboo.CMS.Web.Authorizations.Authorization(AreaName = "Contents", Group = "", Name = "Content", Order = 1)]
+        [HttpPost]
+        public virtual ActionResult Unlocalize(string folderName, string[] docs)
+        {
+            var data = new JsonResultData(ModelState);
+            var succeed = false;
+            data.RunWithTry((resultData) =>
+            {
+                TextFolder textFolder = new TextFolder(Repository, folderName).AsActual();
+
+                if (docs != null && docs.Length == 1)
+                {
+                    var uuid = docs[0].ToLower();
+                    var currentContent = textFolder.CreateQuery().FirstOrDefault(it => it.UUID.ToLower() == uuid);
+                    if(currentContent != null)
+                    {
+                        var originalContent = GetOriginalTextContent(Site.Parent.AsActual(), folderName, uuid);
+                        if(originalContent != null)
+                        {
+                            var toUpdate = new TextContent(originalContent);
+                            toUpdate.Repository = Repository.Name;
+                            toUpdate.UserId = User.Identity.Name;
+                            toUpdate.UtcLastModificationDate = DateTime.UtcNow;
+                            toUpdate.IsLocalized = false;
+                            _textContentProvider.Update(toUpdate, currentContent);
+                            succeed = true;
+                            resultData.ReloadPage = true;
+
+                        }
+                    }
+                }
+            });
+
+            if (!succeed)
+            {
+                data.AddErrorMessage("This item can not be unlocalized".Localize());
+            }
+
             return Json(data);
 
         }
@@ -1033,5 +1075,28 @@ namespace Kooboo.CMS.Web.Areas.Contents.Controllers
             exporter.Export(contentQuery, Response.OutputStream);
         }
         #endregion
+
+        private TextContent GetOriginalTextContent(Kooboo.CMS.Sites.Models.Site site, string folderName, string uuid)
+        {
+            if(site != null)
+            {
+                var textFolder = new TextFolder(new Repository(site.Repository).AsActual(), folderName).AsActual();
+                if(textFolder != null)
+                {
+                    var content = textFolder.CreateQuery().FirstOrDefault(it => it.UUID.ToLower() == uuid);
+                    if(content != null)
+                    {
+                        return content;
+                    }
+                    else
+                    {
+                        return GetOriginalTextContent(site.Parent.AsActual(), folderName, uuid);
+                    }
+
+                }
+            }
+
+            return null;
+        }
     }
 }

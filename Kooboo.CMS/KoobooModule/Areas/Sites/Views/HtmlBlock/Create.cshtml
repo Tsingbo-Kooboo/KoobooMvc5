@@ -1,13 +1,13 @@
 ﻿@model Kooboo.CMS.Sites.Models.HtmlBlock
 @{
     ViewBag.Title = "New HTML block".Localize();
-    Layout = "~/Views/Shared/Blank.cshtml";
+    Layout = "~/Views/Shared/Site.cshtml";
 }
 @section Panel{
     <ul class="panel">
         <li>
-            <a data-ajaxform="">
-                @Html.IconImage("save") @("Save".Localize())</a>
+            <button data-ajaxform="" data-no-change-disabled>
+                @Html.IconImage("save") @("Save".Localize())</button>
         </li>
         @foreach (var group in Kooboo.CMS.Sites.Extension.UI.TopToolbar.ToolbarButtons.GetToolbarButtons(ViewContext.RequestContext))
         {
@@ -33,18 +33,5 @@
             </tbody>
         </table>
     }
-
-    @if (ViewBag.ExternalCssSetting != null)
-    {
-        <script type="text/javascript">
-            (function () {
-                var old = tinymce.getKoobooConfig;
-                tinymce.getKoobooConfig = function () {
-                    var ret = old.apply(this, arguments);
-                    ret.content_css = '@Html.Raw(ViewBag.ExternalCssSetting) ';
-                    return ret;
-                };
-            }());
-        </script>
-    }
+     @Html.Partial("~/Views/Shared/_TinyMCEExternalCssInjection.cshtml")
 </div>

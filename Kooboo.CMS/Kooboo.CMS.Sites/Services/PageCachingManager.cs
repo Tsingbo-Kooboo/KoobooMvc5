@@ -21,7 +21,7 @@ namespace Kooboo.CMS.Sites.Services
     {
         public virtual void AddCaching(HttpContextBase httpContext, Page page, string html)
         {
-            var filePath = GetFilePath(page, httpContext.Request.Path);
+            var filePath = GetFilePath(httpContext, page, httpContext.Request.Path);
             if (!File.Exists(filePath))
             {
                 IOUtility.SaveStringToFile(filePath, html);
@@ -30,7 +30,7 @@ namespace Kooboo.CMS.Sites.Services
         public virtual string GetCaching(HttpContextBase httpContext, Page page)
         {
             string html = null;
-            var filePath = GetFilePath(page, httpContext.Request.Path);
+            var filePath = GetFilePath(httpContext, page, httpContext.Request.Path);
             if (File.Exists(filePath))
             {
                 var expired = false;
@@ -79,7 +79,7 @@ namespace Kooboo.CMS.Sites.Services
 
             IOUtility.DeleteDirectory(pageCachingPage, true);
         }
-        protected virtual string GetFilePath(Page page, string requestPath)
+        protected virtual string GetFilePath(HttpContextBase httpContext, Page page, string requestPath)
         {
             requestPath = requestPath.TrimEnd('/');
             var extension = Path.GetExtension(requestPath);
@@ -87,7 +87,13 @@ namespace Kooboo.CMS.Sites.Services
             {
                 requestPath = requestPath + "/default.html";
             }
-            return Path.Combine(GetPageCachingPath(page), requestPath.TrimStart('/'));
+
+            if (httpContext.Request.Url != null)
+            {
+                requestPath = String.Concat(httpContext.Request.Url.Host, httpContext.Request.Path, requestPath);
+            }
+
+            return Path.Combine(GetPageCachingPath(page), requestPath.Replace('/', '\\'));
         }
 
         protected virtual string GetPageCachingPath(Page page)

@@ -24,22 +24,34 @@ namespace Kooboo.CMS.Sites.Controllers.ActionFilters
     {
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            var request = (FrontHttpRequestWrapper)filterContext.HttpContext.Request;
+            var request = (FrontHttpRequestWrapper) filterContext.HttpContext.Request;
             RedirectType redirectType;
             string inputUrl = request.RequestUrl;
             if (string.IsNullOrEmpty(inputUrl))
             {
                 inputUrl = "/";
             }
+
             if (!string.IsNullOrEmpty(request.Url.Query))
             {
                 inputUrl = inputUrl + request.Url.Query;
             }
+
             string redirectUrl;
-            if (UrlMapperFactory.Default.Map(Site.Current, inputUrl, out redirectUrl, out redirectType))
+            string redirectHost;
+            var inputHost = request.Url.Host;
+
+            if (UrlMapperFactory.Default.Map(Site.Current, inputUrl, inputHost, out redirectUrl, out redirectHost, out redirectType))
             {
-                filterContext.Result = RedirectHelper.CreateRedirectResult(Site.Current, request.RequestChannel, redirectUrl, null, null, redirectType);
+                if (!string.IsNullOrEmpty(redirectHost))
+                {
+                    redirectUrl = string.Format("{0}://{1}/{2}",request.Url.Scheme,redirectHost,redirectUrl.TrimStart('/'));
+                }
+
+                filterContext.Result = RedirectHelper.CreateRedirectResult(Site.Current, request.RequestChannel,
+                    redirectUrl, null, null, redirectType);
             }
         }
     }
 }
+    ;

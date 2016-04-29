@@ -9,6 +9,10 @@
     </h1>
     <ul class="sitemap-description right">
         <li>
+            <input type="checkbox" id="page-name-toggler">
+            <label class="inline" for="page-name-toggler">@("Show unlocalized page names".Localize())</label>
+        </li>
+        <li>
             <span class="static"></span>
             @("Static page".Localize())
         </li>
@@ -83,5 +87,14 @@
 <script>
     $(function () {
         $('.tree-node').treeNode();
+        $('#page-name-toggler').change(function() {
+            if ($(this).is(':checked')) {
+                $('span[data-localized]').hide();
+                $('span[data-unlocalized]').show();
+            } else {
+                $('span[data-localized]').show();
+                $('span[data-unlocalized]').hide();
+            }
+        });
     });
 </script>

@@ -25,6 +25,8 @@ using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using Kooboo.CMS.Content.Models;
+using Kooboo.Web.Mvc;
+
 namespace Kooboo.CMS.Sites.Controllers
 {
     /// <summary>
@@ -45,6 +47,11 @@ namespace Kooboo.CMS.Sites.Controllers
         {
             var site = new Site(siteName);
             var scripts = ServiceFactory.ScriptManager.GetFiles(site, name);
+            var fileName = Request.RequestContext.GetRequestValue("fileName");
+            if (!string.IsNullOrEmpty(fileName))
+            {
+                scripts = scripts.Where(it => it.FileName.Equals(fileName, StringComparison.OrdinalIgnoreCase));
+            }
 
             Output(CompressJavascript(scripts, compressed), "text/javascript", 2592000, "*");
 

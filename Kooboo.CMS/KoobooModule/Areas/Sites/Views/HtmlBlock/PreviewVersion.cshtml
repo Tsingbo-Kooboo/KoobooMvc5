@@ -5,19 +5,22 @@
 }
 
 @section Panel{
-    <ul class="panel">
-
-        <li><a href="@Url.Action("Revert", ViewContext.RequestContext.AllRouteValues())" data-ajax="Post" data-confirm="@("Are you sure you want to revert to this version?".Localize())">
-            @Html.IconImage("reset") @("Revert".Localize())</a></li>
-        @foreach (var group in Kooboo.CMS.Sites.Extension.UI.TopToolbar.ToolbarButtons.GetToolbarButtons(ViewContext.RequestContext))
-        {
-            @Html.Partial("_ToolbarGroupButtons", group)
-        }
+    <ul class="panel"> 
+        <li>
+            <a href="@Url.Action("Revert", ViewContext.RequestContext.AllRouteValues())" data-ajax="Post" data-confirm="@("Are you sure you want to revert to this version?".Localize())">
+                @Html.IconImage("reset") @("Revert".Localize())
+            </a>
+        </li>
+             
         <li>
             <a href="@ViewContext.RequestContext.GetRequestValue("return")">
                 @Html.IconImage("cancel") @("Back".Localize())</a>
         </li>
-        
+      
+        @foreach (var group in Kooboo.CMS.Sites.Extension.UI.TopToolbar.ToolbarButtons.GetToolbarButtons(ViewContext.RequestContext))
+        {
+            @Html.Partial("_ToolbarGroupButtons", group)
+        }
     </ul>
 }
 
@@ -30,19 +33,5 @@
             @Html.EditorFor(m => m.Body)
         </tbody>
     </table>
-
-    @if (ViewBag.ExternalCssSetting != null)
-    {
-        <script type="text/javascript">
-            (function () {
-                var old = tinymce.getKoobooConfig;
-                tinymce.getKoobooConfig = function () {
-                    var ret = old.apply(this, arguments);
-                    ret.content_css = '@Html.Raw(ViewBag.ExternalCssSetting)';
-                    return ret;
-                };
-            }());
-        </script>
-    }
-
+    @Html.Partial("~/Views/Shared/_TinyMCEExternalCssInjection.cshtml")
 </div>

@@ -42,8 +42,12 @@ namespace Kooboo.CMS.Web.Areas.Sites.Controllers
             string nsStr = ControllerContext.RequestContext.GetRequestValue("ns");
 
             var ns = Manager.GetNamespace(Site).GetNamespaceNode(nsStr);
-            ViewData["NameSpace"] = ns;
-            return View(List(search, sortField, sortDir));
+            if (string.IsNullOrEmpty(search))
+            {
+                // do not show "folders" in search result
+                ViewData["NameSpace"] = ns;
+            }
+            return View(List(search, sortField, sortDir).Select(it => it.AsActual()));
         }
 
         #endregion
@@ -51,7 +55,6 @@ namespace Kooboo.CMS.Web.Areas.Sites.Controllers
         #region CURD
         public override ActionResult Create(HtmlBlock model)
         {
-            ViewBag.ExternalCssSetting = this.GetExternalCssSetting();
             if (model == null)
             {
                 model = new HtmlBlock();
@@ -68,33 +71,12 @@ namespace Kooboo.CMS.Web.Areas.Sites.Controllers
             base.Add(model);
         }
 
-        public override ActionResult Edit(string uuid)
-        {
-            ViewBag.ExternalCssSetting = this.GetExternalCssSetting();
-            return base.Edit(uuid);
-        }
-
         protected override void Update(HtmlBlock newModel, string old_key)
         {
             newModel.UserName = User.Identity.Name;
             base.Update(newModel, old_key);
         }
 
-        private string GetExternalCssSetting()
-        {
-            if (!string.IsNullOrEmpty(Site.Theme))
-            {
-                string cssHackBody;
-                var themefiles = Kooboo.CMS.Sites.Parsers.ThemeRule.ThemeRuleParser.Parse(new Theme(Site, Site.Theme).LastVersion(), out cssHackBody);
-                var files = themefiles.Where(o => o.PhysicalPath.EndsWith(".css", StringComparison.CurrentCultureIgnoreCase))
-                                      .Select(o => Kooboo.Web.Url.UrlUtility.ResolveUrl(o.VirtualPath)).ToList();
-                return string.Join(",", files);
-            }
-            else
-            {
-                return "";
-            }
-        }
 
         public virtual ActionResult Localize(HtmlBlock[] model)
         {

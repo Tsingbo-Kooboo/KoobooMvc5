@@ -1,17 +1,17 @@
 ﻿@model Kooboo.CMS.Sites.Models.Page
 @{
     ViewBag.Title = "Edit page".Localize();
-    Layout = "~/Views/Shared/Blank.cshtml";
+    Layout = "~/Views/Shared/Site.cshtml";
     var publishPermission = ServiceFactory.UserManager.Authorize(Kooboo.CMS.Sites.Models.Site.Current, ViewContext.HttpContext.User.Identity.Name, Kooboo.CMS.Account.Models.Permission.Sites_Page_PublishPermission);
 }
 @section Panel{
     <ul class="panel">
         <li class="j_DropDown">
-            <a>
+            <button data-no-change-disabled>
                 @Html.IconImage("save")
                 @Html.IconImage("arrow small white-down")
                 @("Save".Localize())
-            </a>
+            </button>
             <ul class="j_DropDownContent hide">
                 @if (Model.Published.Value == false || (Model.Published.Value == true && publishPermission))
                 {

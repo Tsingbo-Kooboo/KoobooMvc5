@@ -120,6 +120,12 @@ namespace Kooboo.CMS.Web.Areas.Sites.Models
         [Display(Name = "Cache to disk")]
         [Description("Generate static disk based html page for each individual requests. If a static page with the same URL exists, it will be servered directly from disk without rendering the dynamic page again.")]
         public bool CacheToDisk { get; set; }
+
+        [GridColumn(HeaderText = "Latest modification date", Order = 20, GridColumnType = typeof(SortableGridColumn), GridItemColumnType = typeof(DateTimeGridItemColumn))]
+        public string LastUpdateDate { get; set; }
+
+        [GridColumn(HeaderText = "Editor", Order = 21, GridColumnType = typeof(SortableGridColumn))]
+        public string UserName { get; set; }
     }
 
     [MetadataFor(typeof(Navigation))]

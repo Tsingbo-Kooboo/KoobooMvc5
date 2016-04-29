@@ -33,6 +33,12 @@ namespace Kooboo.CMS.Web.Areas.Sites.Models
         [RemoteEx("IsNameAvailable", "HtmlBlock", AdditionalFields = "SiteName,old_Key")]
         public string Name { get; set; }
 
+        [GridColumn(HeaderText = "Latest modification date", Order = 2, GridColumnType = typeof(SortableGridColumn), GridItemColumnType = typeof(DateTimeGridItemColumn))]
+        public string LastUpdateDate { get; set; }
+
+        [GridColumn(HeaderText = "Editor", Order = 3, GridColumnType = typeof(SortableGridColumn))]
+        public string UserName { get; set; }
+
         [UIHint("Tinymce")]
         public string Body { get; set; }
     }

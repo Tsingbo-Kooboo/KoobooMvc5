@@ -353,6 +353,11 @@ namespace Kooboo.CMS.Form.Html
                     {
                         sb_body.AppendFormat("\t\t<td class=\"date\">{0}</td>\r\n", columnValue);
                     }
+                    else if (item.Name.EqualsOrNullEmpty("UtcLastModificationDate", StringComparison.CurrentCultureIgnoreCase))
+                    {
+                        //show detailed time string for UtcLastModificationDate
+                        sb_body.AppendFormat("\t\t<td class=\"date\">{0}</td>\r\n", "@(item.UtcLastModificationDate)");
+                    }
                     else if (item.DataType == DataType.DateTime)
                     {
                         sb_body.AppendFormat("\t\t<td class=\"date\">{0}</td>\r\n", columnValue);

@@ -45,6 +45,7 @@ namespace Kooboo.CMS.Form.Html
     @Html.Action(""Categories"", ViewContext.RequestContext.AllRouteValues())
     
     </table>
+    @Html.Partial(""~/Views/Shared/_TinyMCEExternalCssInjection.cshtml"")
 }");
 
             return sb.ToString();

@@ -4,7 +4,7 @@
     var folder = (Kooboo.CMS.Content.Models.TextFolder)ViewData["Folder"];
 
     ViewBag.Title = "Edit a content".Localize() + ": " + folder.AsActual().FriendlyText;
-    Layout = "~/Views/Shared/Blank.cshtml";
+    Layout = "~/Views/Shared/Site.cshtml";
 
     var allowedEdit = (bool)ViewData["AllowedEdit"];
     var allowedView = (bool)ViewData["AllowedView"];
@@ -41,9 +41,9 @@
                 else
                 {
                     <li>
-                        <a data-ajaxform="">
+                        <button data-ajaxform="" data-no-change-disabled>
                             @Html.IconImage("save") @("Save".Localize())
-                        </a>
+                        </button>
                     </li>
                 }
 

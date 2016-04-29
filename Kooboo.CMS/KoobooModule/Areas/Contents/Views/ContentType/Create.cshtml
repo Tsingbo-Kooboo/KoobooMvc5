@@ -6,8 +6,8 @@
 @section Panel{
     <ul class="panel">
         <li>
-            <a id="submitContentType">
-                @Html.IconImage("save") @("Save".Localize())</a>
+            <button id="submitContentType" data-no-change-disabled>
+                @Html.IconImage("save") @("Save".Localize())</button>
         </li>
         @foreach (var group in Kooboo.CMS.Sites.Extension.UI.TopToolbar.ToolbarButtons.GetToolbarButtons(ViewContext.RequestContext))
         {

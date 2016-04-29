@@ -50,8 +50,8 @@
                     </a>@Html.IconImage("arrow blue-down")
                 </li>
                 <li>
-                    <a href="#htmlmeta">
-                        @("HTML meta".Localize())
+                    <a href="#seo">
+                        @("SEO".Localize())
                     </a>@Html.IconImage("arrow blue-down")
                 </li>
                 <li>
@@ -117,7 +117,21 @@
             <div class="tab-content" id="smtpInfo">
                 @Html.EditorFor(m => m.Smtp)
             </div>
-            <div class="tab-content" id="htmlmeta">
+            <div class="tab-content" id="seo">
+                <fieldset>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <th></th>
+                                <td>
+                                    @Html.EditorFor(m => m.OutputLowerCasePageUrl)
+                                    @Html.EditorFor(m => m.RemoveTrailingSlash)
+                                    @Html.EditorFor(m => m.DisableNakedDomain)
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </fieldset>
                 @Html.EditorFor(m => m.HtmlMeta)
             </div>
             <div class="tab-content" id="security">

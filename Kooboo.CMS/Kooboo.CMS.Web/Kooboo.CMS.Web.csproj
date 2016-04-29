@@ -250,6 +250,7 @@
     <Compile Include="Areas\Sites\Models\DataSources\MembershipDataSource.cs" />
     <Compile Include="Areas\Sites\Models\DataSources\SiteMembershipGroupDataSource.cs" />
     <Compile Include="Areas\Sites\Models\DataSources\SubmissionPluginsDataSource.cs" />
+    <Compile Include="Areas\Sites\Models\DataSources\SiteDomainsDataSource.cs" />
     <Compile Include="Areas\Sites\Models\Grid2\ABPageTestHitsReport_HitTimes_GridItemColumn.cs" />
     <Compile Include="Areas\Sites\Models\Grid2\ABPageTestHitsReport_ShowTimes_GridItemColumn.cs" />
     <Compile Include="Areas\Sites\Models\Grid2\Inheritable_Status_GridItemColumn.cs" />
@@ -795,6 +796,7 @@
     <Content Include="Scripts\jquery.ui.touch-punch.min.js" />
     <Content Include="Scripts\less.js" />
     <Content Include="Scripts\selectivizr-min.js" />
+    <Content Include="Scripts\jquery-tiny-pubsub.js" />
     <Content Include="Scripts\tiny_mce\langs\en.js" />
     <Content Include="Scripts\tiny_mce\langs\zh-cn.js" />
     <Content Include="Scripts\tiny_mce\license.txt" />
@@ -889,8 +891,6 @@
     <Content Include="Scripts\tiny_mce\tinymce.min.js" />
     <Content Include="Scripts\yardiTip\images\arrow_down.png" />
     <Content Include="Scripts\yardiTip\images\arrow_top.png" />
-    <Content Include="Styles\base.css" />
-    <Content Include="Styles\common.css" />
     <Content Include="Styles\Diff\Diff.css" />
     <Content Include="Styles\Diff\InView.png" />
     <Content Include="Styles\Diff\Main.css" />
@@ -908,7 +908,6 @@
     <Content Include="Styles\jquery-ui.css" />
     <Content Include="Styles\jQuery.jCrop\Jcrop.gif" />
     <Content Include="Styles\jQuery.jCrop\jquery.Jcrop.css" />
-    <Content Include="Styles\reset.css" />
     <Content Include="Styles\validation.css" />
     <Content Include="Views\Shared\Import.cshtml" />
     <Content Include="Areas\Sites\WebResources.config">
@@ -2038,7 +2037,9 @@
     <Content Include="Views\Shared\EditorTemplates\Image.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="routes.config" />
+    <Content Include="routes.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
@@ -2566,9 +2567,6 @@
     <Content Include="Styles\repository-flowchart.less" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Web.config" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Shared\_ToolbarButton.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -2590,53 +2588,7 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Cms_Data\Sites\SampleSite\Templates\Layouts\member_layout\setting.config" />
-    <Content Include="Cms_Data\Sites\SampleSite\Templates\Layouts\member_layout\template.cshtml" />
-    <Content Include="Cms_Data\Sites\SampleSite\Templates\Layouts\one_column\setting.config" />
-    <Content Include="Cms_Data\Sites\SampleSite\Templates\Layouts\one_column\template.cshtml" />
-    <Content Include="Cms_Data\Sites\SampleSite\Templates\Layouts\two_column\setting.config" />
-    <Content Include="Cms_Data\Sites\SampleSite\Templates\Layouts\two_column\template.cshtml" />
-    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Article.Category\setting.config" />
-    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Article.Category\template.cshtml" />
-    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Article.Detail.Return\setting.config" />
-    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Article.Detail.Return\template.cshtml" />
-    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Article.Detail\setting.config" />
-    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Article.Detail\template.cshtml" />
-    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Article.List\ParameterTemplate.cshtml" />
-    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Article.List\setting.config" />
-    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Article.List\template.cshtml" />
-    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Article.Search\setting.config" />
-    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Article.Search\template.cshtml" />
-    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Contactus\setting.config" />
-    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Contactus\template.cshtml" />
-    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Footer\setting.config" />
-    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Footer\template.cshtml" />
-    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\LoginForm\setting.config" />
-    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\LoginForm\template.cshtml" />
-    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\LoginStatus\setting.config" />
-    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\LoginStatus\template.cshtml" />
-    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Member.Activate\setting.config" />
-    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Member.Activate\template.cshtml" />
-    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Member.ChangePassword\setting.config" />
-    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Member.ChangePassword\template.cshtml" />
-    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Member.ForgotPassword\setting.config" />
-    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Member.ForgotPassword\template.cshtml" />
-    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Member.Index\setting.config" />
-    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Member.Index\template.cshtml" />
-    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Member.Login\setting.config" />
-    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Member.Login\template.cshtml" />
-    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Member.Nav\setting.config" />
-    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Member.Nav\template.cshtml" />
-    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Member.Register\setting.config" />
-    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Member.Register\template.cshtml" />
-    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Member.ResetPassword\setting.config" />
-    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Member.ResetPassword\template.cshtml" />
-    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Menu\setting.config" />
-    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Menu\template.cshtml" />
-    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\TestListTwo\setting.config" />
-    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\TestListTwo\template.cshtml" />
-    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\TestList\setting.config" />
-    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\TestList\template.cshtml" />
+    <Content Include="Views\Shared\_TinyMCEExternalCssInjection.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

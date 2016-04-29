@@ -132,5 +132,15 @@ namespace Kooboo.CMS.Web.Areas.Sites.Models
         [DisplayName("Device")]
         [Description("Used to create sites for special devices only, you can define regex expression to match the Browser User-Agent.<br />Only matched devices are allowed to view this site.")]
         public string UserAgent { get; set; }
+
+
+        [DisplayName("Output lower case page urls")]
+        public bool OutputLowerCasePageUrl { get; set; }
+
+        [DisplayName("Remove trailing slashes in requested urls")]
+        public bool RemoveTrailingSlash { get; set; }
+
+        [DisplayName("Add 'www.' prefix to naked domain")]
+        public bool DisableNakedDomain { get; set; }
     }
 }
