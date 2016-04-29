@@ -425,7 +425,7 @@
                 return input.val();
             } else {
                 input.val(val);
-                $('#enablecache').attr('checked', val != '').trigger('change');
+                //$('#enablecache').attr('checked', val != '').trigger('change');
             }
         },
 
@@ -454,11 +454,13 @@
                 $('#skipError').attr('checked', true);
             }
             // OutputCache
-            var dur, policy, outputCache = $.parseJSON(this.outerValue.OutputCache);
+            var dur, policy, outputCache = $.parseJSON(this.outerValue.OutputCache);           
             if (outputCache) {
+                $('#enablecache').attr('checked', outputCache.EnableCaching);
                 dur = outputCache.Duration;
                 policy = outputCache.ExpirationPolicy;
             }
+            $('#enablecache').trigger('change');
             this.duration(dur || '');
             this.expirationPolicy(policy);
         },
@@ -745,6 +747,8 @@
                         optionsHtml.push("<option action='" + op.EntryAction + "' controller='" + op.EntryController + "' values='" + ko.toJSON(op.Values) + "' linkToEntryName='" + op.LinkToEntryName + "'>" + op.Name + '</option>');
                     });
                 }
+                self.EntryOptionsSelect.empty();
+
                 self.EntryOptionsSelect.append(optionsHtml.join(''));
 
                 if (self.ValuesTemplate.data('KO_ViewModel')) {

@@ -2,6 +2,8 @@
 @{
     ViewBag.Title = "Views".Localize();
     Layout = "~/Views/Shared/Site.cshtml";
+    //in root site,show  "Delete" but in subsite, show "Unlocalize"
+    var deleteButtonText = Site.Current.UUID.Equals(Site.Root.UUID, StringComparison.CurrentCultureIgnoreCase) ? "Delete".Localize() : "Unlocalize".Localize();
 }
 
 @section Panel{
@@ -32,7 +34,7 @@
         </li>
 
         <li><a href="@Url.Action("Delete", ViewContext.RequestContext.AllRouteValues().Merge("return", ViewContext.HttpContext.Request.RawUrl))" data-show-on-check="Any" data-show-on-selector=".localized" data-command-type="AjaxPost" data-confirm="@("Are you sure you want to delete these items?".Localize())">
-            @Html.IconImage("delete") @("Delete".Localize())</a></li>
+            @Html.IconImage("delete") @deleteButtonText</a></li>
         <li><a href="@Url.Action("Localize", ViewContext.RequestContext.AllRouteValues().Merge("return", ViewContext.HttpContext.Request.RawUrl))" data-show-on-check="Any" data-show-on-selector=".unlocalized" data-command-type="AjaxPost">
             @Html.IconImage("localize") @("Localize".Localize())</a></li>
         <li class="j_DropDown" data-show-on-check="Any" data-show-on-selector=".localized">

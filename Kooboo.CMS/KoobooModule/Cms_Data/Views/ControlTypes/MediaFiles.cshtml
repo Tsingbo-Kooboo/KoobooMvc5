@@ -7,7 +7,8 @@
     <th>@(string.IsNullOrEmpty(Model.Label) ? Model.Name : Model.Label)</th>
     <td>
         <div id="@containerId" class="mediafile">
-            <input id="@Model.Name" name="@Model.Name" type="hidden" value='@valueGetter' data-bind="value:fieldValue"/>
+            <input id="@Model.Name" name="@Model.Name" type="hidden" value='@valueGetter' data-bind="value:fieldValue" @Html.Raw(Kooboo.CMS.Form.Html.ValidationExtensions.GetUnobtrusiveValidationAttributeString(Model)) />
+            @Html.ValidationMessageForColumn(Model, new Dictionary<string, object>())
             <ul class="clearfix" data-bind="foreach:data">
                 <!-- ko if: isImage -->
                 <li class="img">
@@ -23,7 +24,7 @@
                 </li>
                 <!-- /ko -->
             </ul>
-            <a class="action add" href='@("@")Url.Action("Selection", ViewContext.RequestContext.AllRouteValues().Merge("Controller", "MediaContent").Merge("FolderName", null))")'>@@Html.IconImage("plus small")</a>
+            <a class="action add" href='@("@")Url.Action("Selection", ViewContext.RequestContext.AllRouteValues().Merge("page",null).Merge("Controller", "MediaContent").Merge("FolderName", null))")'>@@Html.IconImage("plus small")</a>
             @Html.Raw(FormHelper.Tooltip(Model.Tooltip))
         </div>
         <script>

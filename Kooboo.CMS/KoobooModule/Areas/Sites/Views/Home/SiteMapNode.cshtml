@@ -1,4 +1,5 @@
 ﻿@model Kooboo.CMS.Sites.Models.SiteMapNode
+
 @if (Model != null)
 {
     var allowToPublish = ServiceFactory.UserManager.Authorize(Kooboo.CMS.Sites.Models.Site.Current, ViewContext.HttpContext.User.Identity.Name, Kooboo.CMS.Account.Models.Permission.Sites_Page_PublishPermission);
@@ -16,10 +17,21 @@
 .Merge("UUID", Model.Page.FullName)
 .Merge("return", Request.RawUrl);
 
+
+    var currentPage = Model.Page;
+    var originalPage = ServiceFactory.PageManager.Get(Site.Root, currentPage.UUID).AsActual();
+    var originalDisplayText = (originalPage.Navigation == null || string.IsNullOrEmpty(originalPage.Navigation.DisplayText)) ? originalPage.Name : originalPage.Navigation.DisplayText;
+    var localizedDisplayText = originalDisplayText;
+    if (isLocal)
+    {
+        localizedDisplayText = (currentPage.Navigation == null || string.IsNullOrEmpty(currentPage.Navigation.DisplayText)) ? originalDisplayText : currentPage.Navigation.DisplayText;
+    }
+
     <div class="map-item @( isLocal ? "" : "inherited") @(isStaticPage ? "static" : "dynamic") @(!Model.Page.Published == true ? "unpublished" : "") @(Model.Page.Navigation.Show ? "show-in-menu" : "") @(isABTestPage == true ? "ab-testing" : "")">
         <span class="status">@Html.IconImage("status")</span>
-        <span class="text trigger" title="@(Model.Page.Name)">
-            <span>@((Model.Page.Navigation == null || string.IsNullOrEmpty(Model.Page.Navigation.DisplayText)) ? Model.Page.Name : Model.Page.Navigation.DisplayText)</span>
+        <span class="text trigger" title="@(originalDisplayText)">
+            <span data-localized>@localizedDisplayText</span>
+            <span data-unlocalized style="display: none">@originalDisplayText</span>
             @Html.IconImage("arrow white-right")
         </span>
         @if (isLocal)
