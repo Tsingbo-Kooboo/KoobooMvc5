@@ -36,9 +36,21 @@ namespace Kooboo.CMS.Web
             {
                 var baseDir = EngineContext.Current.Resolve<Kooboo.CMS.Common.IBaseDir>();
 
-                base.AreaMasterLocationFormats = new string[] { "~/Areas/{2}/Views/{1}/{0}.cshtml", "~/" + baseDir.Cms_DataPathName + "/Views/Shared/{0}.cshtml", "~/Areas/{2}/Views/Shared/{0}.cshtml", "~/Views/Shared/{0}.cshtml" }; //add: "~/Views/Shared/{0}.cshtml" 
+                base.AreaMasterLocationFormats = new string[] {
+                    "~/" + baseDir.Cms_DataPathName + "/Views/Areas/{2}/{1}/{0}.cshtml",
+                    "~/Areas/{2}/Views/{1}/{0}.cshtml",
+                    "~/" + baseDir.Cms_DataPathName + "/Views/Shared/{0}.cshtml",
+                    "~/Areas/{2}/Views/Shared/{0}.cshtml",
+                    "~/Views/Shared/{0}.cshtml"
+                }; //add: "~/Views/Shared/{0}.cshtml" 
 
-                base.AreaViewLocationFormats = new string[] { "~/Areas/{2}/Views/{1}/{0}.cshtml", "~/" + baseDir.Cms_DataPathName + "/Views/Shared/{0}.cshtml", "~/Areas/{2}/Views/Shared/{0}.cshtml", "~/Views/Shared/{0}.cshtml" };//add: "~/Views/Shared/{0}.cshtml"
+                base.AreaViewLocationFormats = new string[] {
+                    "~/" + baseDir.Cms_DataPathName + "/Views/Areas/{2}/{1}/{0}.cshtml",
+                    "~/Areas/{2}/Views/{1}/{0}.cshtml",
+                    "~/" + baseDir.Cms_DataPathName + "/Views/Shared/{0}.cshtml",
+                    "~/Areas/{2}/Views/Shared/{0}.cshtml",
+                    "~/Views/Shared/{0}.cshtml"
+                };//add: "~/Views/Shared/{0}.cshtml"
 
                 base.AreaPartialViewLocationFormats = base.AreaViewLocationFormats;
             }

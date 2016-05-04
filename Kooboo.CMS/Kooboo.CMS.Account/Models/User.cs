@@ -92,15 +92,15 @@ namespace Kooboo.CMS.Account.Models
         [DataMember]
         public virtual string ActivateCode { get; set; }
 
-        private DynamicDictionary customFields = null;
+        private Dictionary<string, string> customFields = null;
         [DataMember(Order = 7)]
-        public DynamicDictionary CustomFields
+        public Dictionary<string, string> CustomFields
         {
             get
             {
                 if (customFields == null)
                 {
-                    customFields = new DynamicDictionary();
+                    customFields = new Dictionary<string, string>();
                 }
                 return customFields;
             }
@@ -126,7 +126,7 @@ namespace Kooboo.CMS.Account.Models
             {
                 if (!string.IsNullOrEmpty(value))
                 {
-                    CustomFields = Kooboo.Runtime.Serialization.DataContractSerializationHelper.DeserializeFromXml<DynamicDictionary>(value);
+                    CustomFields = Kooboo.Runtime.Serialization.DataContractSerializationHelper.DeserializeFromXml<Dictionary<string, string>>(value);
                 }
             }
         }
