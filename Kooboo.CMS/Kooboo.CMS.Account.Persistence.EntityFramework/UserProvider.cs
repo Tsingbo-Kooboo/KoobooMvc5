@@ -44,6 +44,7 @@ namespace Kooboo.CMS.Account.Persistence.EntityFramework
             update.CustomFields = @new.CustomFields;
             update.Email = @new.Email;
             update.UICulture = @new.UICulture;
+            update.CustomFields = @new.CustomFields;
 
             _dbContext.SaveChanges();
         }

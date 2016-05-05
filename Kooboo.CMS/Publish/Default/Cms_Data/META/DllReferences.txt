@@ -217,7 +217,7 @@
   },
   {
     "AssemblyName": "Newtonsoft.Json.dll",
-    "Version": "4.5.0.0",
+    "Version": "8.0.0.0",
     "IsSystemAssembly": true,
     "UserList": [
       "System"
@@ -246,18 +246,10 @@
     "UserList": [
       "System"
     ]
-  },
-  {
-    "AssemblyName": "System.Net.Http.dll",
-    "Version": "2.0.0.0",
-    "IsSystemAssembly": true,
-    "UserList": [
-      "System"
-    ]
-  },
+  },  
   {
     "AssemblyName": "System.Web.Helpers.dll",
-    "Version": "2.0.0.0",
+    "Version": "3.0.0.0",
     "IsSystemAssembly": true,
     "UserList": [
       "System"
@@ -265,7 +257,7 @@
   },
   {
     "AssemblyName": "System.Web.Mvc.dll",
-    "Version": "4.0.0.0",
+    "Version": "5.2.3.0",
     "IsSystemAssembly": true,
     "UserList": [
       "System"
@@ -273,23 +265,15 @@
   },
   {
     "AssemblyName": "System.Web.Razor.dll",
-    "Version": "2.0.0.0",
+    "Version": "3.0.0.0",
     "IsSystemAssembly": true,
     "UserList": [
       "System"
     ]
-  },
-  {
-    "AssemblyName": "System.Web.WebPages.Administration.dll",
-    "Version": "2.0.0.0",
-    "IsSystemAssembly": true,
-    "UserList": [
-      "System"
-    ]
-  },
+  },  
   {
     "AssemblyName": "System.Web.WebPages.Deployment.dll",
-    "Version": "2.0.0.0",
+    "Version": "3.0.0.0",
     "IsSystemAssembly": true,
     "UserList": [
       "System"
@@ -297,7 +281,7 @@
   },
   {
     "AssemblyName": "System.Web.WebPages.dll",
-    "Version": "2.0.0.0",
+    "Version": "3.0.0.0",
     "IsSystemAssembly": true,
     "UserList": [
       "System"
@@ -305,7 +289,7 @@
   },
   {
     "AssemblyName": "System.Web.WebPages.Razor.dll",
-    "Version": "2.0.0.0",
+    "Version": "3.0.0.0",
     "IsSystemAssembly": true,
     "UserList": [
       "System"
