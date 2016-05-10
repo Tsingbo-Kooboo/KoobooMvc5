@@ -138,11 +138,12 @@ namespace Kooboo.CMS.Membership.Services
                 {
                     membershipUser.UtcLastLoginDate = DateTime.UtcNow;
                     membershipUser.ProviderExtraData = extraData;
-                    membershipUser.Profiles = profiles;
                     if (profiles != null)
                     {
                         if (membershipUser.Profiles == null)
+                        {
                             membershipUser.Profiles = new Dictionary<string, string>();
+                        }
                         foreach (var item in profiles)
                         {
                             membershipUser.Profiles[item.Key] = item.Value;

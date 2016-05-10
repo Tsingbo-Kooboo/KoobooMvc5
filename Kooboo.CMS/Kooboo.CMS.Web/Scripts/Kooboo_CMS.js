@@ -588,7 +588,7 @@ function parse_JsonResultData(response, statusText, xhr, $form) {
             var tempForm = $('<form>', {
                 'action': $self.attr('href'),
                 'target': '_top',
-                'method':'post'
+                'method': 'post'
             }).appendTo('body');
             $('<input>').attr({
                 type: 'hidden',
@@ -1146,7 +1146,7 @@ function parse_JsonResultData(response, statusText, xhr, $form) {
             }
             var stop = function () {
                 canLeave = false;
-                $.publish(kooboo.constants.messageToptics.SomeThing_Changed_On_Page);
+                $.isFunction($.publish) && $.publish(kooboo.constants.messageToptics.SomeThing_Changed_On_Page);
             }
             var pass = function () {
                 canLeave = true;
@@ -1333,7 +1333,7 @@ function parse_JsonResultData(response, statusText, xhr, $form) {
         $(".upload-button input:file").change(function () {
             $(this).parent().submit();
         });
-      
+
     });
 
     //knockout extension
