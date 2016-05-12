@@ -184,6 +184,7 @@
 
         triggerSave: function () {
             window.tinyMCE && (window.tinyMCE.triggerSave());
+            window.parent.$.isFunction(window.parent.$.publish) && window.parent.$.publish(kooboo.constants.messageToptics.SomeThing_Changed_On_Page);
         },
 
         validateForm: function (context) {
