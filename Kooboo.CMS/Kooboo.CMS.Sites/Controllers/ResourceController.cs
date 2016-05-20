@@ -292,7 +292,7 @@ namespace Kooboo.CMS.Sites.Controllers
             string cms_dataPath = baseDir.Cms_DataPhysicalPath;
             string fileName = Path.GetFileNameWithoutExtension(imagePath);
             string newFileName = fileName + "-" + width.ToString() + "-" + height.ToString() + "-" + preserverAspectRatio.ToString() + "-" + quality.ToString() + "-" + lastModeifyDate.Ticks;
-            string imageCachingPath = Path.Combine(cms_dataPath, "ImageCaching");
+            string imageCachingPath = Path.Combine(cms_dataPath, SiteConstants.DirectoryNames.CachingDirectoryName);
             string cachingPath = imageCachingPath + imagePath.Substring(cms_dataPath.Length);
             return Path.Combine(Path.GetDirectoryName(cachingPath), newFileName + Path.GetExtension(imagePath));
         }

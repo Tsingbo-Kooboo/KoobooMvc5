@@ -38,7 +38,7 @@ namespace Kooboo.CMS.Membership.Services
 
 
         #region All
-        public IQueryable<MembershipUser> All(Kooboo.CMS.Membership.Models.Membership membership, string filterName)
+        public virtual IQueryable<MembershipUser> All(Kooboo.CMS.Membership.Models.Membership membership, string filterName)
         {
             var all = _provider.All(membership);
             if (!string.IsNullOrEmpty(filterName))
@@ -105,7 +105,7 @@ namespace Kooboo.CMS.Membership.Services
             return _provider.Get(membershipUser);
         }
 
-        private void SetPassword(Kooboo.CMS.Membership.Models.Membership membership, MembershipUser membershipUser, string password)
+        protected virtual void SetPassword(Kooboo.CMS.Membership.Models.Membership membership, MembershipUser membershipUser, string password)
         {
             var salt = _passwordProvider.GenerateSalt();
             var encodedPassword = _passwordProvider.EncodePassword(membership, password, salt);

@@ -18,9 +18,19 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.Caching;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using Kooboo.CMS.Common;
+using Kooboo.CMS.Sites.Caching;
+using Kooboo.CMS.Sites.Parsers.ThemeRule;
+using Kooboo.CMS.Sites.Services;
+using Kooboo.IO;
+using Kooboo.Web.Mvc.WebResourceLoader;
+using Kooboo.Web.Mvc.WebResourceLoader.DynamicClientResource;
+
 namespace Kooboo.CMS.Sites.View
 {
     #region InvalidPageRouteException
@@ -160,9 +170,97 @@ namespace Kooboo.CMS.Sites.View
         public virtual IHtmlString SiteScriptsUrl(string baseUri, string folder, bool compressed)
         {
             Site site = this.Site;
-            return new HtmlString(UrlUtility.ToHttpAbsolute(baseUri, this.Url.Action("scripts", "Resource", new { siteName = site.FullName, version = site.VersionUsedInUrl, area = "", compressed, name = folder })));
+            var scripts = ServiceFactory.ScriptManager.GetFiles(site, folder);
+            var bundleName = GetBundleName(site.VersionUsedInUrl, compressed, folder, FileExtensions.Script);
+            var bundlePath = GetBundlePath(site, bundleName, SiteConstants.DirectoryNames.ScriptsCachingDirectoryName);
+            var bundleGenerated = site.ObjectCache().Get(bundleName) as bool?;
+            if (bundleGenerated == null || !bundleGenerated.Value)
+            {
+                var bundledScripts = CompressJavascript(scripts, compressed);
+
+                IOUtility.SaveStringToFile(UrlUtility.MapPath(bundlePath), bundledScripts);
+                site.ObjectCache().Set(bundleName, true, new CacheItemPolicy());
+            }
+
+            return new HtmlString(UrlUtility.ToHttpAbsolute(baseUri, bundlePath));
         }
 
+        private string GetCachingDirectory(Site site)
+        {
+            var baseDir = Kooboo.CMS.Common.Runtime.EngineContext.Current.Resolve<IBaseDir>();
+            return string.Format("{0}/{1}/Sites/{2}"
+                , baseDir.Cms_DataVirtualPath
+                , SiteConstants.DirectoryNames.CachingDirectoryName
+                , Site.FullName);
+        }
+
+        private string GetBundleName(string versionNumber, bool compressed, string folder, string fileExtension)
+        {
+            if (folder.EndsWith(fileExtension, StringComparison.OrdinalIgnoreCase))
+            {
+                return string.Format("{0}_{1}_{2}", versionNumber, compressed, folder.Replace('/', '_'));
+            }
+
+            return string.Format("{0}_{1}_{2}{3}", versionNumber, compressed, folder.Replace('/', '_'), fileExtension);
+        }
+
+        private string GetBundlePath(Site site, string bundleName, string resourceDirectoryName)
+        {
+            var cachingDirectory = string.Format("{0}/{1}", GetCachingDirectory(site), resourceDirectoryName);
+            return string.Format("{0}/{1}", cachingDirectory, bundleName);
+
+        }
+
+        private string CompressJavascript(IEnumerable<IPath> jsFiles, bool? compressed)
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (var file in jsFiles)
+            {
+                string content;
+                var dynamicResource = DynamicClientResourceFactory.Default.ResolveProvider(file.VirtualPath);
+
+                if (dynamicResource != null)
+                {
+                    content = dynamicResource.Parse(file.VirtualPath);
+                }
+                else
+                {
+                    content = IOUtility.ReadAsString(file.PhysicalPath);
+                }
+                sb.Append(content + ";\n");
+            }
+
+            if (!compressed.HasValue || compressed.Value == true)
+            {
+                return Kooboo.Web.Script.JSMin.Minify(sb.ToString());
+            }
+            else
+            {
+                return sb.ToString();
+            }
+
+        }
+
+        private string CompressCss(IEnumerable<IPath> cssFiles)
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (var file in cssFiles)
+            {
+                string content;
+                var dynamicResource = DynamicClientResourceFactory.Default.ResolveProvider(file.PhysicalPath);
+
+                if (dynamicResource != null)
+                {
+                    content = dynamicResource.Parse(file.VirtualPath);
+                }
+                else
+                {
+                    content = IOUtility.ReadAsString(file.PhysicalPath);
+                }
+                sb.AppendFormat("{0}\n", CSSMinify.Minify(Url, file.VirtualPath, this.Url.RequestContext.HttpContext.Request.Url.AbsolutePath, content));
+            }
+            return sb.ToString();
+        }
         /// <summary>
         /// Sites the theme URL.
         /// </summary>
@@ -179,7 +277,22 @@ namespace Kooboo.CMS.Sites.View
         public virtual IHtmlString SiteThemeUrl(string baseUri, string themeName)
         {
             Site site = this.Site;
-            return new HtmlString(UrlUtility.ToHttpAbsolute(baseUri, this.Url.Action("theme", "Resource", new { siteName = site.FullName, name = themeName, version = site.VersionUsedInUrl, area = "" })).ToString());
+
+            string cssHackBody;
+            var styles = ThemeRuleParser.Parse(new Theme(site, themeName).LastVersion(), out cssHackBody);
+
+            var bundleName = GetBundleName(site.VersionUsedInUrl, true, themeName, FileExtensions.Css);
+            var bundlePath = GetBundlePath(site, bundleName, SiteConstants.DirectoryNames.ThemesCachingDirectoryName);
+            var bundleGenerated = site.ObjectCache().Get(bundleName) as bool?;
+            if (bundleGenerated == null || !bundleGenerated.Value)
+            {
+                var bundledStyles = CompressCss(styles);
+
+                IOUtility.SaveStringToFile(UrlUtility.MapPath(bundlePath), bundledStyles);
+                site.ObjectCache().Set(bundleName, true, new CacheItemPolicy());
+            }
+
+            return new HtmlString(UrlUtility.ToHttpAbsolute(baseUri, bundlePath));
         }
         /// <summary>
         /// Get the media content url.
@@ -402,10 +515,10 @@ namespace Kooboo.CMS.Sites.View
                 {
                     if (relativeScriptFilePath.EndsWith(FileExtensions.Script, StringComparison.OrdinalIgnoreCase))
                     {
-                        var fileName = Path.GetFileName(relativeScriptFilePath);
-                        var path = relativeScriptFilePath.Substring(0, relativeScriptFilePath.Length - fileName.Length);
                         var baseUri = site.ResourceDomain;
-                        return new HtmlString(UrlUtility.ToHttpAbsolute(baseUri, Url.Action("scripts", "Resource", new { siteName = site.FullName, version = site.VersionUsedInUrl, area = "", compressed = true, name = path, fileName })));
+                        var bundleName = GetBundleName(site.VersionUsedInUrl, true, relativeScriptFilePath.Replace('/', '_'), FileExtensions.Script);
+                        var buddlePath = GetBundlePath(site, bundleName, SiteConstants.DirectoryNames.ThemesCachingDirectoryName);
+                        return new HtmlString(UrlUtility.ToHttpAbsolute(baseUri, buddlePath));
                     }
                 }
 
