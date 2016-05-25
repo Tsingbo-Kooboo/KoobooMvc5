@@ -16,6 +16,8 @@ using Kooboo.Web.Mvc;
 using Kooboo.CMS.Content.Query;
 using Kooboo.CMS.Content.Models;
 using Kooboo.CMS.Common.Persistence;
+using Kooboo.Globalization;
+
 namespace Kooboo.CMS.Web
 {
     public static class SortByExtension
@@ -86,7 +88,7 @@ namespace Kooboo.CMS.Web
             }
             var sortUrl = requestContext.UrlHelper().Action(requestContext.GetRequestValue("action"),
                 requestContext.AllRouteValues().Merge("sortField", propertyName).Merge("sortDir", sortDir));
-            return new HtmlString(string.Format(html, sortUrl, headerText, requestContext.UrlHelper().Content("~/Images/invis.gif")));
+            return new HtmlString(string.Format(html, sortUrl, headerText.Localize(), requestContext.UrlHelper().Content("~/Images/invis.gif")));
         }
         #endregion
     }

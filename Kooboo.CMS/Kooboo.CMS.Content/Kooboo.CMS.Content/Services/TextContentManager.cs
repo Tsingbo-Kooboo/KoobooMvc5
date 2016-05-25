@@ -123,7 +123,14 @@ namespace Kooboo.CMS.Content.Services
             textContent.ParentFolder = parentFolder;
             textContent.ParentUUID = parentUUID;
             textContent.UserId = userid;
-            textContent.UtcLastModificationDate = textContent.UtcCreationDate = DateTime.Now;
+            if (textContent.UtcCreationDate==default(DateTime))
+            {
+                textContent.UtcCreationDate = DateTime.Now;
+            }
+            if (textContent.UtcLastModificationDate==default(DateTime))
+            {
+                textContent.UtcLastModificationDate = DateTime.Now;
+            }
 
             textContent.ContentFiles = GetPostFiles(files);
 
