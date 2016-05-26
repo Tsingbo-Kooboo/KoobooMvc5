@@ -138,7 +138,7 @@ namespace Kooboo.CMS.Sites.View
 
             #endregion
 
-            return new HtmlString(site.OutputLowerCasePageUrl? url.ToLower() : url);
+            return new HtmlString(site.OutputLowerCasePageUrl ? url.ToLower() : url);
         }
 
         #endregion
@@ -191,10 +191,10 @@ namespace Kooboo.CMS.Sites.View
             return string.Format("{0}/{1}/Sites/{2}"
                 , baseDir.Cms_DataVirtualPath
                 , SiteConstants.DirectoryNames.CachingDirectoryName
-                , Site.FullName);
+                , site.FullName);
         }
 
-        private string GetBundleName(string versionNumber, bool compressed, string folder, string fileExtension)
+        protected virtual string GetBundleName(string versionNumber, bool compressed, string folder, string fileExtension)
         {
             if (folder.EndsWith(fileExtension, StringComparison.OrdinalIgnoreCase))
             {
@@ -204,14 +204,14 @@ namespace Kooboo.CMS.Sites.View
             return string.Format("{0}_{1}_{2}{3}", versionNumber, compressed, folder.Replace('/', '_'), fileExtension);
         }
 
-        private string GetBundlePath(Site site, string bundleName, string resourceDirectoryName)
+        protected virtual string GetBundlePath(Site site, string bundleName, string resourceDirectoryName)
         {
             var cachingDirectory = string.Format("{0}/{1}", GetCachingDirectory(site), resourceDirectoryName);
             return string.Format("{0}/{1}", cachingDirectory, bundleName);
 
         }
 
-        private string CompressJavascript(IEnumerable<IPath> jsFiles, bool? compressed)
+        protected virtual string CompressJavascript(IEnumerable<IPath> jsFiles, bool? compressed)
         {
             StringBuilder sb = new StringBuilder();
             foreach (var file in jsFiles)
@@ -241,7 +241,7 @@ namespace Kooboo.CMS.Sites.View
 
         }
 
-        private string CompressCss(IEnumerable<IPath> cssFiles)
+        protected virtual string CompressCss(IEnumerable<IPath> cssFiles, string relativePath)
         {
             StringBuilder sb = new StringBuilder();
             foreach (var file in cssFiles)
@@ -257,7 +257,7 @@ namespace Kooboo.CMS.Sites.View
                 {
                     content = IOUtility.ReadAsString(file.PhysicalPath);
                 }
-                sb.AppendFormat("{0}\n", CSSMinify.Minify(Url, file.VirtualPath, this.Url.RequestContext.HttpContext.Request.Url.AbsolutePath, content));
+                sb.AppendFormat("{0}\n", CSSMinify.Minify(Url, file.VirtualPath, relativePath, content));
             }
             return sb.ToString();
         }
@@ -286,7 +286,7 @@ namespace Kooboo.CMS.Sites.View
             var bundleGenerated = site.ObjectCache().Get(bundleName) as bool?;
             if (bundleGenerated == null || !bundleGenerated.Value)
             {
-                var bundledStyles = CompressCss(styles);
+                var bundledStyles = CompressCss(styles, UrlUtility.ResolveUrl(bundlePath));
 
                 IOUtility.SaveStringToFile(UrlUtility.MapPath(bundlePath), bundledStyles);
                 site.ObjectCache().Set(bundleName, true, new CacheItemPolicy());
