@@ -308,7 +308,7 @@
             },
             out: function (event, ui) { },
             drop: function (event, ui) {
-                window.parent.$.isFunction(window.parent.$.publish) && window.parent.$.publish(window.parent.kooboo.constants.messageToptics.SomeThing_Changed_On_Page);
+                window.parent.leaveConfirm.stop();
             }
         },
         dragSetting: {
