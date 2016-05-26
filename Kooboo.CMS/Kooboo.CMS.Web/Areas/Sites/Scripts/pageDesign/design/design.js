@@ -346,6 +346,7 @@
             // btn remove
             this.btnRemove = createBtn('kb-removebtn', options.removeBtnTitle, function () {
                 self.getPosition().removeComponent(self);
+                window.parent.leaveConfirm.stop();
             }).appendTo(this.el);
             this.el.append(split);
 
