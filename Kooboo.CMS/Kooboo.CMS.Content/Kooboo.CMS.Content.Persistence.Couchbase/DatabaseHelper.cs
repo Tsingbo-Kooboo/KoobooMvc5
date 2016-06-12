@@ -7,8 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Kooboo.CMS.Content.Models;
-using Newtonsoft.Json;
-using Enyim.Caching.Memcached;
 
 namespace Kooboo.CMS.Content.Persistence.Couchbase
 {
