@@ -308,22 +308,23 @@
             <h5></h5>
             <table>
                 <tbody>
-                    <tr>
-                        <td>
-                            <select class="short" data-bind="options:metadata.logicList,optionsText:'Text',optionsValue:'Value',value:$data.LogicalTemp"></select>
-                            <select class="medium" data-bind="options:$root.GetSchemaColumns($data.FolderName),optionsText:'Name',optionsValue:'Name',value:$data.FieldNameTemp "></select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <select class="short" data-bind="options:metadata.operatorList,optionsText:'Text',optionsValue:'Value',value:$data.OperatorTemp"></select>
-                            <input type="text" class="medium" data-bind="value:Value1Temp">
-                        </td>
-                    </tr>
+                <tr>
+                    <td>
+                        <select class="short" data-bind="options:metadata.logicList,optionsText:'Text',optionsValue:'Value',value:$data.LogicalTemp"></select>
+                        <select class="medium" data-bind="options:$root.GetSchemaColumns($data.FolderName),optionsText:'Name',optionsValue:'Name',value:$data.FieldNameTemp "></select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <select class="short" data-bind="options:metadata.operatorList,optionsText:'Text',optionsValue:'Value',value:$data.OperatorTemp"></select>
+                        <input type="text" class="medium" data-bind="value:Value1Temp">
+                    </td>
+                </tr>
                 </tbody>
             </table>
             <a class="button save" data-bind="click:$root.SaveEditingFilter">@("Save".Localize())</a>
             <a class="button cancel gray action" data-bind="click:$root.CancelEditingFilter">@("Cancel".Localize())</a>
+            <p class="field-validation-error" data-bind="visible:$data.IsEditing() && $root.IsSaving() && $root.UnsavedFilterCount() > 0" >@("Please save or cancel this filter before saving the data rule".Localize()) </p>
         </div>
     </li>
 </script>
