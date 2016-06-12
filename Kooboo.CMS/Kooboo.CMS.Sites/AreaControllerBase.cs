@@ -18,10 +18,12 @@ using Kooboo.CMS.Sites;
 using Kooboo.CMS.Common.Persistence.Non_Relational;
 using Kooboo.CMS.Common;
 using System.Web;
+using Kooboo.CMS.Sites.Controllers.ActionFilters;
 using Kooboo.Globalization;
 namespace Kooboo.CMS.Sites
 {
     [ValidateInput(false)]
+    [ActionLog]
     public class AreaControllerBase : Controller
     {
         #region Initialize

@@ -32,5 +32,11 @@ namespace Kooboo.HealthMonitoring
         {
             Logger(e);
         }
+
+        public static void LogInformation(string message, object eventSource)
+        {
+            var webEvent = new WebRequestInfoEventWrapper(message, eventSource, 150000);
+            webEvent.Raise();
+        }
     }
 }

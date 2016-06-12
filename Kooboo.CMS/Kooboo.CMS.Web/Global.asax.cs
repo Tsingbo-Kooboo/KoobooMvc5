@@ -21,7 +21,6 @@ using System.IO;
 using System.Security.Permissions;
 using System.Security;
 using Kooboo.Collections;
-using System.Web.Http;
 using Kooboo.CMS.Common.Runtime;
 
 namespace Kooboo.CMS.Web

@@ -50,6 +50,7 @@ namespace Kooboo
             resources["Webevent_event_request_path"] = "Request path: {0}";
             resources["Webevent_event_user_host_address"] = "User host address: {0}";
             resources["Webevent_event_user"] = "User: {0}";
+            resources["Webevent_event_user_ip"] = "User IP: {0}";
             resources["Webevent_event_is_authenticated"] = "Is authenticated: True";
             resources["Webevent_event_is_not_authenticated"] = "Is authenticated: False";
             resources["Webevent_event_authentication_type"] = "Authentication Type: {0}";
@@ -76,6 +77,7 @@ namespace Kooboo
             resources["Webevent_event_exception_type"] = "Exception type: {0}";
             resources["Webevent_event_exception_message"] = "Exception message: {0}";
             resources["Webevent_event_request_information"] = "Request information:";
+            resources["Webevent_event_request_data"] = "Request data:";
             resources["Webevent_event_thread_information"] = "Thread information:";
 
             

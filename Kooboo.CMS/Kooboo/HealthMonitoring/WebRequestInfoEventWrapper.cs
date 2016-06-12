@@ -1,16 +1,10 @@
-﻿#region License
-// 
-// Copyright (c) 2013, Kooboo team
-// 
-// Licensed under the BSD License
-// See the file LICENSE.txt for details.
-// 
-#endregion
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Globalization;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
+using Kooboo.Web.Script.Serialization;
 
 namespace Kooboo.HealthMonitoring
 {
@@ -18,73 +12,19 @@ namespace Kooboo.HealthMonitoring
     /// <summary>
     /// 
     /// </summary>
-    public class WebBaseErrorEventWrapper : WebBaseEventWrapper
+    public class WebBaseInfoEventWrapper : WebBaseEventWrapper
     {
-        public WebBaseErrorEventWrapper(string message, object eventSource, int eventCode, Exception e)
+        public WebBaseInfoEventWrapper(string message, object eventSource, int eventCode)
             : base(message, eventSource, eventCode)
         {
-            this.Init(e);
-        }
-        private void Init(Exception e)
-        {
-            this._exception = e;
-        }
-        private Exception _exception;
-        public Exception ErrorException
-        {
-            get
-            {
-                return this._exception;
-            }
-        }
-
-        internal override void GenerateFieldsForMarshal(List<WebEventFieldData> fields)
-        {
-            base.GenerateFieldsForMarshal(fields);
-
-            fields.Add(new WebEventFieldData("ExceptionType", this.ErrorException.GetType().ToString(), WebEventFieldType.String));
-            fields.Add(new WebEventFieldData("ExceptionMessage", this.ErrorException.Message, WebEventFieldType.String));
-
-        }
-
-        protected override void FormatToString(WebEventFormatter formatter, bool includeAppInfo)
-        {
-            base.FormatToString(formatter, includeAppInfo);
-            if (this._exception != null)
-            {
-                Exception innerException = this._exception;
-                for (int i = 0; (innerException != null) && (i <= 2); i++)
-                {
-                    formatter.AppendLine(string.Empty);
-                    if (i == 0)
-                    {
-                        formatter.AppendLine(WebBaseEventWrapper.FormatResourceStringWithCache("Webevent_event_exception_information"));
-                    }
-                    else
-                    {
-                        formatter.AppendLine(WebBaseEventWrapper.FormatResourceStringWithCache("Webevent_event_inner_exception_information", i.ToString(CultureInfo.InstalledUICulture)));
-                    }
-                    formatter.IndentationLevel++;
-                    formatter.AppendLine(WebBaseEventWrapper.FormatResourceStringWithCache("Webevent_event_exception_type", innerException.GetType().ToString()));
-                    formatter.AppendLine(WebBaseEventWrapper.FormatResourceStringWithCache("Webevent_event_exception_message", innerException.Message));
-                    formatter.IndentationLevel--;
-                    innerException = innerException.InnerException;
-                }
-            }
-
         }
     }
     #endregion
 
-    #region WebRequestErrorEventWrapper
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public class WebRequestErrorEventWrapper : WebBaseErrorEventWrapper
+    public class WebRequestInfoEventWrapper : WebBaseInfoEventWrapper
     {
-        public WebRequestErrorEventWrapper(string message, object eventSource, int eventCode, Exception e)
-            : base(message, eventSource, eventCode, e)
+        public WebRequestInfoEventWrapper(string message, object eventSource, int eventCode)
+            : base(message, eventSource, eventCode)
         {
         }
 
@@ -97,6 +37,13 @@ namespace Kooboo.HealthMonitoring
             this.RequestInformation.FormatToString(formatter);
             formatter.IndentationLevel--;
             formatter.AppendLine(string.Empty);
+
+            //formatter.AppendLine(WebBaseEventWrapper.FormatResourceStringWithCache("Webevent_event_request_data"));
+            //formatter.IndentationLevel++;
+            //formatter.AppendLine(EventSource.ToJSON());
+            //formatter.IndentationLevel--;
+            //formatter.AppendLine(string.Empty);
+
             formatter.AppendLine(WebBaseEventWrapper.FormatResourceStringWithCache("Webevent_event_thread_information"));
             formatter.IndentationLevel++;
             this.ThreadInformation.FormatToString(formatter);
@@ -110,6 +57,7 @@ namespace Kooboo.HealthMonitoring
             fields.Add(new WebEventFieldData("RequestPath", this.RequestInformation.RequestPath, WebEventFieldType.String));
             fields.Add(new WebEventFieldData("UserHostAddress", this.RequestInformation.UserHostAddress, WebEventFieldType.String));
             fields.Add(new WebEventFieldData("UserName", this.RequestInformation.Principal.Identity.Name, WebEventFieldType.String));
+            fields.Add(new WebEventFieldData("UserIp", this.RequestInformation.UserIp, WebEventFieldType.String));
             fields.Add(new WebEventFieldData("UserAuthenticated", this.RequestInformation.Principal.Identity.IsAuthenticated.ToString(), WebEventFieldType.Bool));
             fields.Add(new WebEventFieldData("UserAuthenticationType", this.RequestInformation.Principal.Identity.AuthenticationType, WebEventFieldType.String));
             fields.Add(new WebEventFieldData("RequestThreadAccountName", this.RequestInformation.ThreadAccountName, WebEventFieldType.String));
@@ -146,12 +94,11 @@ namespace Kooboo.HealthMonitoring
         {
             if (this._threadInfo == null)
             {
-                this._threadInfo = new WebThreadInformation(base.ErrorException);
+                this._threadInfo = new WebThreadInformation(null);
             }
         }
 
         private WebThreadInformation _threadInfo;
         private WebRequestInformation _requestInfo;
     }
-    #endregion
 }

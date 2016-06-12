@@ -164,7 +164,9 @@
     <Compile Include="Globalization\LocalizeHelper.cs" />
     <Compile Include="Globalization\Repository\CacheElementRepository.cs" />
     <Compile Include="HealthMonitoring\Log.cs" />
+    <Compile Include="HealthMonitoring\WebBaseEventWrapper.cs" />
     <Compile Include="HealthMonitoring\WebRequestErrorEventWrapper.cs" />
+    <Compile Include="HealthMonitoring\WebRequestInfoEventWrapper.cs" />
     <Compile Include="IPagedList.cs" />
     <Compile Include="Job\IJob.cs" />
     <Compile Include="Job\JobExecutor.cs" />
