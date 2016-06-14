@@ -31,3 +31,5 @@ del web\Web.Debug.config /Q /S
 del web\Web.Release.config /Q /S
 del Web\bin\*.pdb /Q /S
 del web\bin\*.xml /Q /S
+
+copy "Web\Bin\Kooboo*.dll" "Kooboo.Core\lib\*.*"

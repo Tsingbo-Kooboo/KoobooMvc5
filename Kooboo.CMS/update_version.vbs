@@ -59,9 +59,37 @@ stream.Close()
 
 End Function
 
-UpdateVersion "CMSAssemblyInfoGlobal.cs", version
+Function UpdatePackageVersion(ByVal fileName,ByVal version)
 
+Dim regex,content,file,stream,result
+'remove file readonly attribute
+set file = fso.GetFile(fileName)
+file.Attributes =  file.Attributes or 1
+'get old content
+set stream =  CreateObject("ADODB.Stream")
+stream.Type = 2
+stream.Charset = "UTF-8"
+stream.Open() 
+stream.LoadFromFile(fileName) 
+content = stream.ReadText()
+stream.Close()
+'Regex replace
+set regex = New RegExp
+regex.Pattern = "\<version\>.*\</version\>"
+result = regex.Replace(content,"<version>"+version+"</version>")
+'delete old file 
+file.Delete(true)    
+'save back
+stream.Open()
+stream.WriteText(result) 
+stream.SaveToFile fileName, 2
+stream.Close() 
+
+End Function
+
+UpdateVersion "CMSAssemblyInfoGlobal.cs", version
 
 UpdateVersion "Publish\Default\Properties\AssemblyInfo.cs", version
 
+Call UpdatePackageVersion("Publish\Kooboo.Core\Kooboo.Core.nuspec", version)
 

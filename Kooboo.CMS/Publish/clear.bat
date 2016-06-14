@@ -33,3 +33,6 @@ del WPI\Kooboo_CMS.zip /Q /S
 del *.log /Q /S
 rd ..\Kooboo.CMS.Content\Publish /Q /S
 rd ..\..\Publish /Q /S
+rd Kooboo.Core /Q /S
+md Kooboo.Core\lib
+copy "Kooboo.Core.nuspec" "Kooboo.Core\*.*"

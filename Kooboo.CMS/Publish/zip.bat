@@ -1,3 +1,5 @@
+nuget pack Kooboo.Core\Kooboo.Core.nuspec -OutputDirectory Released
+nuget setApiKey 12487df2-6ae4-449f-a648-4237aba653b6
 
 xcopy "Web\*.*" "WPI\Kooboo_CMS\*.*" /S /E /Y /H
 
