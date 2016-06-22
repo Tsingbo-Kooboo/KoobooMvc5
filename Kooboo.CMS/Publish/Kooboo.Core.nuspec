@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+    <metadata>
+        <id>Kooboo.Core</id>
+        <version>4.5.0.0530</version>
+        <title>Kooboo CMS Core Binaries</title>
+        <authors>Kooboo</authors>
+        <owners>Yardi Technology limited</owners>
+        <projectUrl>https://github.com/Tsingbo-Kooboo/KoobooMvc5</projectUrl>
+        <iconUrl>http://www.kooboo.com/favicon.ico</iconUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>This package only contains assemblies and can be used for package development.</description>
+        <releaseNotes />
+        <copyright>Yardi Technology limited</copyright>
+        <language />
+        <tags>Kooboo CMS</tags>
+        <dependencies>
+            <dependency id="Microsoft.AspNet.Mvc" version="5.0.0" />
+        </dependencies>
+        <frameworkAssemblies>
+            <frameworkAssembly assemblyName="System.Web" targetFramework="" />
+        </frameworkAssemblies>
+    </metadata>
+</package>
