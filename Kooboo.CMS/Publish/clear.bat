@@ -35,4 +35,6 @@ rd ..\Kooboo.CMS.Content\Publish /Q /S
 rd ..\..\Publish /Q /S
 rd Kooboo.Core /Q /S
 md Kooboo.Core\lib
+md Kooboo.Core\content
 copy "Kooboo.Core.nuspec" "Kooboo.Core\*.*"
+copy "Kooboo.Core.web.config.install.xdt" "Kooboo.Core\content\web.config.install.xdt"

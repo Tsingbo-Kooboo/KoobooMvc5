@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<configuration xmlns:xdt="http://schemas.microsoft.com/XML-Document-Transform">
+  <system.web>
+    <healthMonitoring xdt:Transform="Replace">
+      <providers>
+        <add name="KoobooCMSTextFileProvider" type="Kooboo.CMS.Web.HealthMonitoring.TextFileWebEventProvider,Kooboo.CMS.Web" />
+      </providers>
+      <rules>
+        <add name="Kooboo Event Default" eventName="Kooboo Event" provider="KoobooCMSTextFileProvider" profile="Default" minInstances="1" maxLimit="Infinite" minInterval="00:00:30" custom="" />
+        <add name="Kooboo Info Default" eventName="Kooboo Info" provider="KoobooCMSTextFileProvider" profile="Default" minInstances="1" maxLimit="Infinite" minInterval="00:00:30" custom="" />
+        <add name="All Errors Kooboo" eventName="All Errors" provider="KoobooCMSTextFileProvider" profile="Default" minInstances="1" maxLimit="Infinite" minInterval="00:00:30" custom="" />
+      </rules>
+      <eventMappings>
+        <add name="Kooboo Info" type="Kooboo.HealthMonitoring.WebRequestInfoEventWrapper,Kooboo" startEventCode="150000" endEventCode="150000" />
+        <add name="Kooboo Event" type="Kooboo.HealthMonitoring.WebRequestErrorEventWrapper,Kooboo" startEventCode="0" endEventCode="2147483647" />
+      </eventMappings>
+    </healthMonitoring>
+  </system.web>
+</configuration>
