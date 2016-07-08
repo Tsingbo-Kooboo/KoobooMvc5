@@ -1200,7 +1200,7 @@ function parse_JsonResultData(response, statusText, xhr, $form) {
         //默认的绑定延迟一点执行，可以允许特定的页面在这个绑定之前做一些事情
         setTimeout(function () {
             //check form changed
-            $('form:not(.no-stop) input,form:not(.no-stop) select:not(.select)').change(function () {
+            $('form:not(.no-stop) input,form:not(.no-stop) textarea, form:not(.no-stop) select:not(.select)').change(function () {
                 window.leaveConfirm.stop();
             });
 
