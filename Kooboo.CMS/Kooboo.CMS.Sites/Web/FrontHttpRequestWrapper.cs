@@ -207,7 +207,14 @@ namespace Kooboo.CMS.Sites.Web
                 RawSite = Site.ParseSiteFromRelativePath(sitePaths).AsActual();
                 if (RawSite != null)
                 {
-                    RequestChannel = FrontRequestChannel.Debug;
+                    if (HttpContext.Current.User.Identity.IsAuthenticated)
+                    {
+                        RequestChannel = FrontRequestChannel.Debug;
+                    }
+                    else
+                    {
+                        throw new HttpException(0x194, string.Format(SR.GetString("Path_not_found"), new object[] { HttpContext.Current.Request.Path }));
+                    }
                 }
 
                 RequestUrl = Kooboo.Web.Url.UrlUtility.Combine(new[] { "/" }.Concat(path.Skip(1)).ToArray());
