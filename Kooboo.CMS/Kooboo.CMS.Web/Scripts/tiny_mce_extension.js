@@ -31,7 +31,8 @@
             allow_script_urls: true,
             extended_valid_elements: "*[*]",
             valid_elements: '*[*]',
-            valid_children: "+body[style|link]" //http://tinymce.moxiecode.com/wiki.php/Configuration:valid_children
+            valid_children: "+body[style|link]", //http://tinymce.moxiecode.com/wiki.php/Configuration:valid_children
+            forced_root_block: ''
         };
     };
 
