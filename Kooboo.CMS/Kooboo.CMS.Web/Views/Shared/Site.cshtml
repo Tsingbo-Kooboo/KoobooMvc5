@@ -23,7 +23,7 @@
     <div id="body-container">
         <header id="header">
             <a class="logo" href="@Html.Raw(Url.Action("SiteMap", "Home", new { area = "Sites" }))" title="@("Back to site manager".Localize())">
-                <img src="@Html.Raw(Url.Content("~/Images/logo.png")) " alt="LOGO">
+                <img src="@Html.Raw(Url.Content("~/Images/logo.png"))" alt="LOGO">
                 @Html.IconImage("home")
             </a>
             @RenderSection("Panel", false)
