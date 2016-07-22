@@ -217,7 +217,8 @@ namespace Kooboo.CMS.Web.Areas.Sites.Controllers
                         Manager.Update(Site, newModel, old);
 
                         //create a 301 url redirect automatically if the user changed the page alternative name
-                        if (!newModel.Route.Identifier.EqualsOrNullEmpty(old.Route.Identifier, StringComparison.CurrentCultureIgnoreCase))
+                        if (!newModel.Route.Identifier.EqualsOrNullEmpty(old.Route.Identifier, StringComparison.CurrentCultureIgnoreCase)
+                            && !(old.Route.Identifier.Contains("*") || old.Route.Identifier.Contains("#")))
                         {
                             var inputUrl = GetPageFriendlyFullPath(old);
                             var outputUrl = GetPageFriendlyFullPath(newModel);
