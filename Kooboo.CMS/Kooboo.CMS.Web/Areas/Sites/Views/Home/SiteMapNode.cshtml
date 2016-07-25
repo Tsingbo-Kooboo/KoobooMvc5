@@ -19,12 +19,15 @@
 
 
     var currentPage = Model.Page;
-    var originalPage = ServiceFactory.PageManager.Get(Site.Root, currentPage.UUID).AsActual();
-    var originalDisplayText = (originalPage.Navigation == null || string.IsNullOrEmpty(originalPage.Navigation.DisplayText)) ? originalPage.Name : originalPage.Navigation.DisplayText;
-    var localizedDisplayText = originalDisplayText;
+    var localizedDisplayText  = ((currentPage.Navigation == null || string.IsNullOrEmpty(currentPage.Navigation.DisplayText)) ? currentPage.Name : currentPage.Navigation.DisplayText);
+    var originalDisplayText = localizedDisplayText;
     if (isLocal)
     {
-        localizedDisplayText = (currentPage.Navigation == null || string.IsNullOrEmpty(currentPage.Navigation.DisplayText)) ? originalDisplayText : currentPage.Navigation.DisplayText;
+        var originalPage = ServiceFactory.PageManager.Get(Site.Root, currentPage.UUID).AsActual();
+        if (originalPage != null)
+        {
+            originalDisplayText = (originalPage.Navigation == null || string.IsNullOrEmpty(originalPage.Navigation.DisplayText)) ? originalPage.Name : originalPage.Navigation.DisplayText;
+        }
     }
 
     <div class="map-item @( isLocal ? "" : "inherited") @(isStaticPage ? "static" : "dynamic") @(!Model.Page.Published == true ? "unpublished" : "") @(Model.Page.Navigation.Show ? "show-in-menu" : "") @(isABTestPage == true ? "ab-testing" : "")">
