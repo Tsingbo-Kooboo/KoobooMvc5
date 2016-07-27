@@ -2,7 +2,7 @@
     // inject all css files of current site into TinyMCE editor (when edit html blocks & and richtext fields of text contents)
     var site = Site.Current.AsActual();
     var css = string.Empty;
-    if (!string.IsNullOrEmpty(site.Theme))
+    if (site!=null && !string.IsNullOrEmpty(site.Theme))
     {
         string cssHackBody;
         var themefiles = Kooboo.CMS.Sites.Parsers.ThemeRule.ThemeRuleParser.Parse(new Theme(site, site.Theme).LastVersion(), out cssHackBody);
