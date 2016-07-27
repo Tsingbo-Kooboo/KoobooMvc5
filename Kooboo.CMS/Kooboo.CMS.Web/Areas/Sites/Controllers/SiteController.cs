@@ -219,7 +219,7 @@ namespace Kooboo.CMS.Web.Areas.Sites.Controllers
 
         [CreateSiteAuthroziation]
         [HttpPost]
-        public virtual ActionResult Delete(string siteName, bool deleteRepository)
+        public virtual ActionResult Delete(string siteName, bool deleteRepository = false)
         {
             var data = new JsonResultData(ModelState);
             data.RunWithTry((resultData) =>
