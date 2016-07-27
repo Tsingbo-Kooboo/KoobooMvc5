@@ -140,7 +140,7 @@ namespace Kooboo.CMS.Web.Areas.Contents.Controllers
                 foreach (var folder in model)
                 {
                     folder.Repository = Repository;
-                    Manager.Remove(Repository, folder);
+                    Manager.Remove(Repository, folder.AsActual());
                 }
                 resultData.ReloadPage = true;
             });
