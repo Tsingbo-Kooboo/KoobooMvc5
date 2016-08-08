@@ -832,11 +832,15 @@ namespace Kooboo.Drawing
         /// <returns></returns>
         public static bool ValidateImage(string filePath)
         {
-            System.Drawing.Image sourceImage;
+            Image sourceImage;
 
             try
             {
-                sourceImage = System.Drawing.Image.FromFile(filePath);
+                if (!File.Exists(filePath))
+                {
+                    return false;
+                }
+                sourceImage = Image.FromFile(filePath);
                 sourceImage.Dispose();
                 return true;
             }
@@ -859,11 +863,15 @@ namespace Kooboo.Drawing
         /// <returns></returns>
         public static bool ResizeImage(string sourceFile, string targetFile, int maxWidth, int maxHeight, bool preserverAspectRatio, int quality)
         {
-            System.Drawing.Image sourceImage;
+            Image sourceImage;
 
             try
             {
-                sourceImage = System.Drawing.Image.FromFile(sourceFile);
+                if (!File.Exists(sourceFile))
+                {
+                    return false;
+                }
+                sourceImage = Image.FromFile(sourceFile);
             }
             catch (OutOfMemoryException)
             {
@@ -988,10 +996,10 @@ namespace Kooboo.Drawing
 
         public static bool ResizeImage(Stream sourceStream, Stream targetStream, ImageFormat imageFormat, int maxWidth, int maxHeight, bool preserverAspectRatio, int quality)
         {
-            System.Drawing.Image sourceImage;
+            Image sourceImage;
             try
             {
-                sourceImage = System.Drawing.Image.FromStream(sourceStream);
+                sourceImage = Image.FromStream(sourceStream);
                 sourceStream.Position = 0;
             }
             catch (OutOfMemoryException)
@@ -1023,7 +1031,7 @@ namespace Kooboo.Drawing
             else
                 oSize = new Size(maxWidth, maxHeight);
 
-            System.Drawing.Image oResampled = null;
+            Image oResampled = null;
             Graphics oGraphics = null;
             try
             {
@@ -1088,7 +1096,7 @@ namespace Kooboo.Drawing
                 }
                 else
                 {
-                    oResampled.Save(targetStream, System.Drawing.Imaging.ImageFormat.Png);
+                    oResampled.Save(targetStream, ImageFormat.Png);
                 }
             }
             finally

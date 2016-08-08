@@ -2587,7 +2587,54 @@
   <ItemGroup>
     <Content Include="Views\Shared\_TinyMCEExternalCssInjection.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Layouts\member_layout\setting.config" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Layouts\member_layout\template.cshtml" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Layouts\one_column\setting.config" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Layouts\one_column\template.cshtml" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Layouts\two_column\setting.config" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Layouts\two_column\template.cshtml" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Article.Category\setting.config" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Article.Category\template.cshtml" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Article.Detail.Return\setting.config" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Article.Detail.Return\template.cshtml" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Article.Detail\setting.config" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Article.Detail\template.cshtml" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Article.List\ParameterTemplate.cshtml" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Article.List\setting.config" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Article.List\template.cshtml" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Article.Search\setting.config" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Article.Search\template.cshtml" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Contactus\setting.config" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Contactus\template.cshtml" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Footer\setting.config" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Footer\template.cshtml" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\LoginForm\setting.config" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\LoginForm\template.cshtml" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\LoginStatus\setting.config" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\LoginStatus\template.cshtml" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Member.Activate\setting.config" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Member.Activate\template.cshtml" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Member.ChangePassword\setting.config" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Member.ChangePassword\template.cshtml" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Member.ForgotPassword\setting.config" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Member.ForgotPassword\template.cshtml" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Member.Index\setting.config" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Member.Index\template.cshtml" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Member.Login\setting.config" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Member.Login\template.cshtml" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Member.Nav\setting.config" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Member.Nav\template.cshtml" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Member.Register\setting.config" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Member.Register\template.cshtml" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Member.ResetPassword\setting.config" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Member.ResetPassword\template.cshtml" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Menu\setting.config" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Menu\template.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Contents\Views\Setting\Basic.cshtml" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
