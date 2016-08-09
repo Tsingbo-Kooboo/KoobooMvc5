@@ -76,27 +76,18 @@ namespace Kooboo.CMS.Web.Areas.Contents.Controllers
 
         #region Grid
         [Kooboo.CMS.Web.Authorizations.Authorization(AreaName = "Contents", Group = "", Name = "Content", Order = 1)]
-        public virtual JsonResult CategoriesData(string folderName, string search = null, string uuid = null)
+        public virtual JsonResult LoadData(string folderName)
         {
             folderName = folderName ?? this.ControllerContext.RequestContext.GetRequestValue("Folder");
             TextFolder textFolder = new TextFolder(Repository, folderName).AsActual();
             var schema = textFolder.GetSchema().AsActual();
             var titleColumn = schema.TitleColumn.Name;
-            var textContents = textFolder
-                .CreateQuery();
-            //if (!string.IsNullOrEmpty(search))
-            //{
-            //    textContents = textContents.WhereContains(titleColumn, search);
-            //}
-            //if (!string.IsNullOrEmpty(uuid))
-            //{
-            //    textContents = textContents.Or(new WhereEqualsExpression("UUID", uuid));
-            //}
-            var result = textContents.Select(it => new
-            {
-                id = it.UUID,
-                text = it[titleColumn]
-            });
+            var result = textFolder
+                .CreateQuery().Select(it => new
+                {
+                    id = it.UUID,
+                    text = it[titleColumn]
+                });
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
@@ -110,7 +101,6 @@ namespace Kooboo.CMS.Web.Areas.Contents.Controllers
             TextFolder textFolder = new TextFolder(Repository, folderName).AsActual();
             var schema = textFolder.GetSchema().AsActual();
 
-            SchemaPath schemaPath = new SchemaPath(schema);
             ViewData["Folder"] = textFolder;
             ViewData["Schema"] = schema;
             ViewData["Menu"] = textFolder.GetFormTemplate(FormType.Grid_Menu);
@@ -140,25 +130,24 @@ namespace Kooboo.CMS.Web.Areas.Contents.Controllers
                 IWhereExpression exp = new FalseExpression();
                 foreach (var item in schema.Columns.Where(it => it.ShowInGrid))
                 {
-                    exp = new OrElseExpression(exp, (new WhereContainsExpression(null, item.Name, search)));
+                    exp = new OrElseExpression(exp, new WhereContainsExpression(null, item.Name, search));
                 }
-                if (exp != null)
-                {
-                    query = query.Where(exp);
-                }
+                query = query.Where(exp);
                 showTreeStyle = false;
             }
-            if (whereClause != null && whereClause.Count() > 0)
+            if (whereClause != null && whereClause.Any())
             {
-                var contentWhereClause = whereClause.Where(it => !it.FieldName.StartsWith(categoryPrefix, StringComparison.OrdinalIgnoreCase));
-                var categoryWhereCaluse = whereClause.Where(it => it.FieldName.StartsWith(categoryPrefix, StringComparison.OrdinalIgnoreCase));
-                if (contentWhereClause != null && contentWhereClause.Any())
+                var contentWhereClause = whereClause.Where(it => !it.FieldName.StartsWith(categoryPrefix, StringComparison.OrdinalIgnoreCase)).ToArray();
+                var categoryWhereCaluse = whereClause.Where(it => it.FieldName.StartsWith(categoryPrefix, StringComparison.OrdinalIgnoreCase)).ToArray();
+                if (contentWhereClause.Any())
                 {
                     var expression = WhereClauseToContentQueryHelper.Parse(contentWhereClause, schema, new MVCValueProviderWrapper(ValueProvider));
                     query = query.Where(expression);
                 }
-                if (categoryWhereCaluse != null && categoryWhereCaluse.Any())
+                if (categoryWhereCaluse.Any())
                 {
+                    var last = contentWhereClause.LastOrDefault();
+                    Logical prevLogical = last?.Logical ?? Logical.Or;
                     foreach (var categoryCaluse in categoryWhereCaluse.ToArray())
                     {
                         var categoryFolderName = categoryCaluse.FieldName.Remove(0, categoryPrefix.Length);
@@ -166,7 +155,7 @@ namespace Kooboo.CMS.Web.Areas.Contents.Controllers
                         if (categoryFolder != null)
                         {
                             IContentQuery<TextContent> categoryContents = categoryFolder.CreateQuery().WhereEquals("UUID", categoryCaluse.Value1);
-                            switch (categoryCaluse.Logical)
+                            switch (prevLogical)
                             {
                                 case Logical.And:
                                 case Logical.ThenAnd:
@@ -180,6 +169,7 @@ namespace Kooboo.CMS.Web.Areas.Contents.Controllers
                                     break;
                             }
                         }
+                        prevLogical = categoryCaluse.Logical;
                     }
                 }
                 showTreeStyle = false;
