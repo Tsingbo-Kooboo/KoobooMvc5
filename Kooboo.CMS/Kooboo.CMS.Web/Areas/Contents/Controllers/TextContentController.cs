@@ -147,7 +147,7 @@ namespace Kooboo.CMS.Web.Areas.Contents.Controllers
                 if (categoryWhereCaluse.Any())
                 {
                     var last = contentWhereClause.LastOrDefault();
-                    Logical prevLogical = last?.Logical ?? Logical.Or;
+                    Logical prevLogical = last == null ? Logical.Or : last.Logical;
                     foreach (var categoryCaluse in categoryWhereCaluse.ToArray())
                     {
                         var categoryFolderName = categoryCaluse.FieldName.Remove(0, categoryPrefix.Length);
