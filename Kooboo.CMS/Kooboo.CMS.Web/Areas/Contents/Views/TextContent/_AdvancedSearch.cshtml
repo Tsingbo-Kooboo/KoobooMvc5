@@ -1,40 +1,63 @@
 ﻿@model dynamic
-@using Kooboo.Web.Script.Serialization
 @using Kooboo.CMS.Sites.DataRule
 @{
-
     var action = ViewContext.RequestContext.AllRouteValues()["action"].ToString();
-    var schema = (Kooboo.CMS.Content.Models.Schema)ViewData["Schema"];
-    var folder = (Kooboo.CMS.Content.Models.TextFolder)ViewData["Folder"];
+    var schema = (Schema)ViewData["Schema"];
+    var folder = (TextFolder)ViewData["Folder"];
     var operatorList = new List<System.Web.Mvc.SelectListItem> {
-    new System.Web.Mvc.SelectListItem{ Text = "Equals", Value="0"},
-    new System.Web.Mvc.SelectListItem{ Text = "NotEquals", Value="1"},
-    new System.Web.Mvc.SelectListItem{ Text = "Greater than", Value="2"},
-    new System.Web.Mvc.SelectListItem{ Text = "Less than", Value="3"},
-    new System.Web.Mvc.SelectListItem{ Text = "Contains", Value="4"},
-    new System.Web.Mvc.SelectListItem{ Text = "Start with", Value="5"},
-    new System.Web.Mvc.SelectListItem{ Text = "End with", Value="6"}
-  };
+        new System.Web.Mvc.SelectListItem{ Text = "Equals", Value="0"},
+        new System.Web.Mvc.SelectListItem{ Text = "NotEquals", Value="1"},
+        new System.Web.Mvc.SelectListItem{ Text = "Greater than", Value="2"},
+        new System.Web.Mvc.SelectListItem{ Text = "Less than", Value="3"},
+        new System.Web.Mvc.SelectListItem{ Text = "Contains", Value="4"},
+        new System.Web.Mvc.SelectListItem{ Text = "Start with", Value="5"},
+        new System.Web.Mvc.SelectListItem{ Text = "End with", Value="6"}
+    };
 
     var logicalList = new List<System.Web.Mvc.SelectListItem> {
-    new System.Web.Mvc.SelectListItem{ Text = "AND", Value="0"},
-    new System.Web.Mvc.SelectListItem{ Text = "OR", Value="1"},
-    new System.Web.Mvc.SelectListItem{ Text = "Then AND", Value="2"},
-    new System.Web.Mvc.SelectListItem{ Text = "Then OR", Value="3"}
-  };
+        new System.Web.Mvc.SelectListItem{ Text = "AND", Value="0"},
+        new System.Web.Mvc.SelectListItem{ Text = "OR", Value="1"},
+        new System.Web.Mvc.SelectListItem{ Text = "Then AND", Value="2"},
+        new System.Web.Mvc.SelectListItem{ Text = "Then OR", Value="3"}
+    };
+    var prefix = ViewData["CategorySearchPrefix"] ?? "category:";
+    var group = new SelectListGroup { Name = "Category".Localize() };
 
-    var columnSelectListItems = schema.AllColumns.Select(o =>
-                                                  new System.Web.Mvc.SelectListItem
-                                                  {
-                                                      Text = o.Name,
-                                                      Value = o.Name
-                                                  });
-
-    var dataTypesJson = Newtonsoft.Json.JsonConvert.SerializeObject(schema.AllColumns.Select(it => new { FieldName = it.Name, DataType = it.DataType.ToString() }));
+    var columnSelectListItems = schema.AllColumns.Select(o => new System.Web.Mvc.SelectListItem
+    {
+        Text = o.Name,
+        Value = o.Name
+    });
+    if (folder.Categories != null)
+    {
+        var categories = folder.Categories.Select(it => new System.Web.Mvc.SelectListItem
+        {
+            Text = it.FolderName,
+            Value = prefix + it.FolderName,
+            Group = group
+        });
+        columnSelectListItems = columnSelectListItems.Concat(categories);
+    }
+    var dataTypesJson = Newtonsoft.Json.JsonConvert.SerializeObject(schema.AllColumns.Select(it =>
+    {
+        var dict = new Dictionary<string, object>
+                                                                                                                {
+            {"FieldName", it.Name},
+            {"DataType", it.DataType.ToString()}
+                                                                                                                };
+        if (!string.IsNullOrEmpty(it.SelectionFolder))
+        {
+            dict["SelectionFolder"] = it.SelectionFolder;
+        }
+        if (it.SelectionItems != null && it.SelectionItems.Any())
+        {
+            dict["SelectionItems"] = it.SelectionItems;
+        }
+        return dict;
+    }));
 
     var whereClauseJson = Newtonsoft.Json.JsonConvert.SerializeObject(new WhereClause());
     var jsonData = Newtonsoft.Json.JsonConvert.SerializeObject((ViewData["WhereClause"] ?? new List<WhereClause> { new WhereClause() }));
-
 }
 <div class="search-panel">
     <div class="searchbox">
@@ -69,22 +92,23 @@
                 <input type="hidden" name="ParentUUID" value="@Request["ParentUUID"]" />
                 <fieldset>
                     <table id="filter_list">
-                        <tbody data-bind="foreach: {data:data,afterRender:bindFieldNameChanged}">
+                        <tbody data-bind="foreach: {data:data,afterRender:afterRender}">
                             <tr>
-                                <td class="filter-list clearfix">
-                                    <a class="action right" href="javascipr:;" data-bind="click: $parent.removeItem">@Html.IconImage("minus small")</a>
-                                    <div class="clearfix">
-                                        @Html.DropDownList("FieldName", columnSelectListItems,
-                                        new RouteValueDictionary() { { "class", "medium j_FieldNameInput" } }
-                                        .Merge("data-bind", "value:FieldName, attr: {id:'FieldName' +$index(),  name: $parent.getPrefixFieldName($index()) + 'FieldName'}"))
-                                        @Html.DropDownList("Operator", operatorList, new RouteValueDictionary(new { @class = "short" })
-                                        .Merge("data-bind", "value:Operator, attr: {id:'Operator' +$index(),name: $parent.getPrefixFieldName($index()) + 'Operator'}"))
-                                    </div>
-                                    <div class="clearfix">
-                                        @Html.TextBox("Value1", null, new RouteValueDictionary(new { @class = "medium j_FieldValueInput" })
-                                        .Merge("data-bind", "value:Value1, attr: {id:'Value1' + $index(),name: $parent.getPrefixFieldName($index()) + 'Value1'}"))
-                                        @Html.DropDownList("Logical", logicalList, new RouteValueDictionary(new { @class = "short" })
-                                        .Merge("data-bind", "value:Logical, attr: {id:'Logical' + $index(),name: $parent.getPrefixFieldName($index()) + 'Logical'}"))
+                                <td>
+                                    <div class="filter-list clearfix" data-bind="attr:{title:$data.FieldName}">
+                                        <a class="action right" href="javascipr:;" data-bind="click: $parent.removeItem">@Html.IconImage("minus small")</a>
+                                        <div class="clearfix">
+                                            @Html.DropDownList("FieldName", columnSelectListItems, new RouteValueDictionary() { { "class", "medium j_FieldNameInput" } }
+                                                    .Merge("data-bind", "value:FieldName,event:{change:$root.fieldNameChanged}, attr: {id:'FieldName' +$index(),  name: $parent.getPrefixFieldName($index()) + 'FieldName'}"))
+                                            @Html.DropDownList("Operator", operatorList, new RouteValueDictionary(new { @class = "short" })
+                                                .Merge("data-bind", "value:Operator, attr: {id:'Operator' +$index(),name: $parent.getPrefixFieldName($index()) + 'Operator'}"))
+                                        </div>
+                                        <div class="clearfix">
+                                            @Html.TextBox("Value1", null, new RouteValueDictionary(new { @class = "medium j_FieldValueInput" })
+                                                .Merge("data-bind", "value:Value1, attr: {id:'Value1' + $index(),name: $parent.getPrefixFieldName($index()) + 'Value1'}"))
+                                            @Html.DropDownList("Logical", logicalList, new RouteValueDictionary(new { @class = "short" })
+                                                .Merge("data-bind", "value:Logical, attr: {id:'Logical' + $index(),name: $parent.getPrefixFieldName($index()) + 'Logical'}"))
+                                        </div>
                                     </div>
                                 </td>
                             </tr>
@@ -107,45 +131,27 @@
             </form>
             <script type="text/javascript">
                 $(function () {
-
                     (function () {
-                        var searchPanel = $('div.search-panel');
-                        panel = searchPanel.find('div.more-search');
-                        moreLink = searchPanel.find('a.more').click(function () {
-                            if (panel.is(':visible')) {
-                                $(this).removeClass('active');
-                                panel.slideUp();
-                            } else {
-                                $(this).addClass('active');
-                                panel.slideDown();
-                            }
-                        });
+                        var searchPanel = $('div.search-panel'),
+                            panel = searchPanel.find('div.more-search'),
+                            moreLink = searchPanel.find('a.more').click(function () {
+                                if (panel.is(':visible')) {
+                                    $(this).removeClass('active');
+                                    panel.slideUp();
+                                } else {
+                                    $(this).addClass('active');
+                                    panel.slideDown();
+                                }
+                            });
                         searchPanel.find('.cancel').click(function () {
                             searchPanel.find('a.more').click();
                         });
                     })();
 
                     (function () {
-                        var dataTypes = @Html.Raw(dataTypesJson);
-                        function bindFieldNameChanged()
-                        {
-                            $('.j_FieldNameInput').change(function(){
-                                var $fieldNameInput = $(this);
-                                var $fieldValueInput = $fieldNameInput.parents('td').find('.j_FieldValueInput');
-                                console.log($fieldNameInput);
-                                console.log($fieldValueInput);
-                                var dataType = _.find(dataTypes,function(type,index){return type.FieldName == $fieldNameInput.val()});
-                                if (dataType!=null) {
-                                    switch (dataType.DataType) {
-                                        case 'DateTime':
-                                            $fieldValueInput.datepicker();
-                                            break;
-                                        default:
-                                            $fieldValueInput.datepicker("destroy");
-                                    } ;
-                                }
-                            });
-                        }
+                        var dataTypes = @Html.Raw(dataTypesJson),
+                            prefix = '@prefix';
+
                         function SearchViewModel() {
                             var self = this;
 
@@ -155,20 +161,104 @@
                                 self.data.push(@Html.Raw(whereClauseJson));
                             };
 
-                            self.removeItem = function () {
+                            self.removeItem = function() {
                                 self.data.remove(this);
                             };
 
                             var namePrfix = 'WhereClause';
-                            self.getPrefixFieldName = function (index) {
+                            self.getPrefixFieldName = function(index) {
                                 return namePrfix + '[' + (index) + '].';
                             };
-                            self.bindFieldNameChanged = bindFieldNameChanged;
+
+                            function handleFieldNameChanged(m, $fieldValueInput) {
+                                var fieldName = m.FieldName;
+                                /**
+                                *   load data by folder
+                                */
+                                function loadFolder(folderName) {
+                                    $.get("@Url.Action("LoadData", new {
+                                          siteName = Request.QueryString["siteName"],
+                                          RepositoryName = Request.QueryString["RepositoryName"]
+                                      })", {
+                                        folderName: folderName
+                                    }).then(function(res) {
+                                        loadData(res);
+                                    }, function(err) {
+                                        throw err;
+                                    });
+                                }
+
+                                /**
+                                *   select2 with data
+                                *  res:[{id:"id1",text:"text1"},{id:"id2",text:"text2"}]
+                                */
+                                function loadData(res) {
+                                    $fieldValueInput.select2({
+                                        data: res,
+                                        initSelection: function(element, callback) {
+                                            var id = element.val(),
+                                                data = _.find(res, function(it) {
+                                                    return it.id === id;
+                                                });
+                                            data && callback(data);
+                                        }
+                                    });
+                                }
+
+                                if (fieldName.startsWith(prefix)) {
+                                    var cateFolderName = fieldName.substr(prefix.length);
+                                    loadFolder(cateFolderName);
+                                }else{
+                                    var dataType = _.find(dataTypes,function(type){return type.FieldName === fieldName});
+                                    if (!dataType) {
+                                        return;
+                                    }
+                                    switch (dataType.DataType) {
+                                        case 'DateTime':
+                                            $fieldValueInput.datepicker();
+                                            break;
+                                        case 'Bool':
+                                            $fieldValueInput.datepicker("destroy");
+                                            loadData([{id:null,text:"Empty"},{ id:"True",text:"True"},{id:"False",text:"False"}]);
+                                    break;
+                                        default:
+                                            $fieldValueInput.datepicker("destroy");
+                                if (dataType.SelectionFolder) {
+                                    loadFolder(dataType.SelectionFolder);
+                                }else if (dataType.SelectionItems && dataType.SelectionItems.length) {
+                                    var res = _.map(dataType.SelectionItems, function(r) {
+                                        return {
+                                            id:r.Value,
+                                            text:r.Text
+                                        };
+                                    });
+                                    loadData(res);
+                                } else {
+                                    $fieldValueInput.select2("destroy");
+                                }
+                            };
                         }
+                    }
+
+                            self.fieldNameChanged = function(m,e) {
+                                e.preventDefault();
+                                var $fieldNameInput = $(e.target),
+                                    $fieldValueInput = $fieldNameInput.parents('td').find('.j_FieldValueInput');
+                                handleFieldNameChanged(m,$fieldValueInput);
+                            }
+
+                    self.afterRender = function() {
+                        $(".j_FieldNameInput").trigger("change");
+                    }
+
+                    self.simpleOperators = function(m) {
+                        console.log(arguments);
+
+                        return true;
+                    }
+                }
                         ko.applyBindings(new SearchViewModel(), $("#filter_list")[0]);
-
-
-                    })();
+                })();
                 });
             </script>
         </div>
