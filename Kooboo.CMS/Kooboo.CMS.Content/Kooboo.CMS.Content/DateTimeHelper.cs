@@ -8,6 +8,7 @@
 #endregion
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 
@@ -51,7 +52,7 @@ namespace Kooboo.CMS.Content
                 }
                 else
                 {
-                    return DateTime.TryParse(strValue, out dt);
+                    return DateTime.TryParse(strValue, CultureInfo.InvariantCulture, DateTimeStyles.None, out dt);
                 }
             }
             return false;

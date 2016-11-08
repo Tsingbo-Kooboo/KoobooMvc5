@@ -28,7 +28,7 @@ namespace Kooboo.CMS.Form.Html.Controls
                     @"<input class=""long"" id=""{0}"" name=""{0}"" type=""{1}"" value=""@(Model.{0} ==null ? """" : ((Model.{0} is string)? Model.{0} : Model.{0}.ToLocalTime().ToString({3})))"" {2}/>",
                     column.Name, Type,
                     ValidationExtensions.GetUnobtrusiveValidationAttributeString(column),
-                    "\"MM/dd/yyyy HH:mm:ss\"");
+                    "\"MM/dd/yyyy HH:mm:ss\",System.Globalization.CultureInfo.InvariantCulture");
             return input + string.Format(@"<script language=""javascript"" type=""text/javascript"">$(function(){{$(""#{0}"").datetimepicker({1});}});</script>", 
                 column.Name,
                 "{controlType: 'select',timeFormat: 'HH:mm:ss',dateFormat:'mm/dd/yy'}");
