@@ -207,7 +207,9 @@ namespace Kooboo.CMS.Sites.Web
                 RawSite = Site.ParseSiteFromRelativePath(sitePaths).AsActual();
                 if (RawSite != null)
                 {
-                    if (HttpContext.Current.User.Identity.IsAuthenticated)
+                    var allowAnonymous = System.Configuration.ConfigurationManager.AppSettings["AllowDevPathAccessAnonymously"].As(false);
+
+                    if (HttpContext.Current.User.Identity.IsAuthenticated || allowAnonymous)
                     {
                         RequestChannel = FrontRequestChannel.Debug;
                     }
@@ -217,7 +219,7 @@ namespace Kooboo.CMS.Sites.Web
                     }
                 }
 
-                RequestUrl = Kooboo.Web.Url.UrlUtility.Combine(new[] { "/" }.Concat(path.Skip(1)).ToArray());
+                RequestUrl = UrlUtility.Combine(new[] { "/" }.Concat(path.Skip(1)).ToArray());
                 if (this.Path.EndsWith("/") && !this.RequestUrl.EndsWith("/"))
                 {
                     RequestUrl = RequestUrl + "/";
