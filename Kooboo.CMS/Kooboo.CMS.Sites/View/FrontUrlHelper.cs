@@ -30,6 +30,7 @@ using Kooboo.CMS.Sites.Services;
 using Kooboo.IO;
 using Kooboo.Web.Mvc.WebResourceLoader;
 using Kooboo.Web.Mvc.WebResourceLoader.DynamicClientResource;
+using Kooboo.CMS.Common.Runtime;
 
 namespace Kooboo.CMS.Sites.View
 {
@@ -52,12 +53,14 @@ namespace Kooboo.CMS.Sites.View
     #region FrontUrlHelper
     public class FrontUrlHelper
     {
+        private readonly IUrlResolver _urlResolver;
         #region .ctor
         public FrontUrlHelper(UrlHelper url, Site site, FrontRequestChannel requestChannel)
         {
             this.Url = url;
             this.Site = site;
             this.RequestChannel = requestChannel;
+            _urlResolver = EngineContext.Current.Resolve<IUrlResolver>();
         }
 
         public UrlHelper Url { get; private set; }
