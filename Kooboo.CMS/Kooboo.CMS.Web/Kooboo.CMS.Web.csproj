@@ -2635,6 +2635,9 @@
   <ItemGroup>
     <Content Include="Areas\Contents\Views\Setting\Basic.cshtml" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\Master.Style.cshtml" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

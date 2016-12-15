@@ -44,10 +44,8 @@
 }
 @helper RenderCurrent(Site site)
 {
-    <li class='active'>
+    <li class="active">
         @Html.ActionLink(string.IsNullOrEmpty(site.DisplayName) ? site.Name : site.DisplayName, "SiteMap", new { Area = "Sites", controller = "Home", siteName = site.FullName, repositoryName = site.AsActual().Repository })
-
-
         <ul>
             @foreach (var child in ServiceFactory.SiteManager.ChildSites(site))
             {
@@ -58,12 +56,10 @@
 }
 @helper RenderSiteTree(Site site, Site current)
 {
-    <li @(site == current ? "class=active" : "")>
-
+    <li @Html.Raw(site == current ? "class=\"active\"" : "")>
         @Html.ActionLink(string.IsNullOrEmpty(site.DisplayName) ? site.Name : site.DisplayName, ViewContext.RequestContext.GetRequestValue("action")
         , ViewContext.RequestContext.AllRouteValues().Merge("siteName", site.FullName).Merge("repositoryName", site.AsActual().Repository)
         .Merge("_swithSite", "true"))
-
         <ul>
             @foreach (var child in ServiceFactory.SiteManager.ChildSites(site))
             {
@@ -89,6 +85,5 @@
             }*@
         @RenderSiteTree(rootSite, Model)
     </ul>
-
 </div>
 
