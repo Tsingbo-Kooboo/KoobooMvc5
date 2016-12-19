@@ -132,7 +132,7 @@ namespace Kooboo.CMS.Content.Services
             if (extensionArr != null)
             {
                 var extension = fileName.Substring(fileName.LastIndexOf('.') + 1);
-                if (!extensionArr.Contains(extension))
+                if (extensionArr.Any() && !extensionArr.Contains(extension))
                 {
                     throw new FriendlyException("Current folder doesn't support " + extension);
                 }
