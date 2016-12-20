@@ -1,4 +1,4 @@
-﻿@using Kooboo.CMS.Web.Areas.Sites
+﻿@using Kooboo.CMS.Sites.Extension.UI.WebResources
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,6 +10,10 @@
     </title>
     @Html.Partial("Master.Style")
     @RenderSection("ScriptCSS", false)
+    @foreach (var script in CustomWebResources.GetStyles(ViewContext.RequestContext))
+    {
+        @script.Body
+    }
 </head>
 <body class="loading">
     @Html.Partial("_Loading_Info")
@@ -42,7 +46,10 @@
             @Html.Partial("Footer")
         </footer>
     </div>
-
     @Html.Partial("Master.Script")
+    @foreach (var script in CustomWebResources.GetScripts(ViewContext.RequestContext))
+    {
+        @script.Body
+    }
 </body>
 </html>

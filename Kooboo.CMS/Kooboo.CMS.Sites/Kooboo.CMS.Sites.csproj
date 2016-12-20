@@ -188,6 +188,9 @@
     <Compile Include="Extension\UI\TopToolbar\ToolbarGroupButtons.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Extension\UI\WebResources\CustomWebResources.cs" />
+    <Compile Include="Extension\UI\WebResources\IWebResourceProvider.cs" />
+    <Compile Include="Extension\UI\WebResources\WebResource.cs" />
     <Compile Include="InitializeCurrentContext.cs" />
     <Compile Include="Membership\ActivateMemberModel.cs" />
     <Compile Include="Membership\ActivateMemberPlugin.cs" />
