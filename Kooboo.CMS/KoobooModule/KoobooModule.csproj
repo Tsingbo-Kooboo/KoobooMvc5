@@ -902,13 +902,10 @@
     <Content Include="lib\Mono.Math.dll" />
     <Content Include="lib\Newtonsoft.Json.dll" />
     <Content Include="lib\Ninject.dll" />
-    <Content Include="lib\NuGet.Core.dll" />
     <Content Include="lib\Org.Mentalis.Security.Cryptography.dll" />
-    <Content Include="lib\System.Net.Http.dll" />
     <Content Include="lib\System.Web.Helpers.dll" />
     <Content Include="lib\System.Web.Mvc.dll" />
     <Content Include="lib\System.Web.Razor.dll" />
-    <Content Include="lib\System.Web.WebPages.Administration.dll" />
     <Content Include="lib\System.Web.WebPages.Deployment.dll" />
     <Content Include="lib\System.Web.WebPages.dll" />
     <Content Include="lib\System.Web.WebPages.Razor.dll" />
