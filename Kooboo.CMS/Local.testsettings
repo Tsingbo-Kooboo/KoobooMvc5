@@ -1,9 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <TestSettings name="Local" id="5809fd80-e3a9-4aae-91f0-f102a1605ac6" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
   <Description>These are default test settings for a local test run.</Description>
-  <Deployment>
-    <DeploymentItem filename="E:\Projects\Kooboo\src\trunk\Lib\SqlCE\" />
-  </Deployment>
+  <Deployment enabled="false" />
   <Execution>
     <TestTypeSpecific>
       <UnitTestRunConfig testTypeId="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b">
@@ -25,4 +23,5 @@
     <AgentRule name="LocalMachineDefaultRole">
     </AgentRule>
   </Execution>
+  <Properties />
 </TestSettings>
