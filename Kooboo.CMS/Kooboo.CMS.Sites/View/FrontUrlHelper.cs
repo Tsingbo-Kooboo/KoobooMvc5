@@ -30,6 +30,7 @@ using Kooboo.CMS.Sites.Services;
 using Kooboo.IO;
 using Kooboo.Web.Mvc.WebResourceLoader;
 using Kooboo.Web.Mvc.WebResourceLoader.DynamicClientResource;
+using Kooboo.CMS.Common.Runtime;
 
 namespace Kooboo.CMS.Sites.View
 {

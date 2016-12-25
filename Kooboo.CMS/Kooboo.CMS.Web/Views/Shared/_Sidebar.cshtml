@@ -8,11 +8,9 @@
         @Html.Partial("_SitesNavTree", Site.Current)
         @if (ServiceFactory.UserManager.IsAdministrator(User.Identity.Name))
         {
-            <a class="right add" href="@Url.Action("CreateSubSite", "Site", new { area = "Sites", parent = ViewContext.RequestContext.GetRequestValue("siteName"), @return = ViewContext.HttpContext.Request.RawUrl })" title='@("New sub site".Localize())'>@Html.IconImage("add")</a>
+            <a class="right add" href="@Url.Action("CreateSubSite", "Site", new { area = "Sites", parent = ViewContext.RequestContext.GetRequestValue("siteName"), @return = ViewContext.HttpContext.Request.RawUrl })" title="@("New sub site".Localize())">@Html.IconImage("add")</a>
         }
     </div>
-
-
     <nav class="container block menu">
         @Html.Partial("Menu", Kooboo.Web.Mvc.Menu.MenuFactory.BuildMenu(ViewContext.Controller.ControllerContext, "Sites").SetCurrentSite(this.ViewContext))
     </nav>
@@ -25,7 +23,6 @@ else if (!string.IsNullOrEmpty(ViewContext.RequestContext.GetRequestValue("Repos
         </a>
         <span class="name-title clear">@(ViewContext.RequestContext.GetRequestValue("RepositoryName"))</span>
     </div>
-    
     <nav class="container block menu">
         @Html.Partial("Menu", Kooboo.Web.Mvc.Menu.MenuFactory.BuildMenu(ViewContext.Controller.ControllerContext, "Contents").SetCurrentRepository(this.ViewContext))
     </nav>
@@ -33,7 +30,6 @@ else if (!string.IsNullOrEmpty(ViewContext.RequestContext.GetRequestValue("Repos
 else
 {
     @Html.Partial("_SidebarTopSearch")
-
     <nav class="container block menu">
         @Html.Partial("Menu", Kooboo.Web.Mvc.Menu.MenuFactory.BuildMenu(ViewContext.Controller.ControllerContext, "AreasMenu"))
     </nav>

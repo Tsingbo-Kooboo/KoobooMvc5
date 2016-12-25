@@ -792,6 +792,10 @@ namespace Kooboo.Drawing
         /// </returns>
         public static bool IsImageExtension(string extension)
         {
+            if (string.IsNullOrEmpty(extension))
+            {
+                return false;
+            }
             switch (extension.ToLower())
             {
                 case ".jpg":

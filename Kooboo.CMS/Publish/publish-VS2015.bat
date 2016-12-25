@@ -14,7 +14,7 @@ nuget.exe restore ..\Kooboo.CMS-Release.sln
 
 "C:\Windows\Microsoft.NET\Framework\v4.0.30319\MSBuild" ..\Kooboo.CMS.Content\Kooboo.CMS.Content.FileServer.sln /t:rebuild /l:FileLogger,Microsoft.Build.Engine;logfile=Publish_FileServer.log; /p:VisualStudioVersion=14.0
 
-"C:\Windows\Microsoft.NET\Framework\v4.0.30319\MSBuild" ..\Kooboo.CMS.Content\Kooboo.CMS.Content.FileServer.Web\Kooboo.CMS.Content.FileServer.Web.csproj /t:ResolveReferences;Compile /t:_CopyWebApplication /p:Configuration=Release /p:WebProjectOutputDir=..\Publish\FileServer.Web /p:OutputPath=..\Publish\FileServer.Web\Bin /p:VisualStudioVersion=14.0
+"C:\Windows\Microsoft.NET\Framework\v4.0.30319\MSBuild" ..\Kooboo.CMS.Content\Kooboo.CMS.Content.FileServer.Web\Kooboo.CMS.Content.FileServer.Web.csproj /p:VisualStudioVersion=14.0 /p:DeployOnBuild=true /p:PublishProfile=FileServer.Web.pubxml
 
 call copy.bat
 
