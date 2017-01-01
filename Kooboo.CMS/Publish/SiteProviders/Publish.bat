@@ -10,7 +10,7 @@ copy "..\..\..\Lib\EntityFramework\*.dll" "SQLServer\*.*"
 
 
 copy "..\..\Kooboo.CMS.SitesProviders\Kooboo.CMS.Sites.Persistence.EntityFramework\bin\Release\Kooboo.CMS.Sites.Persistence.EntityFramework.dll" "EntityFramework\Kooboo.CMS.Sites.Persistence.EntityFramework.dll"
-copy "..\..\..\Lib\EntityFramework\*.dll" "EntityFramework\*.*"
+copy "..\..\packages\EntityFramework.6.1.3\lib\net45\*.dll" "EntityFramework\*.*"
 
 copy "..\..\Kooboo.CMS.SitesProviders\Kooboo.CMS.Sites.Persistence.Couchbase\bin\Release\Couchbase.dll" "Couchbase\Couchbase.dll"
 copy "..\..\Kooboo.CMS.SitesProviders\Kooboo.CMS.Sites.Persistence.Couchbase\bin\Release\Enyim.Caching.dll" "Couchbase\Enyim.Caching.dll"

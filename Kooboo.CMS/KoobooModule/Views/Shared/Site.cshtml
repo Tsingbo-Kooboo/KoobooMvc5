@@ -1,4 +1,4 @@
-﻿@using Kooboo.CMS.Web.Areas.Sites
+﻿@using Kooboo.CMS.Sites.Extension.UI.WebResources
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,22 +8,19 @@
         @ViewBag.Title
         @(" - Kooboo CMS".Localize())
     </title>
-    @Html.ExternalResources("siteStyles")
-    @Html.ExternalResources("siteScripts")
-    <script type="text/javascript" src="~/Scripts/tiny_mce/tinymce.min.js"></script>
-    <script type="text/javascript" src="~/Scripts/tiny_mce_extension.js"></script>
-    <!--[if lte IE 8]>
-    <script src="~/Scripts/html5shiv.js" type="text/javascript"></script>
-    <script src="~/Scripts/selectivizr-min.js" type="text/javascript"></script>
-    <![endif]-->
+    @Html.Partial("Master.Style")
     @RenderSection("ScriptCSS", false)
+    @foreach (var script in CustomWebResources.GetStyles(ViewContext.RequestContext))
+    {
+        @script.Body
+    }
 </head>
 <body class="loading">
     @Html.Partial("_Loading_Info")
     <div id="body-container">
         <header id="header">
             <a class="logo" href="@Html.Raw(Url.Action("SiteMap", "Home", new { area = "Sites" }))" title="@("Back to site manager".Localize())">
-                <img src="@Html.Raw(Url.Content("~/Images/logo.png")) " alt="LOGO">
+                <img src="@Html.Raw(Url.Content("~/Images/logo.png"))" alt="LOGO">
                 @Html.IconImage("home")
             </a>
             @RenderSection("Panel", false)
@@ -36,11 +33,11 @@
             </div>
             <aside id="sidebar">
                 @if (IsSectionDefined("Sidebar"))
-                { 
+                {
                     @RenderSection("Sidebar", false)
                 }
                 else
-                { 
+                {
                     @Html.Partial("_Sidebar")
                 }
             </aside>
@@ -49,7 +46,10 @@
             @Html.Partial("Footer")
         </footer>
     </div>
-
     @Html.Partial("Master.Script")
+    @foreach (var script in CustomWebResources.GetScripts(ViewContext.RequestContext))
+    {
+        @script.Body
+    }
 </body>
 </html>

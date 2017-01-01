@@ -113,6 +113,7 @@
                 });
                 self.DataRuleList.remove(rule);
                 self.CodeSnippetList.remove(codeSnippet);
+                window.leaveConfirm.stop();
             }
         };
         self.InsertCodeSnippet = function(rule,e){
@@ -191,6 +192,7 @@
                 self.RemoveFilter(filter,e);
             }
             filter.IsEditing(false);
+            self.UnsavedFilterCount(self.UnsavedFilterCount() - 1);
         };
         self.SaveEditingFilter = function(filter,e) {
             filter.Logical(filter.LogicalTemp());
@@ -199,6 +201,7 @@
             filter.Value1(filter.Value1Temp());
             filter.Value2(filter.Value2Temp());
             filter.IsEditing(false);
+            self.UnsavedFilterCount(self.UnsavedFilterCount() - 1);
         };
         self.EditFilter = function(filter,e) {
             if(e!=null){              
@@ -219,7 +222,8 @@
             filter.Value2Temp = ko.observable(filter.Value2());
             filter.IsNew = false;
             filter.IsEditing(true);
-           
+            self.UnsavedFilterCount(self.UnsavedFilterCount() + 1);
+
         };
         self.AddFilter = function(data,e) {
             var newFilter = utils.CloneObject(metadata.rawEmptyWhereClause);
@@ -246,8 +250,9 @@
             }
         };
         self.SaveDataRule = function() {
+            self.IsSaving(true);
             utils.ValidateDataRuleName(self.DataRuleSetting().DataName());
-            if (!self.IsValid()) {
+            if (!self.IsValid() || self.UnsavedFilterCount() > 0) {
                 return;
             }
             var newDataRule = self.DataRuleSetting();
@@ -282,6 +287,8 @@
         };
         self.CancelSaveDataRule = function() {
             utils.$DataRuleEditForm.dialog("close");
+            self.IsSaving(false);
+            self.UnsavedFilterCount(0);
         };
         self.HasAdvancedOptions = ko.computed(function() {
             return self.DataRuleSetting().TakeOperation() == 0;
@@ -332,6 +339,8 @@
         };
         self.ValidationMessage = ko.observable('');
         self.IsValid = ko.observable(true);
+        self.IsSaving = ko.observable(false);
+        self.UnsavedFilterCount = ko.observable(0);
         self.getPrefixFieldName = function (fieldName,index) {
             return fieldName + '[' + (index) + '].';
         };

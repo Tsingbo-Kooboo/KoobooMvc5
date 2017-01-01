@@ -307,7 +307,9 @@
                 }
             },
             out: function (event, ui) { },
-            drop: function (event, ui) { }
+            drop: function (event, ui) {
+                window.parent.leaveConfirm.stop();
+            }
         },
         dragSetting: {
             refreshPositions: true,

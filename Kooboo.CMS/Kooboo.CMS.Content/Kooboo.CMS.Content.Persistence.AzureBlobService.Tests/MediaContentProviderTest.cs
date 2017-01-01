@@ -24,7 +24,7 @@ namespace Kooboo.CMS.Content.Persistence.AzureBlobService.Tests
         MediaFolder mediaFolder = null;
         public MediaContentProviderTest()
         {
-            Kooboo.CMS.Content.Persistence.AzureBlobService.AssemblyInitializer.ResetProviders();
+            //Kooboo.CMS.Content.Persistence.AzureBlobService.AssemblyInitializer.ResetProviders();
 
             repository = new Repository(Kooboo.UniqueIdGenerator.GetInstance().GetBase32UniqueId(5));
             mediaFolder = new MediaFolder(repository, "MediaFolder1/MediaFolder2");

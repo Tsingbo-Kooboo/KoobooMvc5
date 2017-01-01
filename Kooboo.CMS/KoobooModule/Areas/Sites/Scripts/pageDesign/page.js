@@ -184,6 +184,7 @@
 
         triggerSave: function () {
             window.tinyMCE && (window.tinyMCE.triggerSave());
+            window.parent.leaveConfirm.stop();
         },
 
         validateForm: function (context) {

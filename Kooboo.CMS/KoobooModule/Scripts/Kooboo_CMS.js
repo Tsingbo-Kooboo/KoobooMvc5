@@ -588,7 +588,7 @@ function parse_JsonResultData(response, statusText, xhr, $form) {
             var tempForm = $('<form>', {
                 'action': $self.attr('href'),
                 'target': '_top',
-                'method':'post'
+                'method': 'post'
             }).appendTo('body');
             $('<input>').attr({
                 type: 'hidden',
@@ -1110,11 +1110,11 @@ function parse_JsonResultData(response, statusText, xhr, $form) {
                 $msgBox.html(msg);
                 if (success) {
                     $notification.removeClass('error');
+                    setTimeout(timeoutHide, timeout || 3000);
                 } else {
                     $notification.addClass('error');
                 }
                 $notification.animate({ right: 0 }, 'fast');
-                //setTimeout(timeoutHide, timeout || 3000);
             };
             $close.click(function () {
                 hide();
@@ -1146,7 +1146,7 @@ function parse_JsonResultData(response, statusText, xhr, $form) {
             }
             var stop = function () {
                 canLeave = false;
-                $.publish(kooboo.constants.messageToptics.SomeThing_Changed_On_Page);
+                $.isFunction($.publish) && $.publish(kooboo.constants.messageToptics.SomeThing_Changed_On_Page);
             }
             var pass = function () {
                 canLeave = true;
@@ -1200,7 +1200,7 @@ function parse_JsonResultData(response, statusText, xhr, $form) {
         //默认的绑定延迟一点执行，可以允许特定的页面在这个绑定之前做一些事情
         setTimeout(function () {
             //check form changed
-            $('form:not(.no-stop) input,form:not(.no-stop) select:not(.select)').change(function () {
+            $('form:not(.no-stop) input,form:not(.no-stop) textarea, form:not(.no-stop) select:not(.select)').change(function () {
                 window.leaveConfirm.stop();
             });
 
@@ -1333,7 +1333,7 @@ function parse_JsonResultData(response, statusText, xhr, $form) {
         $(".upload-button input:file").change(function () {
             $(this).parent().submit();
         });
-      
+
     });
 
     //knockout extension

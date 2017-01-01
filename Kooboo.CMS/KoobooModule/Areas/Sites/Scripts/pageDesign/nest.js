@@ -182,7 +182,6 @@
     var iframeUrl = decodeURIComponent($(settings.pageDesignUrl).val());
     $(settings.iframeMarkup).insertAfter(settings.iframeMask);
     $(settings.iframeSelector).load(function () {
-        console.log(arguments);
         // get doc
         var doc;
         try {
