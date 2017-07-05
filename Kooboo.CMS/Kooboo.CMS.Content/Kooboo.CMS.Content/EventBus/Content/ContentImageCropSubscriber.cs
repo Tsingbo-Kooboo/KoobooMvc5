@@ -54,7 +54,7 @@ namespace Kooboo.CMS.Content.EventBus.Content
 
                                     var contentPath = new TextContentPath(content);
 
-                                    var vPath = Kooboo.Web.Url.UrlUtility.Combine(contentPath.VirtualPath, "kooboo-crop-" + Path.GetFileName(imgParam.Url));
+                                    var vPath = Kooboo.Web.Url.UrlUtility.Combine(contentPath.VirtualPath, Path.GetFileName(imgParam.Url));
 
                                     Kooboo.IO.IOUtility.EnsureDirectoryExists(contentPath.PhysicalPath);
 

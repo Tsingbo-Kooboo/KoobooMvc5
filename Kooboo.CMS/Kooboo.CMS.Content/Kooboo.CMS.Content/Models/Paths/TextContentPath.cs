@@ -20,36 +20,11 @@ namespace Kooboo.CMS.Content.Models.Paths
         public TextContentPath(TextContent content)
         {
             var repository = new Repository(content.Repository);
-
+            var repositoryPath = new RepositoryPath(repository);
             var textContent = content;
-            if (string.IsNullOrEmpty(textContent.FolderName))
-            {
-                var schemaPath = new SchemaPath(new Schema(repository, textContent.SchemaName));
-                // Compatible with the ContentFolderName has been change (_contents=>.contents)
-                //this.PhysicalPath = Path.Combine(schemaPath.PhysicalPath, ContentFolderName, content.UUID);
-                //this.VirtualPath = UrlUtility.Combine(schemaPath.VirtualPath, ContentFolderName, content.UUID);
-
-                //if (!Directory.Exists(this.PhysicalPath))
-                //{
-                    this.PhysicalPath = Path.Combine(schemaPath.PhysicalPath, ContentAttachementFolder, content.UUID);
-                    this.VirtualPath = UrlUtility.Combine(schemaPath.VirtualPath, ContentAttachementFolder, content.UUID);
-                //}
-            }
-            else
-            {
-                FolderPath folderPath = null;
-
-                folderPath = new FolderPath(FolderHelper.Parse<TextFolder>(repository, content.FolderName));
-                //// Compatible with the ContentFolderName has been change (_contents=>.contents)
-                //this.PhysicalPath = Path.Combine(folderPath.PhysicalPath, ContentFolderName, content.UUID);
-                //this.VirtualPath = UrlUtility.Combine(folderPath.VirtualPath, ContentFolderName, content.UUID);
-                //if (!Directory.Exists(this.PhysicalPath))
-                //{
-                    this.PhysicalPath = Path.Combine(folderPath.PhysicalPath, ContentAttachementFolder, content.UUID);
-                    this.VirtualPath = UrlUtility.Combine(folderPath.VirtualPath, ContentAttachementFolder, content.UUID);
-                //}
-
-            }
+            var name = string.IsNullOrEmpty(textContent.FolderName) ? textContent.SchemaName : textContent.FolderName;
+            this.PhysicalPath = Path.Combine(repositoryPath.PhysicalPath, ContentAttachementFolder, name, content.UUID);
+            this.VirtualPath = UrlUtility.RawCombine(repositoryPath.VirtualPath, ContentAttachementFolder, name, content.UUID);
             var sysFolderName = Path.GetDirectoryName(this.PhysicalPath);
             if (!Directory.Exists(sysFolderName))
             {
@@ -59,10 +34,8 @@ namespace Kooboo.CMS.Content.Models.Paths
             }
 
         }
-        [Obsolete("Please use ContentAttachementFolder.")]
-        public static string ContentFolderName = "_contents";
 
-        public static string ContentAttachementFolder = "~contents";
+        public static string ContentAttachementFolder = "Attachments";
 
         #region IPath Members
 
