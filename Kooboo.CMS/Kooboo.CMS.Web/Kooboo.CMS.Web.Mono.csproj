@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -7,15 +7,15 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{C5803C24-EEEE-4A7E-8F2F-B0FB66287845}</ProjectGuid>
-    <ProjectTypeGuids>{E53F8FEA-EAE0-44A6-8774-FFD645390401};{349C5851-65DF-11DA-9384-00065B846F21};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <ProjectGuid>{F8F74EEC-0088-41F0-8B3E-7F3552E3C2C6}</ProjectGuid>
+    <ProjectTypeGuids>{349C5851-65DF-11DA-9384-00065B846F21};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Kooboo.CMS.Web</RootNamespace>
     <AssemblyName>Kooboo.CMS.Web</AssemblyName>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <OldToolsVersion>4.0</OldToolsVersion>
@@ -25,13 +25,15 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <MvcProjectUpgradeChecked>true</MvcProjectUpgradeChecked>
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;MONO</DefineConstants>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ExcludeGeneratedDebugSymbol>true</ExcludeGeneratedDebugSymbol>
@@ -44,7 +46,7 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\</OutputPath>
-    <DefineConstants>TRACE;MONO</DefineConstants>
+    <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ExcludeGeneratedDebugSymbol>true</ExcludeGeneratedDebugSymbol>
@@ -56,13 +58,21 @@
     <Reference Include="DiffPlex">
       <HintPath>..\..\Lib\DiffPlex.dll</HintPath>
     </Reference>
+    <Reference Include="dotless.Core, Version=1.5.2.0, Culture=neutral, PublicKeyToken=96b446c9e63eae34, processorArchitecture=MSIL">
+      <HintPath>..\packages\dotless.1.5.2\lib\dotless.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\Lib\JSON.NET\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Caching" />
@@ -75,14 +85,32 @@
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions" />
     <Reference Include="System.Web.Extensions" />
-    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Lib\MVC\4.0\System.Web.Mvc.dll</HintPath>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Routing" />
-    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Lib\MVC\4.0\System.Web.WebPages.dll</HintPath>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
@@ -90,7 +118,6 @@
     <Reference Include="CookComputing.XmlRpcV2, Version=2.5.0.0, Culture=neutral, PublicKeyToken=a7d6e17aa302004d">
       <HintPath>..\..\Lib\CookComputing.XmlRpcV2.dll</HintPath>
     </Reference>
-    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\CMSAssemblyInfoGlobal.cs">
@@ -105,6 +132,7 @@
     <Compile Include="Areas\Account\Models\ChangeLanguageModel.cs" />
     <Compile Include="Areas\Account\Models\CreateRoleModel.cs" />
     <Compile Include="Areas\Account\Models\DataSources\EnabledLanguagesDataSource.cs" />
+    <Compile Include="Areas\Account\Models\DataSources\RolesDatasource.cs" />
     <Compile Include="Areas\Account\Models\EditUserModel.cs" />
     <Compile Include="Areas\Account\Models\Grid2\User_ResetPassword_GridItemColumn.cs" />
     <Compile Include="Areas\Account\Models\LoginModel.cs" />
@@ -122,7 +150,6 @@
     <Compile Include="Areas\Contents\Controllers\ManagerControllerBase.cs" />
     <Compile Include="Areas\Contents\Controllers\MediaContentController.cs" />
     <Compile Include="Areas\Contents\Controllers\MediaFolderController.cs" />
-    <Compile Include="Areas\Contents\Controllers\MetaweblogController.cs" />
     <Compile Include="Areas\Contents\Controllers\PendingWorkflowController.cs" />
     <Compile Include="Areas\Contents\Controllers\ReceivingSettingController.cs" />
     <Compile Include="Areas\Contents\Controllers\RepositoryController.cs" />
@@ -182,6 +209,7 @@
     <Compile Include="Areas\Contents\Models\Schema_Metadata.cs" />
     <Compile Include="Areas\Contents\Models\SelectableViewModel.cs" />
     <Compile Include="Areas\Contents\Models\SendingSetting_Metadata.cs" />
+    <Compile Include="Areas\Contents\Models\TextContentImportModel.cs" />
     <Compile Include="Areas\Contents\Models\TextContentDiffModel.cs" />
     <Compile Include="Areas\Contents\Models\TextContentGrid.cs" />
     <Compile Include="Areas\Contents\Models\TextFolder_Metadata.cs" />
@@ -212,19 +240,29 @@
     <Compile Include="Areas\Sites\Controllers\ABSiteSettingController.cs" />
     <Compile Include="Areas\Sites\Controllers\ABRuleSettingController.cs" />
     <Compile Include="Areas\Sites\Menu\MembershipMenuItems.cs" />
+    <Compile Include="Areas\Sites\Menu\HtmlBlockNamespaceMenuItems.cs" />
     <Compile Include="Areas\Sites\Models\ABPageTestHitsReport.cs" />
     <Compile Include="Areas\Sites\Models\ABPageTestResult_Metadata.cs" />
+    <Compile Include="Areas\Sites\Models\DataSources\RouteTypesDatasource.cs" />
     <Compile Include="Areas\Sites\Models\DataSources\MembershipDataSource.cs" />
     <Compile Include="Areas\Sites\Models\DataSources\SiteMembershipGroupDataSource.cs" />
     <Compile Include="Areas\Sites\Models\DataSources\SubmissionPluginsDataSource.cs" />
+    <Compile Include="Areas\Sites\Models\DataSources\SiteDomainsDataSource.cs" />
     <Compile Include="Areas\Sites\Models\Grid2\ABPageTestHitsReport_HitTimes_GridItemColumn.cs" />
     <Compile Include="Areas\Sites\Models\Grid2\ABPageTestHitsReport_ShowTimes_GridItemColumn.cs" />
+    <Compile Include="Areas\Sites\Models\Grid2\Inheritable_Status_GridItemColumn.cs" />
+    <Compile Include="Areas\Sites\Models\Grid2\InstallationContext_GridItem.cs" />
+    <Compile Include="Areas\Sites\Models\Grid2\InstallationContext_TargetVersion_Column.cs" />
+    <Compile Include="Areas\Sites\Models\Grid2\InstallationContext_SourceVersion_Column.cs" />
+    <Compile Include="Areas\Sites\Models\Grid2\Label_Value_GridItemColumn.cs" />
     <Compile Include="Areas\Sites\Models\Grid2\Page_Navigation_ShowInMenu_SortableGridColumn.cs" />
     <Compile Include="Areas\Sites\Models\Grid2\Page_Navigation_ShowInMenu_GridItemColumn.cs" />
     <Compile Include="Areas\Sites\Models\Grid2\HitReport_GridItemColumn.cs" />
     <Compile Include="Areas\Sites\Models\HtmlMeta_Metadata.cs" />
     <Compile Include="Areas\Sites\Models\ImportRepositoryModel.cs" />
     <Compile Include="Areas\Sites\Models\ImportSiteModel.cs" />
+    <Compile Include="Areas\Sites\Models\InstallationContext_Metadata.cs" />
+    <Compile Include="Areas\Sites\Models\Label_Metadata.cs" />
     <Compile Include="Areas\Sites\Models\LanguageVisitRule_Metadata.cs" />
     <Compile Include="Areas\Sites\Models\PagePermission_Metadata.cs" />
     <Compile Include="Areas\Sites\Models\ProxyPosition_Metadata.cs" />
@@ -245,18 +283,33 @@
     <Compile Include="Areas\Sites\Models\ABRuleSetting_Metadata.cs" />
     <Compile Include="Areas\Sites\Models\SiteTemplate_ViewModel.cs" />
     <Compile Include="Areas\Sites\Models\QueryStringVisitRule_Metadata.cs" />
+    <Compile Include="Areas\Sites\Views\Page\PageIndexToolbarProvider.cs" />
+    <Compile Include="Interoperability\MetaWeblog\BloggerAPI.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interoperability\MetaWeblog\MetaWeblogRouteHandler.cs" />
     <Compile Include="KoobooCMSHttpApplicationEvents.cs" />
+    <Compile Include="Misc\DynamicClientResourceDIFactory.cs" />
+    <Compile Include="Misc\LessCssProvider.cs" />
+    <Compile Include="Misc\RedirectManagerActionFilterAttribute.cs" />
+    <Compile Include="Misc\RenderHelper.cs" />
     <Compile Include="Models\AllPropertiesResolver.cs" />
     <Compile Include="Models\ImportModel.cs" />
-    <Compile Include="Models\RelationModel.cs" />
+    <Compile Include="Models\RelationModel_Metadata.cs" />
     <Compile Include="ReferrerCheckingModule.cs" />
     <Compile Include="SortByExtension.cs" />
     <Content Include="Areas\Account\Menu.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Areas\Account\WebResources.config" />
+    <Content Include="Areas\Account\WebResources.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Areas\Contents\Menu.config">
       <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Areas\Contents\Views\TextContent\SelectCategories.cshtml" />
+    <Content Include="Areas\Contents\Views\TextContent\ShowOriginalVersions.cshtml">
+      <SubType>Code</SubType>
     </Content>
     <Content Include="Areas\Contents\WebResources.config">
       <SubType>Designer</SubType>
@@ -342,7 +395,6 @@
     <Compile Include="Areas\Sites\Models\DataRuleSetting_Metadata.cs" />
     <Compile Include="Areas\Sites\Models\DataSources\AutoCompletePageListDataSouce.cs" />
     <Compile Include="Areas\Sites\Models\DataSources\CopyPageDataSource.cs" />
-    <Compile Include="Areas\Sites\Models\DataSources\ElementCategoryCulturesSelectListDataSource.cs" />
     <Compile Include="Areas\Sites\Models\DataSources\FileExtensionsDataSource.cs" />
     <Compile Include="Areas\Sites\Models\DataSources\LayoutListDataSource.cs" />
     <Compile Include="Areas\Sites\Models\DataSources\LayoutPositionsDataSource.cs" />
@@ -362,7 +414,6 @@
     <Compile Include="Areas\Sites\Models\DataSources\UsersDatasource.cs" />
     <Compile Include="Areas\Sites\Models\DataSources\ViewNamesDataSource.cs" />
     <Compile Include="Areas\Sites\Models\DiagnosisResult_Metadata.cs" />
-    <Compile Include="Areas\Sites\Models\Element_Metadata.cs" />
     <Compile Include="Areas\Sites\Models\Grid2\PageGridItem.cs" />
     <Compile Include="Areas\Sites\Models\Grid2\Version_Revert_GridItemColumn.cs" />
     <Compile Include="Areas\Sites\Models\Grid2\Version_Preview_GridItemColumn.cs" />
@@ -372,7 +423,6 @@
     <Compile Include="Areas\Sites\Models\Grid2\Module_Uninstall_GridItemColumn.cs" />
     <Compile Include="Areas\Sites\Models\Grid2\InheritableDialogEditGridActionItemColumn.cs" />
     <Compile Include="Areas\Sites\Models\Grid2\Copy_GridItemColumn.cs" />
-    <Compile Include="Areas\Sites\Models\Grid2\Element_Value_GridItemColumn.cs" />
     <Compile Include="Areas\Sites\Models\Grid2\Localize_GridItemColumn.cs" />
     <Compile Include="Areas\Sites\Models\Grid2\Relation_GridItemColumn.cs" />
     <Compile Include="Areas\Sites\Models\Grid2\Script_FileName_GridItemColumn.cs" />
@@ -407,9 +457,7 @@
     <Compile Include="Areas\Sites\Models\User_Metadata.cs" />
     <Compile Include="Areas\Sites\Models\VersionInfo_Metadata.cs" />
     <Compile Include="Areas\Sites\Models\View_Metadata.cs" />
-    <Compile Include="Areas\Sites\SiteCustomTabs.cs" />
     <Compile Include="Areas\Sites\SitesAreaRegistration.cs" />
-    <Compile Include="Areas\Sites\PageCustomTabs.cs" />
     <Compile Include="Areas\SubmissionControllerBase.cs" />
     <Compile Include="Authorizations\AuthorizationAttribute.cs" />
     <Compile Include="Authorizations\AuthorizationHelpers.cs" />
@@ -428,7 +476,6 @@
     <Compile Include="Grid2\SortableGridColumn.cs" />
     <Compile Include="HealthMonitoring\TextFileWebEventProvider.cs" />
     <Compile Include="HtmlExtensions.cs" />
-    <Compile Include="Interoperability\MetaWeblog\BloggerAPI.cs" />
     <Compile Include="Interoperability\MetaWeblog\MetaWeblogAPI.cs" />
     <Compile Include="Interoperability\MetaWeblog\MetaWeblogAPIHandler.cs" />
     <Compile Include="Json_netResult.cs" />
@@ -639,9 +686,12 @@
     <Content Include="Images\Default.png" />
     <Content Include="Images\favicon.ico" />
     <Content Include="Images\loading.gif" />
+    <Content Include="Images\svg-content.png" />
     <Content Include="Images\svg-edit.png" />
     <Content Include="Images\svg-export.png" />
+    <Content Include="Images\svg-membership.png" />
     <Content Include="Images\svg-preview.png" />
+    <Content Include="Images\svg-site.png" />
     <Content Include="Images\svg-view.png" />
     <Content Include="LICENSE.txt" />
     <Content Include="Scripts\aight.js" />
@@ -736,10 +786,14 @@
     <Content Include="Scripts\codemirror\theme\xq-dark.css" />
     <Content Include="Scripts\codemirror\theme\xq-light.css" />
     <Content Include="Scripts\d3.v3.min.js" />
+    <Content Include="Scripts\jquery-ui-timepicker-addon\jquery-ui-sliderAccess.js" />
+    <Content Include="Scripts\jquery-ui-timepicker-addon\jquery-ui-timepicker-addon.js" />
     <Content Include="Scripts\jquery.autosize.js" />
     <Content Include="Scripts\jquery.fileDownload.js" />
     <Content Include="Scripts\jquery.ui.touch-punch.min.js" />
+    <Content Include="Scripts\less.js" />
     <Content Include="Scripts\selectivizr-min.js" />
+    <Content Include="Scripts\jquery-tiny-pubsub.js" />
     <Content Include="Scripts\tiny_mce\langs\en.js" />
     <Content Include="Scripts\tiny_mce\langs\zh-cn.js" />
     <Content Include="Scripts\tiny_mce\license.txt" />
@@ -782,6 +836,7 @@
     <Content Include="Scripts\tiny_mce\plugins\fullscreen\plugin.min.js" />
     <Content Include="Scripts\tiny_mce\plugins\hr\plugin.min.js" />
     <Content Include="Scripts\tiny_mce\plugins\image\plugin.min.js" />
+    <Content Include="Scripts\tiny_mce\plugins\importcss\plugin.min.js" />
     <Content Include="Scripts\tiny_mce\plugins\insertdatetime\plugin.min.js" />
     <Content Include="Scripts\tiny_mce\plugins\insertPage\plugin.min.js" />
     <Content Include="Scripts\tiny_mce\plugins\KoobooMediaLibrary\plugin.min.js" />
@@ -797,6 +852,7 @@
     <Content Include="Scripts\tiny_mce\plugins\paste\plugin.min.js" />
     <Content Include="Scripts\tiny_mce\plugins\preview\plugin.min.js" />
     <Content Include="Scripts\tiny_mce\plugins\print\plugin.min.js" />
+    <Content Include="Scripts\tiny_mce\plugins\rawcode\plugin.min.js" />
     <Content Include="Scripts\tiny_mce\plugins\save\plugin.min.js" />
     <Content Include="Scripts\tiny_mce\plugins\searchreplace\plugin.min.js" />
     <Content Include="Scripts\tiny_mce\plugins\spellchecker\plugin.min.js" />
@@ -819,6 +875,8 @@
     <Content Include="Scripts\tiny_mce\skins\lightgray\fonts\icomoon.ttf" />
     <Content Include="Scripts\tiny_mce\skins\lightgray\fonts\icomoon.woff" />
     <Content Include="Scripts\tiny_mce\skins\lightgray\fonts\readme.md" />
+    <Content Include="Scripts\tiny_mce\skins\lightgray\fonts\tinymce-small.svg" />
+    <Content Include="Scripts\tiny_mce\skins\lightgray\fonts\tinymce.svg" />
     <Content Include="Scripts\tiny_mce\skins\lightgray\img\anchor.gif" />
     <Content Include="Scripts\tiny_mce\skins\lightgray\img\loader.gif" />
     <Content Include="Scripts\tiny_mce\skins\lightgray\img\object.gif" />
@@ -828,14 +886,22 @@
     <Content Include="Scripts\tiny_mce\skins\lightgray\skin.min.css" />
     <Content Include="Scripts\tiny_mce\themes\modern\theme.min.js" />
     <Content Include="Scripts\tiny_mce\tinymce.min.js" />
+    <Content Include="Scripts\yardiTip\images\arrow_down.png" />
+    <Content Include="Scripts\yardiTip\images\arrow_top.png" />
     <Content Include="Styles\Diff\Diff.css" />
     <Content Include="Styles\Diff\InView.png" />
     <Content Include="Styles\Diff\Main.css" />
+    <Content Include="Styles\fonts\opensans-bold-webfont.svg" />
+    <Content Include="Styles\fonts\opensans-extrabold-webfont.svg" />
     <Content Include="Styles\fonts\opensans-light-webfont.svg" />
     <Content Include="Styles\fonts\opensans-regular-webfont.svg" />
+    <Content Include="Styles\fonts\opensans-semibold-webfont.svg" />
     <Content Include="Styles\images\icon-insert-page.png" />
+    <Content Include="Styles\images\line-x.png" />
+    <Content Include="Styles\images\line-y.png" />
     <Content Include="Styles\images\media-library.png" />
     <Content Include="Styles\InlineEditing.css" />
+    <Content Include="Styles\jquery-ui-timepicker-addon.css" />
     <Content Include="Styles\jquery-ui.css" />
     <Content Include="Styles\jQuery.jCrop\Jcrop.gif" />
     <Content Include="Styles\jQuery.jCrop\jquery.Jcrop.css" />
@@ -862,15 +928,12 @@
     <Content Include="Scripts\Kooboo_CMS.js" />
     <Content Include="Scripts\select2.min.js" />
     <Content Include="Scripts\underscore.js" />
-    <Content Include="Styles\base.css" />
-    <Content Include="Styles\common.css" />
     <Content Include="Styles\ie.css" />
     <Content Include="Styles\images\arrows.png" />
     <Content Include="Styles\images\icons.png" />
     <Content Include="Styles\images\line-end.png" />
     <Content Include="Styles\images\line.png" />
     <Content Include="Styles\images\stripe.png" />
-    <Content Include="Styles\reset.css" />
     <Content Include="Styles\select2\select2.css" />
     <Content Include="Styles\select2\select2.png" />
     <Content Include="Styles\select2\select2x2.png" />
@@ -1044,7 +1107,6 @@
     <Content Include="Areas\Account\Views\Users\ResetPassword.cshtml" />
     <Content Include="Areas\Account\Views\Shared\FrontLayout.cshtml" />
     <Content Include="Areas\Account\Views\Shared\CommonLayout.cshtml" />
-    <Content Include="Areas\Sites\Views\Page\EditorTemplates\CustomFields.cshtml" />
     <Content Include="favicon.ico" />
     <Content Include="Scripts\jquery.numeric.js" />
     <Content Include="Scripts\jquery-globalize\cultures\globalize.culture.af-ZA.js" />
@@ -1764,14 +1826,12 @@
     <Content Include="Scripts\jquery-ui.js" />
     <Content Include="Scripts\jquery.filestyle.js" />
     <Content Include="Scripts\jquery.json-2.2.js" />
-    <Content Include="Scripts\jquery.maskedinput-1.2.2.min.js" />
+    <Content Include="Scripts\jquery.maskedinput.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.watermarkinput.js" />
     <Content Include="Scripts\yardiTip\ellipsis.xml" />
-    <Content Include="Scripts\yardiTip\images\arrow_down.gif" />
-    <Content Include="Scripts\yardiTip\images\arrow_top.gif" />
     <Content Include="Scripts\yardiTip\images\arrow_top_yellow.gif" />
     <Content Include="Scripts\yardiTip\yardiTip.css" />
     <Content Include="Scripts\yardiTip\yardiTip.js" />
@@ -1838,7 +1898,6 @@
     <Content Include="Areas\Contents\Views\TextContent\Edit.cshtml" />
     <Content Include="Areas\Contents\Views\TextContent\Index.cshtml" />
     <Content Include="Areas\Contents\Views\TextContent\_AdvancedSearch.cshtml" />
-    <Content Include="Areas\Contents\Views\TextContent\SelectCategories.cshtml" />
     <Content Include="Areas\Contents\Views\TextContent\SubContent.cshtml" />
     <Content Include="Areas\Contents\Views\TextContent\Versions.cshtml" />
     <Content Include="Areas\Contents\Views\TextFolder\EditorTemplates\Categories.cshtml" />
@@ -1975,45 +2034,9 @@
     <Content Include="Views\Shared\EditorTemplates\Image.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="routes.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Kooboo.CMS.Account\Kooboo.CMS.Account.csproj">
-      <Project>{61ed004c-9e20-4680-af2b-0723fe7648bb}</Project>
-      <Name>Kooboo.CMS.Account</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Kooboo.CMS.Caching\Kooboo.CMS.Caching.csproj">
-      <Project>{570CD9D3-75D2-468A-8245-45BDCA57432E}</Project>
-      <Name>Kooboo.CMS.Caching</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Kooboo.CMS.Common\Kooboo.CMS.Common.csproj">
-      <Project>{ab6dde14-eeb6-4497-80a0-d148a0a692b5}</Project>
-      <Name>Kooboo.CMS.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Kooboo.CMS.Content\Kooboo.CMS.Content\Kooboo.CMS.Content.csproj">
-      <Project>{C5A5186D-6F8E-4BB9-AF0E-74F0993B48DA}</Project>
-      <Name>Kooboo.CMS.Content</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Kooboo.CMS.Form\Kooboo.CMS.Form.csproj">
-      <Project>{C4F32215-EFAD-45C9-8276-6126681C3589}</Project>
-      <Name>Kooboo.CMS.Form</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Kooboo.CMS.Membership\Kooboo.CMS.Membership.csproj">
-      <Project>{3df23643-4bd1-4564-82b9-9ec594ad05b6}</Project>
-      <Name>Kooboo.CMS.Membership</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Kooboo.CMS.Search\Kooboo.CMS.Search.csproj">
-      <Project>{C7B73E67-D226-41CB-A86D-410276B265A1}</Project>
-      <Name>Kooboo.CMS.Search</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Kooboo.CMS.Sites\Kooboo.CMS.Sites.csproj">
-      <Project>{ffd8e9f0-61b6-4b0d-a803-5beccd2a6578}</Project>
-      <Name>Kooboo.CMS.Sites</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Kooboo\Kooboo.csproj">
-      <Project>{347e47e5-3132-4bad-b935-8282a2b16cf5}</Project>
-      <Name>Kooboo</Name>
-    </ProjectReference>
+    <Content Include="routes.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
@@ -2270,16 +2293,10 @@
     <Content Include="Areas\Sites\Views\Page\EditorTemplates\Naviation_Order.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Sites\Views\ModuleManagement\OnInstalling.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Areas\Sites\Views\ModuleManagement\InstallComplete.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Sites\Views\ModuleManagement\OnUninstalling.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Areas\Sites\Views\ModuleManagement\DeleteModuleFiles.cshtml" />
+    <Content Include="Areas\Sites\Views\ModuleManagement\Uninstall.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Sites\Views\ModuleManagement\GoingToUninstall.cshtml" />
@@ -2291,7 +2308,7 @@
     <Content Include="Areas\Contents\Views\ContentType\EditTemplate.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Sites\Views\ABRuleSetting\EditorTemplates\UserAgentPattern.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\UserAgentPattern.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Sites\Views\Page\_OutputCache.cshtml">
@@ -2401,12 +2418,246 @@
   <ItemGroup>
     <Content Include="Areas\Sites\Views\ModuleManagement\UninstallComplete.cshtml" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Sites\Views\ABRuleSetting\Finished.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Contents\Views\TextContent\Import.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Contents\Views\Shared\_TextContentGridBreadcrumb.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Sites\Views\Home\UnsyncedPageNode.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Shared\EditorTemplates\Spinner.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Sites\Views\Shared\_ChooseDataRuleType.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Sites\Views\ModuleManagement\Reinstall.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Sites\Views\ModuleManagement\RunReinstallation.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Sites\Views\ModuleManagement\ReinstallComplete.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Sites\Views\ModuleManagement\Versions.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Sites\Views\ModuleManagement\RunInstallation.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Sites\Views\ModuleManagement\RunUninstallation.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Kooboo.CMS.Account\Kooboo.CMS.Account.csproj">
+      <Project>{61ed004c-9e20-4680-af2b-0723fe7648bb}</Project>
+      <Name>Kooboo.CMS.Account</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Kooboo.CMS.Caching\Kooboo.CMS.Caching.csproj">
+      <Project>{570cd9d3-75d2-468a-8245-45bdca57432e}</Project>
+      <Name>Kooboo.CMS.Caching</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Kooboo.CMS.Common\Kooboo.CMS.Common.csproj">
+      <Project>{ab6dde14-eeb6-4497-80a0-d148a0a692b5}</Project>
+      <Name>Kooboo.CMS.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Kooboo.CMS.Content\Kooboo.CMS.Content\Kooboo.CMS.Content.csproj">
+      <Project>{c5a5186d-6f8e-4bb9-af0e-74f0993b48da}</Project>
+      <Name>Kooboo.CMS.Content</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Kooboo.CMS.Form\Kooboo.CMS.Form.csproj">
+      <Project>{c4f32215-efad-45c9-8276-6126681c3589}</Project>
+      <Name>Kooboo.CMS.Form</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Kooboo.CMS.Membership\Kooboo.CMS.Membership.csproj">
+      <Project>{3df23643-4bd1-4564-82b9-9ec594ad05b6}</Project>
+      <Name>Kooboo.CMS.Membership</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Kooboo.CMS.Search\Kooboo.CMS.Search.csproj">
+      <Project>{c7b73e67-d226-41cb-a86d-410276b265a1}</Project>
+      <Name>Kooboo.CMS.Search</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Kooboo.CMS.Sites\Kooboo.CMS.Sites.csproj">
+      <Project>{ffd8e9f0-61b6-4b0d-a803-5beccd2a6578}</Project>
+      <Name>Kooboo.CMS.Sites</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Kooboo\Kooboo.csproj">
+      <Project>{347e47e5-3132-4bad-b935-8282a2b16cf5}</Project>
+      <Name>Kooboo</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\tiny_mce\skins\lightgray\fonts\tinymce-small.eot" />
+    <Content Include="Scripts\tiny_mce\skins\lightgray\fonts\tinymce-small.ttf" />
+    <Content Include="Scripts\tiny_mce\skins\lightgray\fonts\tinymce-small.woff" />
+    <Content Include="Scripts\tiny_mce\skins\lightgray\fonts\tinymce.eot" />
+    <Content Include="Scripts\tiny_mce\skins\lightgray\fonts\tinymce.ttf" />
+    <Content Include="Scripts\tiny_mce\skins\lightgray\fonts\tinymce.woff" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Styles\base.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Styles\main.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Styles\less-element.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Styles\icon.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Styles\sitemap.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Styles\grid.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Styles\common.less" />
+    <Content Include="Styles\reset.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Styles\ui.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Styles\fonts\opensans-bold-webfont.eot" />
+    <Content Include="Styles\fonts\opensans-bold-webfont.ttf" />
+    <Content Include="Styles\fonts\opensans-bold-webfont.woff" />
+    <Content Include="Styles\fonts\opensans-extrabold-webfont.eot" />
+    <Content Include="Styles\fonts\opensans-extrabold-webfont.ttf" />
+    <Content Include="Styles\fonts\opensans-extrabold-webfont.woff" />
+    <Content Include="Styles\fonts\opensans-semibold-webfont.eot" />
+    <Content Include="Styles\fonts\opensans-semibold-webfont.ttf" />
+    <Content Include="Styles\fonts\opensans-semibold-webfont.woff" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Styles\form.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Styles\table.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Styles\column.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Styles\jqueryui.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Styles\tinymce.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\DisplayTemplates\_TR.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Styles\relation.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Styles\repository-flowchart.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_ToolbarButton.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_ToolbarGroupButtons.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_Toolbar.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Sites\Views\HtmlBlock\_Grid2.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Sites\Views\PageDesign\HtmlBlockNamespace.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Sites\Views\PageDesign\HtmlBlockItem.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_TinyMCEExternalCssInjection.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Layouts\member_layout\setting.config" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Layouts\member_layout\template.cshtml" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Layouts\one_column\setting.config" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Layouts\one_column\template.cshtml" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Layouts\two_column\setting.config" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Layouts\two_column\template.cshtml" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Article.Category\setting.config" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Article.Category\template.cshtml" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Article.Detail.Return\setting.config" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Article.Detail.Return\template.cshtml" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Article.Detail\setting.config" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Article.Detail\template.cshtml" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Article.List\ParameterTemplate.cshtml" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Article.List\setting.config" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Article.List\template.cshtml" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Article.Search\setting.config" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Article.Search\template.cshtml" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Contactus\setting.config" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Contactus\template.cshtml" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Footer\setting.config" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Footer\template.cshtml" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\LoginForm\setting.config" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\LoginForm\template.cshtml" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\LoginStatus\setting.config" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\LoginStatus\template.cshtml" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Member.Activate\setting.config" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Member.Activate\template.cshtml" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Member.ChangePassword\setting.config" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Member.ChangePassword\template.cshtml" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Member.ForgotPassword\setting.config" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Member.ForgotPassword\template.cshtml" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Member.Index\setting.config" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Member.Index\template.cshtml" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Member.Login\setting.config" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Member.Login\template.cshtml" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Member.Nav\setting.config" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Member.Nav\template.cshtml" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Member.Register\setting.config" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Member.Register\template.cshtml" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Member.ResetPassword\setting.config" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Member.ResetPassword\template.cshtml" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Menu\setting.config" />
+    <Content Include="Cms_Data\Sites\SampleSite\Templates\Views\Menu\template.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Contents\Views\Setting\Basic.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\Master.Style.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web.Mono.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Mono|AnyCPU'">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE;MONO</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
@@ -2442,7 +2693,11 @@
     </MonoDevelop>
   </ProjectExtensions>
   <PropertyGroup>
-    <PostBuildEvent>copy "..\..\..\Lib\MVC\4.0\*.dll"  "$(TargetDir)";
-@echo copy "..\..\..\Lib\SQLCe\*.*" "$(TargetDir)"</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
   </PropertyGroup>
 </Project>
