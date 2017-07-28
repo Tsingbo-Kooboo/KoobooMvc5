@@ -19,11 +19,11 @@ using System.Text;
 
 namespace Kooboo.CMS.Web.HealthMonitoring
 {
-	public static class TextFileLogger
-	{		
-		private static string WebEventsDir = "WebEvents";
-		private static object lockerHelper = new object();
-		public static void Log(string message)
+    public static class TextFileLogger
+    {
+        private static string WebEventsDir = "WebEvents";
+        private static object lockerHelper = new object();
+        public static void Log(string message)
         {
             lock (lockerHelper)
             {
@@ -55,11 +55,11 @@ namespace Kooboo.CMS.Web.HealthMonitoring
             var filePath = Path.Combine(webEventsDir, DateTime.UtcNow.ToString("yyyy-MM-dd") + ".log");
             return filePath;
         }
-	}
-	
+    }
+
 #if MONO
-	
-#else		
+
+#else
     public class TextFileWebEventProvider : WebEventProvider
     {        
         // Methods
