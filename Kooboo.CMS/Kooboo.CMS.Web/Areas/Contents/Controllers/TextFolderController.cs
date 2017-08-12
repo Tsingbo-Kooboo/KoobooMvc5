@@ -8,6 +8,7 @@
 #endregion
 using Kooboo.CMS.Common;
 using Kooboo.CMS.Common.Persistence.Non_Relational;
+using Kooboo.CMS.Content.EventBus.Content;
 using Kooboo.CMS.Content.Models;
 using Kooboo.CMS.Content.Services;
 using Kooboo.CMS.Sites;
@@ -40,7 +41,7 @@ namespace Kooboo.CMS.Web.Areas.Contents.Controllers
         [Kooboo.CMS.Web.Authorizations.Authorization(AreaName = "Contents", Group = "", Name = "Content", Order = 1)]
         public virtual ActionResult Index(string FolderName, string search)
         {
-            var folders = Manager.All(Repository, search, FolderName).OrderBy(it=>it.FriendlyText).ToArray();
+            var folders = Manager.All(Repository, search, FolderName).OrderBy(it => it.FriendlyText).ToArray();
 
             folders = folders
                 .Select(it => it.AsActual())
@@ -63,7 +64,6 @@ namespace Kooboo.CMS.Web.Areas.Contents.Controllers
         // Kooboo.CMS.Account.Models.Permission.Contents_FolderPermission
         [Kooboo.CMS.Web.Authorizations.Authorization(AreaName = "Contents", Group = "", Name = "Folder", Order = 99)]
         [HttpPost]
-
         public virtual ActionResult Create(TextFolder model, string folderName, string @return)
         {
             //compatible with the Folder parameter changed to FolderName.
@@ -74,7 +74,6 @@ namespace Kooboo.CMS.Web.Areas.Contents.Controllers
             {
                 data.RunWithTry((resultData) =>
                 {
-
                     Folder parent = null;
                     if (!string.IsNullOrEmpty(folderName))
                     {
@@ -82,12 +81,11 @@ namespace Kooboo.CMS.Web.Areas.Contents.Controllers
                     }
                     model.Parent = parent;
                     model.UtcCreationDate = DateTime.UtcNow;
+                    TextFolderEvent.Fire(ContentAction.PreAdd, model);
                     Manager.Add(Repository, model);
-
+                    TextFolderEvent.Fire(ContentAction.Add, model);
                     resultData.RedirectUrl = @return;
                 });
-
-
             }
 
             return Json(data);
@@ -118,7 +116,9 @@ namespace Kooboo.CMS.Web.Areas.Contents.Controllers
                     UUID = string.IsNullOrEmpty(UUID) ? model.FullName : UUID;
                     var old = Manager.Get(Repository, UUID);
                     model.Parent = old.Parent;
+                    TextFolderEvent.Fire(ContentAction.PreUpdate, model);
                     Manager.Update(Repository, model, old);
+                    TextFolderEvent.Fire(ContentAction.Update, model);
 
                     resultData.RedirectUrl = @return;
                 });
@@ -140,7 +140,9 @@ namespace Kooboo.CMS.Web.Areas.Contents.Controllers
                 foreach (var folder in model)
                 {
                     folder.Repository = Repository;
+                    TextFolderEvent.Fire(ContentAction.PreDelete, folder);
                     Manager.Remove(Repository, folder.AsActual());
+                    TextFolderEvent.Fire(ContentAction.Delete, folder);
                 }
                 resultData.ReloadPage = true;
             });

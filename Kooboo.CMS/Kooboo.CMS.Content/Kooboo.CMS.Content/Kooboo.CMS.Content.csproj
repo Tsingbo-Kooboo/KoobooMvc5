@@ -97,6 +97,8 @@
     <Compile Include="EventBus\Content\ContentVersioningSubscriber.cs" />
     <Compile Include="EventBus\Content\ContentWorkflowSubscriber.cs" />
     <Compile Include="EventBus\Content\ContentImageCropSubscriber.cs" />
+    <Compile Include="EventBus\Content\TextFolderEvent.cs" />
+    <Compile Include="EventBus\Content\TextFolderEventContext.cs" />
     <Compile Include="EventBus\EventResult.cs" />
     <Compile Include="Formatter\ITextContentFormater.cs" />
     <Compile Include="Models\Category.cs" />

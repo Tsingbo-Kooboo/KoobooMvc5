@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Powered by Kooboo CMS" xml:space="preserve">
     <value>Powered by Kooboo CMS</value>
@@ -177,7 +177,7 @@
   <data name="Edit user" xml:space="preserve">
     <value>编辑用户</value>
   </data>
-    <data name="Reset user password" xml:space="preserve">
+  <data name="Reset user password" xml:space="preserve">
     <value>重置用户密码</value>
   </data>
   <data name="'Re-enter password' and 'New password' do not match." xml:space="preserve">
@@ -517,7 +517,7 @@
     <value>导入URL地址重定向</value>
   </data>
   <data name="Robots.txt" xml:space="preserve">
-    <value>Robots.txt(网络爬虫排除标准,网站通过Robots协议告诉搜索引擎哪些页面可以抓取，哪些页面不能抓取。)</value>
+    <value>Robots.txt</value>
   </data>
   <data name="Publishing queue" xml:space="preserve">
     <value>发布队列</value>
@@ -4055,5 +4055,20 @@
   </data>
   <data name="The repository does not exists:'{0}'" xml:space="preserve">
     <value>数据库中不存在:"{0}"</value>
+  </data>
+  <data name="Category" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="Readings" xml:space="preserve">
+    <value>Readings</value>
+  </data>
+  <data name="Latest modification date" xml:space="preserve">
+    <value>Latest modification date</value>
+  </data>
+  <data name="Move to..." xml:space="preserve">
+    <value>移到...</value>
+  </data>
+  <data name="Are you sure you want to move these items?" xml:space="preserve">
+    <value>Are you sure you want to move these items?</value>
   </data>
 </root>

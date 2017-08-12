@@ -91,6 +91,28 @@
                     @Html.IconImage("delete") @("Delete".Localize())
                 </a>
             </li>
+            @{
+                var folders = ViewData["SameSchemaFolders"] as IEnumerable<TextFolder>;
+                if (folders != null && folders.Any())
+                {
+                    <li class="j_DropDown" data-show-on-check="Any">
+                        <a>
+                            @("Move to...".Localize())
+                            @Html.IconImage("arrow small white-down")
+                        </a>
+                        <ul class="j_DropDownContent hide">
+                            @foreach (TextFolder f in folders)
+                            {
+                                <li>
+                                    <a href="@Url.Action("BatchMoveContent", ViewContext.RequestContext.AllRouteValues().Merge("targetFolder", f.FullName).Merge("return", ViewContext.HttpContext.Request.RawUrl))" data-command-type="AjaxPost" data-confirm="@("Are you sure you want to move these items?".Localize())">
+                                        @f.FriendlyName
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    </li>
+                }
+            }
             <li class="j_DropDown" data-show-on-check="Any">
                 <a>
                     @("More...".Localize())
@@ -154,7 +176,7 @@
                 @Html.Partial("_ToolbarGroupButtons", group)
             }
         </ul>
-    }
+                }
 }
 
 <div class="topbar clearfix">
@@ -176,7 +198,7 @@
 @Html.Partial(ViewData["Template"].ToString(), Model)
 
 @if (HttpContext.Current.Items["RenderedPager"] == null && folder.EnablePaging.HasValue && folder.EnablePaging.Value == true)
-{
+            {
     <div class="pagination">
         @Html.Pager(pagedList)
     </div>
