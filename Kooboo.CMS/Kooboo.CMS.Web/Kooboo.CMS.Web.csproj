@@ -786,6 +786,9 @@
     <Content Include="Scripts\codemirror\theme\xq-dark.css" />
     <Content Include="Scripts\codemirror\theme\xq-light.css" />
     <Content Include="Scripts\d3.v3.min.js" />
+    <Content Include="Scripts\i18next\i18next.min.js" />
+    <Content Include="Scripts\i18next\setup.js" />
+    <Content Include="Scripts\i18next\jquery-i18next.min.js" />
     <Content Include="Scripts\jquery-ui-timepicker-addon\jquery-ui-sliderAccess.js" />
     <Content Include="Scripts\jquery-ui-timepicker-addon\jquery-ui-timepicker-addon.js" />
     <Content Include="Scripts\jquery.autosize.js" />
@@ -2637,6 +2640,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\Master.Style.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\i18next\locales\en\translation.json" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
