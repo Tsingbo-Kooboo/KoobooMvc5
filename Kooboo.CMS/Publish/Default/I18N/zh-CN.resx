@@ -1,9 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-  <creator alias="zh" intName="Chinese (Simple)" localName="中文（简体，中国）" lcid="0804" culture="zh-CN">
-    <name>彭刚要(pgy866@163.com)</name>
-    <link>https://github.com/Tsingbo-Kooboo/KoobooMvc5/blob/MVC5/Kooboo.CMS/Publish/Default/I18N/zh-CN.resx</link>
-  </creator>
   <!-- 
     Microsoft ResX Schema 
     
@@ -178,9 +174,6 @@
   <data name="Remember me" xml:space="preserve">
     <value>记住我的登录状态</value>
   </data>
-  <data name="Remember me 字段是必需的。" xml:space="preserve">
-    <value>“记住我的登录状态”为必填字段</value>
-  </data>
   <data name="The Remember me field is required." xml:space="preserve">
     <value>“记住我的登录状态”为必填项</value>
   </data>
@@ -305,7 +298,7 @@
     <value>团体</value>
   </data>
   <data name="Member" xml:space="preserve">
-    <value>会员</value>
+    <value>成员</value>
   </data>
   <data name="Connect" xml:space="preserve">
     <value>会员连接</value>
@@ -683,7 +676,7 @@
     <value>使用位置</value>
   </data>
   <data name="Sites in use:" xml:space="preserve">
-    <value>使用位置:</value>
+    <value>使用中的站点:</value>
   </data>
   <data name="'Destination name' is invalid." xml:space="preserve">
     <value>“指定名称”无效</value>
@@ -2568,9 +2561,6 @@
   <data name="Are you sure you want to publish this item." xml:space="preserve">
     <value>您确定要发布此项内容吗？</value>
   </data>
-  <data name="Are you sure you want to unpublish this item." xml:space="preserve">
-    <value>您确定要取消发布这条数据吗？</value>
-  </data>
   <data name="Email" xml:space="preserve">
     <value>邮件</value>
   </data>
@@ -2672,9 +2662,6 @@
   </data>
   <data name="Are you sure you want to leave this page" xml:space="preserve">
     <value>您确定要离开此页面吗？</value>
-  </data>
-  <data name="Are you sure you want to reset this template" xml:space="preserve">
-    <value>您确定要重置这个项目的模板吗？</value>
   </data>
   <data name="System diagnosis" xml:space="preserve">
     <value>系统诊断</value>
@@ -3067,7 +3054,7 @@
     <value>更改语言</value>
   </data>
   <data name="Set as default page" xml:space="preserve">
-    <value>设置当前页为您的后台默认页</value>
+    <value>设置为默认页</value>
   </data>
   <data name="UI culture" xml:space="preserve">
     <value>后台界面语言</value>
@@ -3472,7 +3459,7 @@
     <value>新建会员组</value>
   </data>
   <data name="Connects" xml:space="preserve">
-    <value>第三方登录连接</value>
+    <value>会员连接</value>
   </data>
   <data name="App 密码" xml:space="preserve">
     <value>App 密码</value>
@@ -3988,22 +3975,13 @@
     <value>SEO优化</value>
   </data>
   <data name="Output lower case page urls" xml:space="preserve">
-    <value>输出友好（小写、横线连接）页面URL地址（例如：链接为http://kooboo.com/Home/FriendlyUrl，勾选此项优化后链接将http://KOOBOO.com/home/friendly-url方式显示）</value>
-  </data>
-  <data name="Output lower case page urls 字段是必需的。" xml:space="preserve">
-    <value>“输出友好（小写、横线连接）页面URL地址” 字段是必需的。</value>
+    <value>使用小写的页面URL地址</value>
   </data>
   <data name="Remove trailing slashes in requested urls" xml:space="preserve">
-    <value>除去在URL结尾斜线（例如：链接为http://kooboo.com/Home/FriendlyUrl/ ，勾选此项优化后链接将http://KOOBOO.com/home/friendlyurl方式显示）</value>
-  </data>
-  <data name="Remove trailing slashes in requested urls 字段是必需的。" xml:space="preserve">
-    <value>”除去在URL结尾斜线“ 字段是必需的。</value>
+    <value>除去在URL结尾斜杠</value>
   </data>
   <data name="Add 'www.' prefix to naked domain" xml:space="preserve">
-    <value>将 www.前缀添加到裸域（例如：链接为http://kooboo.com ，勾选此项优化后链接将http://www.KOOBOO.com方式显示）</value>
-  </data>
-  <data name="Add 'www.' prefix to naked domain 字段是必需的。" xml:space="preserve">
-    <value>”将 www.前缀添加到裸域“ 字段是必需的。</value>
+    <value>添加 www.前缀到根域名</value>
   </data>
   <data name="Used in SEO, see: http://googlewebmastercentral.blogspot.com/2009/02/specify-your-canonical.html" xml:space="preserve">
     <value>用于搜索引擎优化, 参见: http://googlewebmastercentral.blogspot.com/2009/02/specify-your-canonical.html</value>
@@ -4256,5 +4234,128 @@
   </data>
   <data name="Are you sure you want to move these items?" xml:space="preserve">
     <value>你确定要移动这些项目吗？</value>
+  </data>
+  <data name="Content types:" xml:space="preserve">
+    <value>内容类型:</value>
+  </data>
+  <data name="Text folders:" xml:space="preserve">
+    <value>内容文件夹:</value>
+  </data>
+  <data name="Users:" xml:space="preserve">
+    <value>Users:</value>
+  </data>
+  <data name="Connects:" xml:space="preserve">
+    <value>会员连接:</value>
+  </data>
+  <data name="用户名" xml:space="preserve">
+    <value>用户名</value>
+  </data>
+  <data name="邮件" xml:space="preserve">
+    <value>邮件</value>
+  </data>
+  <data name="第三方平台登录账号的类型" xml:space="preserve">
+    <value>第三方平台登录账号的类型</value>
+  </data>
+  <data name="审核通过" xml:space="preserve">
+    <value>审核通过</value>
+  </data>
+  <data name="被锁定" xml:space="preserve">
+    <value>被锁定</value>
+  </data>
+  <data name="登陆日期" xml:space="preserve">
+    <value>登陆日期</value>
+  </data>
+  <data name="名称" xml:space="preserve">
+    <value>名称</value>
+  </data>
+  <data name="显示名称" xml:space="preserve">
+    <value>显示名称</value>
+  </data>
+  <data name="App Id编号" xml:space="preserve">
+    <value>App Id编号</value>
+  </data>
+  <data name="App 密钥" xml:space="preserve">
+    <value>App 密钥</value>
+  </data>
+  <data name="站点" xml:space="preserve">
+    <value>站点</value>
+  </data>
+  <data name="最新修改日期" xml:space="preserve">
+    <value>最新修改日期</value>
+  </data>
+  <data name="编辑者" xml:space="preserve">
+    <value>编辑者</value>
+  </data>
+  <data name="Members:" xml:space="preserve">
+    <value>成员:</value>
+  </data>
+  <data name="网站进入位置" xml:space="preserve">
+    <value>网站进入位置</value>
+  </data>
+  <data name="规则名" xml:space="preserve">
+    <value>规则名</value>
+  </data>
+  <data name="重定向类型" xml:space="preserve">
+    <value>重定向类型</value>
+  </data>
+  <data name="The Output lower case page urls field is required." xml:space="preserve">
+    <value>The Output lower case page urls field is required.</value>
+  </data>
+  <data name="The Remove trailing slashes in requested urls field is required." xml:space="preserve">
+    <value>The Remove trailing slashes in requested urls field is required.</value>
+  </data>
+  <data name="The Add 'www.' prefix to naked domain field is required." xml:space="preserve">
+    <value>The Add 'www.' prefix to naked domain field is required.</value>
+  </data>
+  <data name="The field Encrypt key must be a string with a minimum length of 8 and a maximum length of 8." xml:space="preserve">
+    <value>The field Encrypt key must be a string with a minimum length of 8 and a maximum length of 8.</value>
+  </data>
+  <data name="The Turn on submission api field is required." xml:space="preserve">
+    <value>The Turn on submission api field is required.</value>
+  </data>
+  <data name="状态码" xml:space="preserve">
+    <value>状态码</value>
+  </data>
+  <data name="重定向 URL" xml:space="preserve">
+    <value>重定向 URL</value>
+  </data>
+  <data name="显示错误路径" xml:space="preserve">
+    <value>显示错误路径</value>
+  </data>
+  <data name="The field Redirect type is invalid." xml:space="preserve">
+    <value>The field Redirect type is invalid.</value>
+  </data>
+  <data name="The Status code field is required." xml:space="preserve">
+    <value>The Status code field is required.</value>
+  </data>
+  <data name="The Redirect type field is required." xml:space="preserve">
+    <value>The Redirect type field is required.</value>
+  </data>
+  <data name="The Show error path field is required." xml:space="preserve">
+    <value>The Show error path field is required.</value>
+  </data>
+  <data name="输入 URL地址/模式" xml:space="preserve">
+    <value>输入 URL地址/模式</value>
+  </data>
+  <data name="输入的域" xml:space="preserve">
+    <value>输入的域</value>
+  </data>
+  <data name="输出 URL地址/模式" xml:space="preserve">
+    <value>输出 URL地址/模式</value>
+  </data>
+  <data name="输出的域" xml:space="preserve">
+    <value>输出的域</value>
+  </data>
+  <data name="正则表达式" xml:space="preserve">
+    <value>正则表达式</value>
+  </data>
+  <data name="进入页面" xml:space="preserve">
+    <value>进入页面</value>
+  </data>
+  <data name="目的页面" xml:space="preserve">
+    <value>目的页面</value>
+  </data>
+  <data name="Report" xml:space="preserve">
+    <value>Report</value>
   </data>
 </root>
