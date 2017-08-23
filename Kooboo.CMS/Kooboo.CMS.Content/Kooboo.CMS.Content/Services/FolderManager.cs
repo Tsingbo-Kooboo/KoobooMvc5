@@ -181,7 +181,7 @@ namespace Kooboo.CMS.Content.Services
         {
             return All(repository, "").Where(it => ((TextFolder)(object)it).AsActual().Visible).Select(it => GetFolderTreeNode(it));
         }
-        private FolderTreeNode<T> GetFolderTreeNode(T folder)
+        protected FolderTreeNode<T> GetFolderTreeNode(T folder)
         {
             FolderTreeNode<T> treeNode = new FolderTreeNode<T>() { Folder = folder };
             treeNode.Children = ChildFolders(folder)

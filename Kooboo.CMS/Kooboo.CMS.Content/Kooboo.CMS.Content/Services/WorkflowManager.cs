@@ -275,7 +275,7 @@ namespace Kooboo.CMS.Content.Services
                 }
             }
 
-            return allowed;
+            return allowed || HasFolderPermission(textFolder, userName);
         }
 
         public virtual bool AvailableToEditContent(TextContent content, string userName)
@@ -300,11 +300,16 @@ namespace Kooboo.CMS.Content.Services
         {
             return false;
         }
+
         protected virtual string[] GetRoles(string userName)
         {
             return new string[0];
         }
 
+        protected virtual bool HasFolderPermission(TextFolder textFolder, string userName)
+        {
+            return false;
+        }
         #endregion
 
     }
