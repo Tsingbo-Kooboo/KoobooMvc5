@@ -38,5 +38,14 @@ namespace Kooboo.CMS.Content.Services
         {
             return All(repository, "").Where(it => ((MediaFolder)(object)it).AsActual() != null).Select(it => GetFolderTreeNode(it));
         }
+
+        protected override FolderTreeNode<MediaFolder> GetFolderTreeNode(MediaFolder folder)
+        {
+            FolderTreeNode<MediaFolder> treeNode = new FolderTreeNode<MediaFolder>() { Folder = folder };
+            treeNode.Children = ChildFolders(folder)
+                .Where(it => it is MediaFolder)
+                .Select(it => GetFolderTreeNode(it));
+            return treeNode;
+        }
     }
 }
