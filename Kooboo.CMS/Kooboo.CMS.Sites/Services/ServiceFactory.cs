@@ -59,6 +59,16 @@ namespace Kooboo.CMS.Sites.Services
             }
             return user.TextFolders.Any(it => it.EqualsOrNullEmpty(textFolder.FullName, StringComparison.OrdinalIgnoreCase));
         }
+
+        protected override bool HasMediaFolderPermission(string mediaFolder, string userName)
+        {
+            var user = ServiceFactory.UserManager.Get(Site.Current, userName);
+            if (user == null || user.MediaFolders == null)
+            {
+                return false;
+            }
+            return user.MediaFolders.Any(it => it.EqualsOrNullEmpty(mediaFolder, StringComparison.OrdinalIgnoreCase));
+        }
     }
     public class SendingSettingManager : Kooboo.CMS.Content.Services.SendingSettingManager
     {

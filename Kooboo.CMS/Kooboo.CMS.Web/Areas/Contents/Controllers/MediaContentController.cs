@@ -57,7 +57,7 @@ namespace Kooboo.CMS.Web.Areas.Contents.Controllers
 
         #region Index
 
-        [Kooboo.CMS.Web.Authorizations.Authorization(AreaName = "Contents", Group = "", Name = "Content", Order = 99)]
+        [Authorization(AreaName = "Contents", Group = "", Name = "Content", Order = 99)]
         public virtual ActionResult Index(string folderName, string search, int? page, int? pageSize, string sortField, string sortDir, string listType)
         {
             return MediaContentGrid(folderName, search, page, pageSize, sortField, sortDir, listType);
@@ -65,13 +65,18 @@ namespace Kooboo.CMS.Web.Areas.Contents.Controllers
         #endregion
 
         #region Create
-        [Kooboo.CMS.Web.Authorizations.Authorization(AreaName = "Contents", Group = "", Name = "Content", Order = 1)]
+        [Authorization(AreaName = "Contents", Group = "", Name = "Content", Order = 1)]
         [HttpPost]
         public virtual ActionResult Create(string folderName, string @return)
         {
             var data = new JsonResultData(ModelState);
             data.RunWithTry((resultData) =>
             {
+                if (!HasPermission(folderName))
+                {
+                    resultData.AddErrorMessage("you do not have permission to this folder".Localize());
+                    return;
+                }
                 HttpFileCollectionBase files = Request.Files;
                 MediaContent mediaContent = SaveFile(folderName, files);
                 if (mediaContent.IsImage)
@@ -82,10 +87,15 @@ namespace Kooboo.CMS.Web.Areas.Contents.Controllers
             });
             return Json(data);
         }
-        [Kooboo.CMS.Web.Authorizations.Authorization(AreaName = "Contents", Group = "", Name = "Content", Order = 1)]
+        [Authorization(AreaName = "Contents", Group = "", Name = "Content", Order = 1)]
         [HttpPost]
         public virtual ActionResult Upload(string folderName, string @return)
         {
+            if (!HasPermission(folderName))
+            {
+                ModelState.AddModelError("", new Exception("you do not have permission to add file".Localize()));
+                return Redirect(@return);
+            }
             HttpFileCollectionBase files = Request.Files;
             MediaContent mediaContent = SaveFile(folderName, files);
             return Redirect(@return);
@@ -136,44 +146,48 @@ namespace Kooboo.CMS.Web.Areas.Contents.Controllers
 
         #region Delete
         // Kooboo.CMS.Account.Models.Permission.Contents_ContentPermission
-        [Kooboo.CMS.Web.Authorizations.Authorization(AreaName = "Contents", Group = "", Name = "Content", Order = 1)]
+        [Authorization(AreaName = "Contents", Group = "", Name = "Content", Order = 1)]
         [HttpPost]
         public virtual ActionResult Delete(string folderName, string[] folders, string[] docs)
         {
-
             var data = new JsonResultData(ModelState);
-            data.RunWithTry((resultData) =>
+            data.RunWithTry(resultData =>
+            {
+                if (!HasPermission(folderName))
                 {
-                    if (string.IsNullOrWhiteSpace(folderName))
-                    {
-                        if (folders != null)
-                            foreach (var f in folders)
-                            {
-                                if (string.IsNullOrEmpty(f)) continue;
-                                var folderPath = FolderHelper.SplitFullName(f);
-                                FolderManager.Remove(Repository, new MediaFolder(Repository, folderPath));
-                            }
-                    }
-                    else
-                    {
-                        var folder = FolderManager.Get(Repository, folderName).AsActual();
-                        if (folders != null)
-                            foreach (var f in folders)
-                            {
-                                if (string.IsNullOrEmpty(f)) continue;
-                                var folderPath = FolderHelper.SplitFullName(f);
-                                FolderManager.Remove(Repository, new MediaFolder(Repository, folderPath));
-                            }
+                    resultData.AddErrorMessage("you do not have permission to this folder".Localize());
+                    return;
+                }
+                if (string.IsNullOrWhiteSpace(folderName))
+                {
+                    if (folders != null)
+                        foreach (var f in folders)
+                        {
+                            if (string.IsNullOrEmpty(f)) continue;
+                            var folderPath = FolderHelper.SplitFullName(f);
+                            FolderManager.Remove(Repository, new MediaFolder(Repository, folderPath));
+                        }
+                }
+                else
+                {
+                    var folder = FolderManager.Get(Repository, folderName).AsActual();
+                    if (folders != null)
+                        foreach (var f in folders)
+                        {
+                            if (string.IsNullOrEmpty(f)) continue;
+                            var folderPath = FolderHelper.SplitFullName(f);
+                            FolderManager.Remove(Repository, new MediaFolder(Repository, folderPath));
+                        }
 
-                        if (docs != null)
-                            foreach (var f in docs)
-                            {
-                                if (string.IsNullOrEmpty(f)) continue;
-                                ContentManager.Delete(Repository, folder, f);
-                            }
-                    }
-                    resultData.ReloadPage = true;
-                });
+                    if (docs != null)
+                        foreach (var f in docs)
+                        {
+                            if (string.IsNullOrEmpty(f)) continue;
+                            ContentManager.Delete(Repository, folder, f);
+                        }
+                }
+                resultData.ReloadPage = true;
+            });
             return Json(data);
 
             //return RedirectToAction("Index", new { folderName = folderName });
@@ -215,6 +229,11 @@ namespace Kooboo.CMS.Web.Areas.Contents.Controllers
             var data = new JsonResultData(ModelState);
             data.RunWithTry((resultData) =>
             {
+                if (!HasPermission(folderName))
+                {
+                    resultData.AddErrorMessage("you do not have permission to this folder".Localize());
+                    return;
+                }
                 FolderManager.Import(Repository, Request.Files[0].InputStream, folderName, @override);
                 data.RedirectUrl = @return;
             });
@@ -247,6 +266,10 @@ namespace Kooboo.CMS.Web.Areas.Contents.Controllers
             if (string.IsNullOrWhiteSpace(folderName))
             {
                 var folders = FolderManager.All(Repository, search, "");
+                if (Repository.StrictMediaPermission)
+                {
+                    folders = folders.Where(it => ServiceFactory.WorkflowManager.AvailableToMediaContent(it.FullName, User.Identity.Name));
+                }
                 return View(viewName, new MediaContentGrid
                 {
                     ChildFolders = folders
@@ -272,7 +295,10 @@ namespace Kooboo.CMS.Web.Areas.Contents.Controllers
                 }
 
                 contentQuery = contentQuery.SortBy(sortField, sortDir);
-
+                if (Repository.StrictMediaPermission)
+                {
+                    childFolders = childFolders.Where(it => ServiceFactory.WorkflowManager.AvailableToMediaContent(it.FullName, User.Identity.Name));
+                }
                 return View(viewName, new MediaContentGrid
                 {
                     ChildFolders = childFolders,
@@ -613,6 +639,11 @@ namespace Kooboo.CMS.Web.Areas.Contents.Controllers
             var data = new JsonResultData();
             data.RunWithTry((resultData) =>
             {
+                if (!HasPermission(folderName))
+                {
+                    resultData.AddErrorMessage("you do not have permission to this folder".Localize());
+                    return;
+                }
                 if (ModelState.IsValid)
                 {
                     MediaFolder parent = null;
@@ -640,6 +671,11 @@ namespace Kooboo.CMS.Web.Areas.Contents.Controllers
             var data = new JsonResultData(ModelState);
             data.RunWithTry((resultData) =>
             {
+                if (!HasPermission(folderName))
+                {
+                    resultData.AddErrorMessage("you do not have permission to this folder".Localize());
+                    return;
+                }
                 var oldFolder = new MediaFolder(Repository, folderName);
                 var @new = new MediaFolder(Repository, folderName);
                 @new.Name = name;
@@ -690,6 +726,15 @@ namespace Kooboo.CMS.Web.Areas.Contents.Controllers
             return Json(true, JsonRequestBehavior.AllowGet);
         }
         #endregion
+
+        private bool HasPermission(string folderName)
+        {
+            var userName = User.Identity.Name;
+            var isAdmin = Kooboo.CMS.Sites.Services.ServiceFactory.UserManager.IsAdministrator(userName);
+            return !Repository.StrictMediaPermission
+            || isAdmin
+            || ServiceFactory.WorkflowManager.AvailableToMediaContent(folderName, userName);
+        }
     }
 
     public class TextFileModel

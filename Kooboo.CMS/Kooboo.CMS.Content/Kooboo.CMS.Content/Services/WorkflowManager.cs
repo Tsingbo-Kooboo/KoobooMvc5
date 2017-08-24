@@ -296,6 +296,14 @@ namespace Kooboo.CMS.Content.Services
             return available;
         }
 
+        public virtual bool AvailableToMediaContent(string mediaFolder, string userName)
+        {
+            if (!Repository.Current.StrictMediaPermission || IsAdministrator(userName))
+            {
+                return true;
+            }
+            return HasMediaFolderPermission(mediaFolder, userName);
+        }
         protected virtual bool IsAdministrator(string userName)
         {
             return false;
@@ -310,6 +318,12 @@ namespace Kooboo.CMS.Content.Services
         {
             return false;
         }
+
+        protected virtual bool HasMediaFolderPermission(string mediaFolder, string userName)
+        {
+            return true;
+        }
+                
         #endregion
 
     }
