@@ -12,6 +12,7 @@ using System.Linq;
 using System.Text;
 using Kooboo.CMS.Content.Models;
 using Kooboo.CMS.Content.Persistence;
+using Kooboo.CMS.Common.Persistence.Non_Relational;
 
 namespace Kooboo.CMS.Content.Services
 {
@@ -31,6 +32,20 @@ namespace Kooboo.CMS.Content.Services
                 throw new NameIsReqiredException();
             }
             ((IMediaFolderProvider)Provider).Rename(@new, @old);
+        }
+
+        public override IEnumerable<FolderTreeNode<MediaFolder>> FolderTrees(Repository repository)
+        {
+            return All(repository, "").Where(it => ((MediaFolder)(object)it).AsActual() != null).Select(it => GetFolderTreeNode(it));
+        }
+
+        protected override FolderTreeNode<MediaFolder> GetFolderTreeNode(MediaFolder folder)
+        {
+            FolderTreeNode<MediaFolder> treeNode = new FolderTreeNode<MediaFolder>() { Folder = folder };
+            treeNode.Children = ChildFolders(folder)
+                .Where(it => it is MediaFolder)
+                .Select(it => GetFolderTreeNode(it));
+            return treeNode;
         }
     }
 }

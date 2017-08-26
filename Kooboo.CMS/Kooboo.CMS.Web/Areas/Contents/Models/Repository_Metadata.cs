@@ -60,6 +60,10 @@ namespace Kooboo.CMS.Web.Areas.Contents.Models
         [DisplayName("Strict content permission")]
         [Description("User can not manage the content when the folder permission is empty.")]
         public bool StrictContentPermission { get; set; }
+
+        [DisplayName("Strict media folder permission")]
+        public bool StrictMediaPermission { get; set; }
+
         [DisplayName("Show hidden folders")]
         [Description("Show the all folders including the hidden folders.")]
         public bool ShowHiddenFolders { get; set; }

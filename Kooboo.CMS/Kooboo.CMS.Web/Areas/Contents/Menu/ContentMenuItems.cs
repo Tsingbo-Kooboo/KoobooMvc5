@@ -22,6 +22,7 @@ namespace Kooboo.CMS.Web.Areas.Contents.Menu
         where T : Folder
     {
         protected abstract FolderManager<T> FolderManager { get; }
+
         protected virtual IEnumerable<MenuItem> GetContentFolderItems(Repository repository)
         {
             if (repository == null)
@@ -41,6 +42,7 @@ namespace Kooboo.CMS.Web.Areas.Contents.Menu
 
             return items;
         }
+
         protected virtual MenuItem CreateFolderMenuItem(T folder)
         {
             folder = folder.AsActual();
@@ -58,7 +60,6 @@ namespace Kooboo.CMS.Web.Areas.Contents.Menu
             }
             return null;
         }
-
 
         #region IMenuItemContainer Members
 

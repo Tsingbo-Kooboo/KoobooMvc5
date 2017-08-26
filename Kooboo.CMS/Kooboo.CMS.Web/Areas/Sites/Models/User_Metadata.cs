@@ -45,6 +45,18 @@ namespace Kooboo.CMS.Web.Areas.Sites.Models
         [DataSource(typeof(RolesDatasource))]
         public List<string> Roles { get; set; }
 
+        [DisplayName("Text folders")]
+        [DataSource(typeof(Contents.Models.DataSources.TextFoldersDataSource))]
+        [UIHint("Multiple_DropDownList")]
+        [Description("The text folders that this user have permission")]
+        public List<string> TextFolders { get; set; }
+
+        [DisplayName("Media folders")]
+        [UIHint("Multiple_DropDownList")]
+        [Description("The media folders that this user have permission")]
+        [DataSource(typeof(Kooboo.CMS.Web.Areas.Contents.Models.DataSources.MediaFoldersDataSource))]
+        public List<string> MediaFolders { get; set; }
+
         [UIHint("Dictionary")]
         public Dictionary<string, string> Profile { get; set; }
     }

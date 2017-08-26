@@ -490,12 +490,11 @@ namespace Kooboo.CMS.Web.Areas.Contents.Controllers
 
         private void SetPermissionData(TextFolder folder)
         {
-            var workflowManager = Kooboo.CMS.Content.Services.ServiceFactory.WorkflowManager;
+            var workflowManager = ServiceFactory.WorkflowManager;
 
             ViewData["AllowedEdit"] = workflowManager.AvailableToPublish(folder, User.Identity.Name);
 
             ViewData["AllowedView"] = workflowManager.AvailableViewContent(folder, User.Identity.Name);
-
         }
         #endregion
 

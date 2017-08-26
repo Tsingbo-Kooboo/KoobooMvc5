@@ -35,9 +35,7 @@ namespace Kooboo.Web.Mvc.Menu
                 menuItem.RouteValues["area"] = menuItem.Area;
             }
 
-
-            var isActive =
-               GetIsActive(menuItem, controllerContext);
+            var isActive = GetIsActive(menuItem, controllerContext);
             menuItem.IsCurrent = isActive;
 
             foreach (var sub in menuItem.Items)
@@ -51,12 +49,6 @@ namespace Kooboo.Web.Mvc.Menu
             }
 
             menuItem.IsActive = isActive;
-
-            //if (!this.IsActive)
-            //{
-            //    this.IsActive = DefaultActive(controllerContext);
-            //}
-
 
             if (menuItem.Visible != false)
             {

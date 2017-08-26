@@ -169,6 +169,12 @@ namespace Kooboo.CMS.Content.Models
         [DataMember]
         public bool StrictContentPermission { get; set; }
 
+        /// <summary>
+        /// 是否对媒体文件使用严格的权限模式，主要是针对增删改的控制
+        /// </summary>
+        [DataMember]
+        public bool StrictMediaPermission { get; set; }
+
         private bool _showHiddenFolders = false;
         [DataMember]
         public bool ShowHiddenFolders
