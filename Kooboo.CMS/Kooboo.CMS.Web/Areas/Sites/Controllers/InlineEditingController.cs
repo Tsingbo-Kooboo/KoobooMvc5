@@ -184,103 +184,129 @@ namespace Kooboo.CMS.Web.Areas.Sites.Controllers
                 #region anchorBar
                 blockMenuAnchorBar_js = new
                 {
-                    editBtnTitle = "Edit".Localize(),
-                    copyBtnTitle = "Copy".Localize(),
-                    deleteBtnTitle = "Delete".Localize(),
-                    publishBtnTitle = "Publish".Localize(),
-                    unpublishedTip = "This item has not been published yet.<br/>Click to publish this item.".Localize()
+                    editBtnTitle = "Edit".Localize("InlineEditor"),
+                    copyBtnTitle = "Copy".Localize("InlineEditor"),
+                    deleteBtnTitle = "Delete".Localize("InlineEditor"),
+                    publishBtnTitle = "Publish".Localize("InlineEditor"),
+                    unpublishedTip = "This item has not been published yet.<br/>Click to publish this item.".Localize("InlineEditor")
                 },
 
                 fieldMenuAnchorBar_js = new
                 {
-                    editBtnTitle = "Edit".Localize()
+                    editBtnTitle = "Edit".Localize("InlineEditor")
                 },
 
                 htmlMenuAnchorBar_js = new
                 {
-                    editBtnTitle = "Edit".Localize()
+                    editBtnTitle = "Edit".Localize("InlineEditor")
                 },
 
                 inlineEditorAnchorBar_js = new
                 {
-                    saveBtnTitle = "Save".Localize(),
-                    cancelBtnTitle = "Cancel".Localize(),
-                    fontFamilyTitle = "Font family".Localize(),
-                    fontSizeTitle = "Font size".Localize(),
-                    fontColorTitle = "Font color".Localize(),
-                    backColorTitle = "Background color".Localize()
+                    saveBtnTitle = "Save".Localize("InlineEditor"),
+                    cancelBtnTitle = "Cancel".Localize("InlineEditor"),
+                    fontFamilyTitle = "Font family".Localize("InlineEditor"),
+                    fontSizeTitle = "Font size".Localize("InlineEditor"),
+                    fontColorTitle = "Font color".Localize("InlineEditor"),
+                    backColorTitle = "Background color".Localize("InlineEditor")
                 },
                 #endregion
 
                 #region colorPicker
                 colorPicker_js = new
                 {
-                    caption = "Color picker".Localize(),
-                    description = "Select a color or insert a hex code value.".Localize(),
-                    originalColor = "Original:".Localize(),
-                    newColor = "New:".Localize(),
-                    hexValue = "Hex value:".Localize(),
-                    useNewColorBtn = "OK".Localize(),
-                    cancelBtn = "Cancel".Localize()
+                    caption = "Color picker".Localize("InlineEditor"),
+                    description = "Select a color or insert a hex code value.".Localize("InlineEditor"),
+                    originalColor = "Original:".Localize("InlineEditor"),
+                    newColor = "New:".Localize("InlineEditor"),
+                    hexValue = "Hex value:".Localize("InlineEditor"),
+                    useNewColorBtn = "OK".Localize("InlineEditor"),
+                    cancelBtn = "Cancel".Localize("InlineEditor")
                 },
                 #endregion
 
                 #region editor
                 sniffer_js = new
                 {
-                    widthFormatError = "Invalid input width".Localize(),
-                    heightFormatError = "Invalid input height".Localize(),
-                    imgSizeConfirm = "The image size is too big for this layout.\nAre you sure you want to use this size?".Localize(),
-                    deleteImgConfirm = "Are you sure you want to delete this image?".Localize(),
-                    unlinkConfirm = "Are you sure you want to delete the link?".Localize()
+                    widthFormatError = "Invalid input width".Localize("InlineEditor"),
+                    heightFormatError = "Invalid input height".Localize("InlineEditor"),
+                    imgSizeConfirm = "The image size is too big for this layout.\nAre you sure you want to use this size?".Localize("InlineEditor"),
+                    deleteImgConfirm = "Are you sure you want to delete this image?".Localize("InlineEditor"),
+                    unlinkConfirm = "Are you sure you want to delete the link?".Localize("InlineEditor")
                 },
 
                 toolbarButton_js = new
                 {
-                    bold = "Bold".Localize(),
-                    italic = "Italic".Localize(),
-                    underline = "Underline".Localize(),
-                    alignLeft = "Align left".Localize(),
-                    alignCenter = "Align center".Localize(),
-                    alignRight = "Align right".Localize(),
-                    alignJustify = "Align justify".Localize(),
-                    numberList = "Number list".Localize(),
-                    bulletList = "Bullet list".Localize(),
-                    indent = "Increase indent".Localize(),
-                    outdent = "Decrease indent".Localize(),
-                    insertImage = "Insert image".Localize(),
-                    insertLink = "Insert link".Localize(),
-                    editSource = "Edit source".Localize(),
-                    redo = "Redo".Localize(),
-                    undo = "Undo".Localize(),
-                    unformat = "Remove format".Localize(),
-                    horizontalRuler = "Insert horizontal ruler".Localize(),
-                    pastePlainText = "Paste with plain text".Localize()
+                    bold = "Bold".Localize("InlineEditor"),
+                    italic = "Italic".Localize("InlineEditor"),
+                    underline = "Underline".Localize("InlineEditor"),
+                    alignLeft = "Align left".Localize("InlineEditor"),
+                    alignCenter = "Align center".Localize("InlineEditor"),
+                    alignRight = "Align right".Localize("InlineEditor"),
+                    alignJustify = "Align justify".Localize("InlineEditor"),
+                    numberList = "Number list".Localize("InlineEditor"),
+                    bulletList = "Bullet list".Localize("InlineEditor"),
+                    indent = "Increase indent".Localize("InlineEditor"),
+                    outdent = "Decrease indent".Localize("InlineEditor"),
+                    insertImage = "Insert image".Localize("InlineEditor"),
+                    insertLink = "Insert link".Localize("InlineEditor"),
+                    editSource = "Edit source".Localize("InlineEditor"),
+                    redo = "Redo".Localize("InlineEditor"),
+                    undo = "Undo".Localize("InlineEditor"),
+                    unformat = "Remove format".Localize("InlineEditor"),
+                    horizontalRuler = "Insert horizontal ruler".Localize("InlineEditor"),
+                    pastePlainText = "Paste with plain text".Localize("InlineEditor")
                 },
                 #endregion
 
                 #region inline
                 block_js = new
                 {
-                    confirmDel = "Are you sure you want to delete this item?".Localize(),
-                    networkError = "Network error, the action has been cancelled.".Localize(),
-                    copying = "Copying...".Localize(),
-                    deleting = "Deleting...".Localize(),
-                    publishing = "Publishing...".Localize(),
-                    copySuccess = "Copy successfully.".Localize(),
-                    deleteSuccess = "Delete successfully.".Localize(),
-                    publishSuccess = "Publish successfully.".Localize(),
-                    copyFailure = "The attempt to copy has failed.".Localize(),
-                    deleteFailure = "The attempt to delete has failed.".Localize(),
-                    publishFailure = "The attempt to publish has failed.".Localize()
+                    confirmDel = "Are you sure you want to delete this item?".Localize("InlineEditor"),
+                    networkError = "Network error, the action has been cancelled.".Localize("InlineEditor"),
+                    copying = "Copying...".Localize("InlineEditor"),
+                    deleting = "Deleting...".Localize("InlineEditor"),
+                    publishing = "Publishing...".Localize("InlineEditor"),
+                    copySuccess = "Copy successfully.".Localize("InlineEditor"),
+                    deleteSuccess = "Delete successfully.".Localize("InlineEditor"),
+                    publishSuccess = "Publish successfully.".Localize("InlineEditor"),
+                    copyFailure = "The attempt to copy has failed.".Localize("InlineEditor"),
+                    deleteFailure = "The attempt to delete has failed.".Localize("InlineEditor"),
+                    publishFailure = "The attempt to publish has failed.".Localize("InlineEditor")
                 },
 
                 field_js = new
                 {
-                    networkError = "Network error, the action has been cancelled.".Localize(),
-                    saving = "Saving...".Localize(),
-                    saveSuccess = "Save successfully.".Localize(),
-                    saveFailure = "The attempt to save has failed.".Localize()
+                    networkError = "Network error, the action has been cancelled.".Localize("InlineEditor"),
+                    saving = "Saving...".Localize("InlineEditor"),
+                    saveSuccess = "Save successfully.".Localize("InlineEditor"),
+                    saveFailure = "The attempt to save has failed.".Localize("InlineEditor")
+                },
+                blockAnchor_js = new
+                {
+                    editBtnTitle = "edit".Localize("InlineEditor"),
+                    copyBtnTitle = "copy".Localize("InlineEditor"),
+                    deleteBtnTitle = "delete".Localize("InlineEditor"),
+                    publishBtnTitle = "publish".Localize("InlineEditor"),
+                    unpublishedTip = "This item has not been published yet.<br/>Click to publish this item.".Localize("InlineEditor")
+                },
+                editorAnchor_js = new
+                {
+                    saveBtnTitle = "save".Localize("InlineEditor"),
+                    cancelBtnTitle = "cancel".Localize("InlineEditor"),
+                    fontFamilyTitle = "font family".Localize("InlineEditor"),
+                    fontSizeTitle = "font size".Localize("InlineEditor"),
+                    headingTitle = "heading".Localize("InlineEditor"),
+                    fontColorTitle = "font color".Localize("InlineEditor"),
+                    backColorTitle = "background color".Localize("InlineEditor")
+                },
+                fieldAnchor_js = new
+                {
+                    editBtnTitle = "edit".Localize("InlineEditor")
+                },
+                htmlAnchor_js = new
+                {
+                    editBtnTitle = "edit".Localize("InlineEditor")
                 },
                 #endregion
 
@@ -288,42 +314,78 @@ namespace Kooboo.CMS.Web.Areas.Sites.Controllers
 
                 imagePanel_js = new
                 {
-                    title = "Image options".Localize(),
-                    imgLibTitle = "Image library".Localize(),
-                    attrURL = "URL".Localize(),
-                    attrALT = "ALT".Localize(),
-                    attrWidth = "Width".Localize(),
-                    attrHeight = "Height".Localize(),
-                    btnOk = "Save".Localize(),
-                    btnCancel = "Cancel".Localize(),
-                    btnRemove = "Remove".Localize(),
-                    btnLibrary = "Library".Localize(),
-                    btnView = "View".Localize(),
-                    attrLinkHref = "LINK".Localize(),
-                    emptyUrlMsg = "Please input the url.".Localize()
+                    title = "Image options".Localize("InlineEditor"),
+                    imgLibTitle = "Image library".Localize("InlineEditor"),
+                    attrURL = "URL".Localize("InlineEditor"),
+                    attrALT = "ALT".Localize("InlineEditor"),
+                    attrWidth = "Width".Localize("InlineEditor"),
+                    attrHeight = "Height".Localize("InlineEditor"),
+                    btnOk = "Save".Localize("InlineEditor"),
+                    btnCancel = "Cancel".Localize("InlineEditor"),
+                    btnRemove = "Remove".Localize("InlineEditor"),
+                    btnLibrary = "Library".Localize("InlineEditor"),
+                    btnView = "View".Localize("InlineEditor"),
+                    attrLinkHref = "LINK".Localize("InlineEditor"),
+                    emptyUrlMsg = "Please input the url.".Localize("InlineEditor")
                 },
 
                 linkPanel_js = new
                 {
-                    headTitle = "Link panel".Localize(),
-                    btnOk = "OK".Localize(),
-                    btnCancel = "Cancel".Localize(),
-                    btnUnlink = "Unlink".Localize(),
-                    lblText = "Text:".Localize(),
-                    lblUrl = "Url:".Localize(),
-                    lblTitle = "Title:".Localize(),
-                    lblLinkType = "Link type:".Localize(),
-                    lblNewWin = "Open in a new window".Localize(),
-                    urlEmptyMsg = "Please input the url.".Localize()
+                    headTitle = "Link panel".Localize("InlineEditor"),
+                    btnOk = "OK".Localize("InlineEditor"),
+                    btnCancel = "Cancel".Localize("InlineEditor"),
+                    btnUnlink = "Unlink".Localize("InlineEditor"),
+                    lblText = "Text:".Localize("InlineEditor"),
+                    lblUrl = "Url:".Localize("InlineEditor"),
+                    lblTitle = "Title:".Localize("InlineEditor"),
+                    lblLinkType = "Link type:".Localize("InlineEditor"),
+                    lblNewWin = "Open in a new window".Localize("InlineEditor"),
+                    urlEmptyMsg = "Please input the url.".Localize("InlineEditor")
                 },
 
                 textPanel_js = new
                 {
-                    headTitle = "Text panel".Localize(),
-                    btnPreview = "Preview".Localize(),
-                    btnReset = "Reset".Localize(),
-                    btnOk = "OK".Localize(),
-                    btnCancel = "Cancel".Localize()
+                    headTitle = "Text panel".Localize("InlineEditor"),
+                    btnPreview = "Preview".Localize("InlineEditor"),
+                    btnReset = "Reset".Localize("InlineEditor"),
+                    btnOk = "OK".Localize("InlineEditor"),
+                    btnCancel = "Cancel".Localize("InlineEditor")
+                },
+                #endregion
+
+                #region positionAnchor
+                positionAnchor_js = new
+                {
+                    addViewTitle = "Add a view".Localize("InlineEditor"),
+                    addModuleTitle = "Add a module".Localize("InlineEditor"),
+                    addFolderTitle = "Add a data folder".Localize("InlineEditor"),
+                    addHtmlTitle = "Add HTML".Localize("InlineEditor"),
+                    addHtmlBlockTitle = "Add a HTML block".Localize("InlineEditor")
+                },
+                #endregion
+
+                #region design
+                design_js = new
+                {
+                    removeConfirm = "Are you sure you want to remove?".Localize("InlineEditor"),
+                    // add
+                    addViewTitle = "Add a view".Localize("InlineEditor"),
+                    addHtmlTitle = "Add HTML".Localize("InlineEditor"),
+                    addModuleTitle = "Add a module".Localize("InlineEditor"),
+                    addFolderTitle = "Add a data folder".Localize("InlineEditor"),
+                    addHtmlBlockTitle = "Add a HTML block".Localize("InlineEditor"),
+                    // edit
+                    editViewTitle = "Edit view".Localize("InlineEditor"),
+                    editHtmlTitle = "Edit HTML".Localize("InlineEditor"),
+                    editModuleTitle = "Edit module".Localize("InlineEditor"),
+                    editFolderTitle = "Edit data folder".Localize("InlineEditor"),
+                    editHtmlBlockTitle = "Edit HTML block".Localize("InlineEditor"),
+                    // btn
+                    editBtnTitle = "Edit".Localize("InlineEditor"),
+                    removeBtnTitle = "Remove".Localize("InlineEditor"),
+                    expandBtnTitle = "Expand".Localize("InlineEditor"),
+                    closeBtnTitle = "Close".Localize("InlineEditor"),
+                    moveBtnTitle = "Move".Localize("InlineEditor")
                 }
                 #endregion
             }).ToJSON();
