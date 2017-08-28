@@ -62,6 +62,7 @@ namespace Kooboo.CMS.Web.Areas.Contents.Models
         public bool StrictContentPermission { get; set; }
 
         [DisplayName("Strict media folder permission")]
+        [Description("Precise control of media folder permissions.")]
         public bool StrictMediaPermission { get; set; }
 
         [DisplayName("Show hidden folders")]
