@@ -22,19 +22,6 @@ namespace Kooboo.CMS.Content.Persistence.Default
     [Kooboo.CMS.Common.Runtime.Dependency.Dependency(typeof(IProvider<MediaFolder>))]
     public class MediaFolderProvider : FolderProvider<MediaFolder>, IMediaFolderProvider
     {
-        #region Get
-        public override MediaFolder Get(MediaFolder dummy)
-        {
-            FolderPath path = new FolderPath(dummy);
-            if (!path.Exists())
-            {
-                return null;
-            }
-            dummy.IsDummy = false;
-            return dummy;
-        }
-        #endregion
-
         #region GetLocker
         static System.Threading.ReaderWriterLockSlim locker = new System.Threading.ReaderWriterLockSlim();
         protected override System.Threading.ReaderWriterLockSlim GetLocker()

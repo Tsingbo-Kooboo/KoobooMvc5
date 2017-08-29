@@ -8,6 +8,7 @@
 #endregion
 using Kooboo.CMS.Common;
 using Kooboo.CMS.Common.Persistence.Non_Relational;
+using Kooboo.CMS.Content.EventBus.Content;
 using Kooboo.CMS.Content.Models;
 using Kooboo.CMS.Content.Services;
 using Kooboo.CMS.Sites;
@@ -72,31 +73,34 @@ namespace Kooboo.CMS.Web.Areas.Contents.Controllers
             return Json(data);
         }
 
-
+        #region Edit
+        [Kooboo.CMS.Web.Authorizations.Authorization(AreaName = "Contents", Group = "", Name = "Folder", Order = 99)]
+        public virtual ActionResult Edit(string UUID)
+        {
+            var model = FolderManager.Get(Repository, UUID).AsActual();
+            return View(model);
+        }
+        [Kooboo.CMS.Web.Authorizations.Authorization(AreaName = "Contents", Group = "", Name = "Folder", Order = 99)]
         [HttpPost]
-        public virtual ActionResult Edit(string folderName)
+        public virtual ActionResult Edit(MediaFolder model, string UUID, string successController, string @return)
         {
             var data = new JsonResultData(ModelState);
             if (ModelState.IsValid)
             {
                 data.RunWithTry((resultData) =>
                 {
-                    var old = FolderManager.Get(Repository, folderName);
-                    var @new = FolderManager.Get(Repository, folderName);
-                    TryUpdateModel(@new);
-
-                    FolderManager.Update(Repository, @new, old);
-
-                    data.Model = new
-                    {
-                        folderName = @new.FullName
-                    };
+                    UUID = string.IsNullOrEmpty(UUID) ? model.FullName : UUID;
+                    var old = FolderManager.Get(Repository, UUID);
+                    model.Parent = old.Parent;
+                    //TextFolderEvent.Fire(ContentAction.PreUpdate, model);
+                    FolderManager.Update(Repository, model, old);
+                    //TextFolderEvent.Fire(ContentAction.Update, model);
+                    resultData.RedirectUrl = @return;
                 });
             }
-
             return Json(data);
         }
-
+        #endregion
 
         public virtual ActionResult Delete(string selectedFolders)
         {

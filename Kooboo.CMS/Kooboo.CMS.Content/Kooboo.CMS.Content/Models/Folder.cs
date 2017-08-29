@@ -23,7 +23,7 @@ namespace Kooboo.CMS.Content.Models
     /// 
     /// </summary>
     [DataContract(Name = "Folder")]
-    [KnownTypeAttribute(typeof(Folder))]
+    [KnownType(typeof(Folder))]
     public partial class Folder : IRepositoryElement
     {
         /// <summary>
@@ -97,8 +97,6 @@ namespace Kooboo.CMS.Content.Models
         public DateTime UtcCreationDate { get; set; }
         [DataMember(Order = 7)]
         public string UserId { get; set; }
-
-
 
         private string[] namePaths = null;
         [DataMember(Order = 8)]

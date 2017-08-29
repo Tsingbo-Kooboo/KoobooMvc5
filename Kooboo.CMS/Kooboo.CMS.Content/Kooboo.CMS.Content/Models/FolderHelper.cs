@@ -49,7 +49,7 @@ namespace Kooboo.CMS.Content.Models
             where T : Folder
         {
             var names = SplitFullName(fullName);
-            if (typeof(T) == typeof(CMS.Content.Models.TextFolder))
+            if (typeof(T) == typeof(TextFolder))
             {
                 return (T)((object)new TextFolder(repository, names));
             }
@@ -57,9 +57,6 @@ namespace Kooboo.CMS.Content.Models
             {
                 return (T)((object)new MediaFolder(repository, names));
             }
-
-
-
         }
     }
 }

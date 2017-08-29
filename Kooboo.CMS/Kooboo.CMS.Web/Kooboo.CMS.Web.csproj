@@ -175,6 +175,7 @@
     </Compile>
     <Compile Include="Areas\Contents\Models\CreateRepositoryModel.cs" />
     <Compile Include="Areas\Contents\Models\DataSources\ControlTypesDataSource.cs" />
+    <Compile Include="Areas\Contents\Models\DataSources\FileExtensionsDataSource.cs" />
     <Compile Include="Areas\Contents\Models\DataSources\MediaFoldersDataSource.cs" />
     <Compile Include="Areas\Contents\Models\DataSources\OrderDirectionsDataSource.cs" />
     <Compile Include="Areas\Contents\Models\DataSources\RepositoriesDataSource.cs" />
@@ -196,6 +197,7 @@
     <Compile Include="Areas\Contents\Models\ImportRepositoryModel.cs" />
     <Compile Include="Areas\Contents\Models\IndexSummaryModel.cs" />
     <Compile Include="Areas\Contents\Models\MediaContentMetadata_Metadata.cs" />
+    <Compile Include="Areas\Contents\Models\MediaFolder_Metadata.cs" />
     <Compile Include="Areas\Contents\Models\MoveMediaContent.cs" />
     <Compile Include="Areas\Contents\Models\SearchSetting_Metadata.cs" />
     <Compile Include="Areas\Contents\Models\FormModel.cs" />
@@ -2637,6 +2639,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\Master.Style.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Contents\Views\MediaFolder\Edit.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
