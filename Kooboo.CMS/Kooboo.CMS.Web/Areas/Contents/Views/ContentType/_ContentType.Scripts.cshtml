@@ -117,8 +117,8 @@
             };
             // self.ShowCustomSettings = ko.observable(false);
             self.ShowSelectionValueContents = ko.computed(function() {
-                var controlTypes = ['DropDownList', 'CheckBoxList', 'RadioList'];
-                return _.indexOf(controlTypes,self.Column().ControlType()) >= 0;
+                var controlType = (self.Column().ControlType() || '').toLowerCase();
+                return controlType.indexOf('list') >= 0 || controlType.indexOf('dropdown') >= 0 ;
             });
             self.AddSelectionItem = function() {
                 var newSelectionItem = ko.mapping.fromJS(metadata.rawEmptySelectListItem);
