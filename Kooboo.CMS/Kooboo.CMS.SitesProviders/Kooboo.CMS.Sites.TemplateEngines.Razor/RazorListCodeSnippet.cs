@@ -36,11 +36,11 @@ namespace Kooboo.CMS.Sites.TemplateEngines.Razor
 </ul>";
                 var titleField = schema.GetSummarizeColumn();
                 var editItem = "";
-                var linkHtml = string.Format("<a class='title' href='@Url.FrontUrl().PageUrl(\"{1}/detail\",new {{ UserKey = item.UserKey}})'>@item.{0}</a>", titleField.Name, schema.Name);
+                var linkHtml = string.Format("<a class=\"title\" href=\"@Url.FrontUrl().PageUrl(\"{1}/detail\",new {{ UserKey = item.UserKey}})\">@item.{0}</a>", titleField.Name, schema.Name);
                 if (inlineEdit)
                 {
-                    editItem = "  @ViewHelper.Edit(item)";
-                    linkHtml = string.Format("<a class='title' href='@Url.FrontUrl().PageUrl(\"{1}/detail\",new {{ UserKey = item.UserKey}})' @ViewHelper.Edit(item,\"{0}\")>@item.{0}</a>", titleField.Name, schema.Name);
+                    editItem = "  @ViewHelper.EditItemAttributes(item)";
+                    linkHtml = string.Format("<a class=\"title\" href=\"@Url.FrontUrl().PageUrl(\"{1}/detail\",new {{ UserKey = item.UserKey}})\" @ViewHelper.EditFieldAttributes(item,\"{0}\")>@item.{0}</a>", titleField.Name, schema.Name);
                 }
 
 
