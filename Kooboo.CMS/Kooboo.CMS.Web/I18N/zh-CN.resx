@@ -4242,118 +4242,46 @@
     <value>内容文件夹:</value>
   </data>
   <data name="Users:" xml:space="preserve">
-    <value>Users:</value>
+    <value>用户:</value>
   </data>
   <data name="Connects:" xml:space="preserve">
     <value>会员连接:</value>
   </data>
-  <data name="用户名" xml:space="preserve">
-    <value>用户名</value>
-  </data>
-  <data name="邮件" xml:space="preserve">
-    <value>邮件</value>
-  </data>
-  <data name="第三方平台登录账号的类型" xml:space="preserve">
-    <value>第三方平台登录账号的类型</value>
-  </data>
-  <data name="审核通过" xml:space="preserve">
-    <value>审核通过</value>
-  </data>
-  <data name="被锁定" xml:space="preserve">
-    <value>被锁定</value>
-  </data>
-  <data name="登陆日期" xml:space="preserve">
-    <value>登陆日期</value>
-  </data>
-  <data name="名称" xml:space="preserve">
-    <value>名称</value>
-  </data>
-  <data name="显示名称" xml:space="preserve">
-    <value>显示名称</value>
-  </data>
-  <data name="App Id编号" xml:space="preserve">
-    <value>App Id编号</value>
-  </data>
-  <data name="App 密钥" xml:space="preserve">
-    <value>App 密钥</value>
-  </data>
-  <data name="站点" xml:space="preserve">
-    <value>站点</value>
-  </data>
-  <data name="最新修改日期" xml:space="preserve">
-    <value>最新修改日期</value>
-  </data>
-  <data name="编辑者" xml:space="preserve">
-    <value>编辑者</value>
-  </data>
   <data name="Members:" xml:space="preserve">
     <value>成员:</value>
-  </data>
-  <data name="网站进入位置" xml:space="preserve">
-    <value>网站进入位置</value>
-  </data>
-  <data name="规则名" xml:space="preserve">
-    <value>规则名</value>
   </data>
   <data name="重定向类型" xml:space="preserve">
     <value>重定向类型</value>
   </data>
   <data name="The Output lower case page urls field is required." xml:space="preserve">
-    <value>The Output lower case page urls field is required.</value>
+    <value>输出小写页面URL地址 字段是必需的。</value>
   </data>
   <data name="The Remove trailing slashes in requested urls field is required." xml:space="preserve">
-    <value>The Remove trailing slashes in requested urls field is required.</value>
+    <value>请求的URL中删除结尾的斜线 字段是必需的。</value>
   </data>
   <data name="The Add 'www.' prefix to naked domain field is required." xml:space="preserve">
-    <value>The Add 'www.' prefix to naked domain field is required.</value>
+    <value>添加 "www" 前缀到裸域 字段是必需的。</value>
   </data>
   <data name="The field Encrypt key must be a string with a minimum length of 8 and a maximum length of 8." xml:space="preserve">
-    <value>The field Encrypt key must be a string with a minimum length of 8 and a maximum length of 8.</value>
+    <value>字段加密密钥必须是一个最小长度为8的字符串, 最大长度为8。</value>
   </data>
   <data name="The Turn on submission api field is required." xml:space="preserve">
-    <value>The Turn on submission api field is required.</value>
-  </data>
-  <data name="状态码" xml:space="preserve">
-    <value>状态码</value>
-  </data>
-  <data name="重定向 URL" xml:space="preserve">
-    <value>重定向 URL</value>
-  </data>
-  <data name="显示错误路径" xml:space="preserve">
-    <value>显示错误路径</value>
+    <value>启用提交 api 字段是必需的。</value>
   </data>
   <data name="The field Redirect type is invalid." xml:space="preserve">
-    <value>The field Redirect type is invalid.</value>
+    <value>重定向类型 字段无效。</value>
   </data>
   <data name="The Status code field is required." xml:space="preserve">
-    <value>The Status code field is required.</value>
+    <value>状态码 字段是必需的。</value>
   </data>
   <data name="The Redirect type field is required." xml:space="preserve">
-    <value>The Redirect type field is required.</value>
+    <value>重定向类型 字段是必需的。</value>
   </data>
   <data name="The Show error path field is required." xml:space="preserve">
-    <value>The Show error path field is required.</value>
+    <value>显示错误路径 字段是必须的。</value>
   </data>
-  <data name="输入 URL地址/模式" xml:space="preserve">
-    <value>输入 URL地址/模式</value>
-  </data>
-  <data name="输入的域" xml:space="preserve">
-    <value>输入的域</value>
-  </data>
-  <data name="输出 URL地址/模式" xml:space="preserve">
-    <value>输出 URL地址/模式</value>
-  </data>
-  <data name="输出的域" xml:space="preserve">
-    <value>输出的域</value>
-  </data>
-  <data name="正则表达式" xml:space="preserve">
-    <value>正则表达式</value>
-  </data>
-  <data name="进入页面" xml:space="preserve">
-    <value>进入页面</value>
-  </data>
-  <data name="目的页面" xml:space="preserve">
-    <value>目的页面</value>
+  <data name="Strict media folder permission" xml:space="preserve">
+    <value>精确媒体文件夹权限</value>
   </data>
   <data name="Report" xml:space="preserve">
     <value>Report</value>
