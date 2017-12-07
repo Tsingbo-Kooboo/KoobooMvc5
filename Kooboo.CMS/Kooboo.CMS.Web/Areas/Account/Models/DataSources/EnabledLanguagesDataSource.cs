@@ -19,12 +19,16 @@ namespace Kooboo.CMS.Web.Areas.Account.Models.DataSources
     {
         public IEnumerable<SelectListItem> GetSelectListItems(System.Web.Routing.RequestContext requestContext, string filter = null)
         {
-            return Kooboo.Globalization.ElementRepository.DefaultRepository.EnabledLanguages().Select(it => new SelectListItem()
-            {
-                Text = it.NativeName,
-                Value = it.Name,
-                Selected = it.Name == System.Globalization.CultureInfo.CurrentUICulture.Name
-            });
+            return Kooboo.Globalization.ElementRepository
+                .DefaultRepository
+                .EnabledLanguages()
+                .Distinct()
+                .Select(it => new SelectListItem()
+                {
+                    Text = it.NativeName,
+                    Value = it.Name,
+                    Selected = it.Name == System.Globalization.CultureInfo.CurrentUICulture.Name
+                });
         }
     }
 }

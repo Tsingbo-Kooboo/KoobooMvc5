@@ -29,7 +29,14 @@ namespace Kooboo.CMS.Web.Areas.Contents.Menu
 
                 if (string.Equals(menuItem.Controller, "MediaContent", StringComparison.OrdinalIgnoreCase))
                 {
-                    return base.GetIsVisible(menuItem, controllerContext);
+                    if (!Repository.Current.StrictMediaPermission)
+                    {
+                        return true;
+                    }
+                    // Media permission
+                    var userName = controllerContext.HttpContext.User.Identity.Name;
+
+                    return ServiceFactory.WorkflowManager.AvailableToMediaContent(folderName, userName);
                 }
                 var textFolder = new TextFolder(Repository.Current, folderName).AsActual();
 
@@ -38,15 +45,14 @@ namespace Kooboo.CMS.Web.Areas.Contents.Menu
                     return false;
                 }
 
-                var allowedView = Kooboo.CMS.Content.Services.ServiceFactory.WorkflowManager
+                var allowedView = ServiceFactory.WorkflowManager
                     .AvailableViewContent(textFolder, controllerContext.HttpContext.User.Identity.Name);
-
-
 
                 return allowedView &&
                     base.GetIsVisible(menuItem, controllerContext);
 
             }
+
             protected override bool GetIsActive(MenuItem menuItem, ControllerContext controllerContext)
             {
                 var baseActive = base.GetIsActive(menuItem, controllerContext);
@@ -64,6 +70,7 @@ namespace Kooboo.CMS.Web.Areas.Contents.Menu
 
             }
         }
+
         public FolderMenuItem(Folder folder)
         {
             base.Visible = true;
@@ -89,14 +96,14 @@ namespace Kooboo.CMS.Web.Areas.Contents.Menu
                 else
                 {
                     base.Controller = "TextContent";
-                    base.Action = "index";
+                    base.Action = "Index";
                 }
                 cssClass = "TextFolder";
             }
             else if (folder is MediaFolder)
             {
                 base.Controller = "MediaContent";
-                base.Action = "index";
+                base.Action = "Index";
 
                 cssClass = "TextFolder";
             }
@@ -105,10 +112,7 @@ namespace Kooboo.CMS.Web.Areas.Contents.Menu
 
             this.Initializer = new FolderMenuItemInitializer();
         }
-        //protected override bool DefaultActive(ControllerContext controllContext)
-        //{
-        //    return false;
-        //}
+
         public override bool Localizable
         {
             get

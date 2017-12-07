@@ -275,7 +275,7 @@ namespace Kooboo.CMS.Content.Services
                 }
             }
 
-            return allowed;
+            return allowed || HasFolderPermission(textFolder, userName);
         }
 
         public virtual bool AvailableToEditContent(TextContent content, string userName)
@@ -296,15 +296,34 @@ namespace Kooboo.CMS.Content.Services
             return available;
         }
 
+        public virtual bool AvailableToMediaContent(string mediaFolder, string userName)
+        {
+            if (!Repository.Current.StrictMediaPermission || IsAdministrator(userName))
+            {
+                return true;
+            }
+            return HasMediaFolderPermission(mediaFolder, userName);
+        }
         protected virtual bool IsAdministrator(string userName)
         {
             return false;
         }
+
         protected virtual string[] GetRoles(string userName)
         {
             return new string[0];
         }
 
+        protected virtual bool HasFolderPermission(TextFolder textFolder, string userName)
+        {
+            return false;
+        }
+
+        protected virtual bool HasMediaFolderPermission(string mediaFolder, string userName)
+        {
+            return true;
+        }
+                
         #endregion
 
     }

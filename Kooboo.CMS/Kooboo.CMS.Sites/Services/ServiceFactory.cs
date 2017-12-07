@@ -27,10 +27,12 @@ namespace Kooboo.CMS.Sites.Services
             : base(workflowProvider, pendingWorkflowItemProvider, workflowHistoryProvider)
         {
         }
+
         protected override bool IsAdministrator(string userName)
         {
             return ServiceFactory.UserManager.IsAdministrator(userName);
         }
+
         protected override string[] GetRoles(string userName)
         {
             if (Site.Current == null)
@@ -46,6 +48,26 @@ namespace Kooboo.CMS.Sites.Services
             {
                 return user.Roles.ToArray();
             }
+        }
+
+        protected override bool HasFolderPermission(TextFolder textFolder, string userName)
+        {
+            var user = ServiceFactory.UserManager.Get(Site.Current, userName);
+            if (user == null || user.TextFolders == null)
+            {
+                return false;
+            }
+            return user.TextFolders.Any(it => it.EqualsOrNullEmpty(textFolder.FullName, StringComparison.OrdinalIgnoreCase));
+        }
+
+        protected override bool HasMediaFolderPermission(string mediaFolder, string userName)
+        {
+            var user = ServiceFactory.UserManager.Get(Site.Current, userName);
+            if (user == null || user.MediaFolders == null)
+            {
+                return false;
+            }
+            return user.MediaFolders.Any(it => it.EqualsOrNullEmpty(mediaFolder, StringComparison.OrdinalIgnoreCase));
         }
     }
     public class SendingSettingManager : Kooboo.CMS.Content.Services.SendingSettingManager

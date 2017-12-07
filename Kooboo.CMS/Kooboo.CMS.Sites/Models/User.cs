@@ -17,9 +17,9 @@ using Kooboo.Collections;
 
 namespace Kooboo.CMS.Sites.Models
 {
-    
+
     [DataContract]
-    public partial class User 
+    public partial class User
     {
         public class DataFilePath
         {
@@ -38,7 +38,11 @@ namespace Kooboo.CMS.Sites.Models
         public string UserName { get; set; }
         [DataMember(Order = 3)]
         public List<string> Roles { get; set; }
+        [DataMember(Order = 4)]
+        public List<string> TextFolders { get; set; }
         [DataMember(Order = 5)]
+        public List<string> MediaFolders { get; set; }
+        [DataMember(Order = 6)]
         public Dictionary<string, string> Profile { get; set; }
     }
 

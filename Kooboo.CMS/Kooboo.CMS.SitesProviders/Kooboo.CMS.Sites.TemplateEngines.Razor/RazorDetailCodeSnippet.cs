@@ -39,7 +39,7 @@ namespace Kooboo.CMS.Sites.TemplateEngines.Razor
         </div>
 ";
                 var titleField = schema.GetSummarizeColumn().Name;
-                var editField = " @ViewHelper.Edit(ViewBag.{0},\"{1}\")";
+                var editField = " @ViewHelper.EditFieldAttributes(ViewBag.{0},\"{1}\")";
                 schema = schema.AsActual();
                 StringBuilder sb = new StringBuilder();
                 foreach (var column in schema.Columns)

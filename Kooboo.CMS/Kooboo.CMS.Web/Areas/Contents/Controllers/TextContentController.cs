@@ -109,6 +109,12 @@ namespace Kooboo.CMS.Web.Areas.Contents.Controllers
             string categoryPrefix = "category:";
             ViewData["CategorySearchPrefix"] = categoryPrefix;
 
+            ViewData["SameSchemaFolders"] = TextFolderManager.AllFoldersFlattened(Repository)
+                .Select(it => it.AsActual())
+                .Where(it => !it.FullName.EqualsOrNullEmpty(textFolder.FullName, StringComparison.OrdinalIgnoreCase) &&
+                it.SchemaName.EqualsOrNullEmpty(textFolder.SchemaName, StringComparison.OrdinalIgnoreCase))
+                .OrderBy(it => it.FullName);
+
             SetPermissionData(textFolder);
 
             IEnumerable<TextFolder> childFolders = new TextFolder[0];
@@ -484,12 +490,11 @@ namespace Kooboo.CMS.Web.Areas.Contents.Controllers
 
         private void SetPermissionData(TextFolder folder)
         {
-            var workflowManager = Kooboo.CMS.Content.Services.ServiceFactory.WorkflowManager;
+            var workflowManager = ServiceFactory.WorkflowManager;
 
             ViewData["AllowedEdit"] = workflowManager.AvailableToPublish(folder, User.Identity.Name);
 
             ViewData["AllowedView"] = workflowManager.AvailableViewContent(folder, User.Identity.Name);
-
         }
         #endregion
 
@@ -910,6 +915,44 @@ namespace Kooboo.CMS.Web.Areas.Contents.Controllers
                 resultData.ReloadPage = true;
             });
             return Json(data);
+        }
+
+        [Kooboo.CMS.Web.Authorizations.Authorization(AreaName = "Contents", Group = "", Name = "Content", Order = 1)]
+        public virtual ActionResult BatchMoveContent(string folderName, string targetFolder, string[] docs)
+        {
+            var data = new JsonResultData(ModelState);
+
+            data.RunWithTry((resultData) =>
+            {
+                if (string.IsNullOrWhiteSpace(targetFolder))
+                {
+                    resultData.AddErrorMessage("target TextFolder invalid".Localize());
+                    return;
+                }
+                var targetFolderEntry = new TextFolder(Repository, targetFolder).AsActual();
+                if (targetFolderEntry == null)
+                {
+                    resultData.AddErrorMessage("target TextFolder invalid".Localize());
+                    return;
+                }
+                TextFolder textFolder = new TextFolder(Repository, folderName).AsActual();
+                var schema = textFolder.GetSchema().AsActual();
+
+                if (docs != null)
+                {
+                    foreach (var doc in docs)
+                    {
+                        if (string.IsNullOrEmpty(doc)) continue;
+
+                        TextContentManager.Update(Repository, schema, doc, new string[] { "FolderName" },
+                             new object[] { targetFolder }, User.Identity.Name);
+                    }
+
+                }
+                resultData.ReloadPage = true;
+            });
+            return Json(data);
+
         }
         #endregion
 
