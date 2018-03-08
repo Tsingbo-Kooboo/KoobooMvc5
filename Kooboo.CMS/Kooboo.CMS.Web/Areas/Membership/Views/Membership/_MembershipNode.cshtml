@@ -10,7 +10,7 @@
     var connectManager = EngineContext.Current.Resolve<MembershipConnectManager>();
     var siteManager = EngineContext.Current.Resolve<SiteManager>();
 
-    var users = userManager.All(Model, "").Count();
+    var users = userManager.All(Model, "").ToList().Count();
     var connects = connectManager.All(Model, "").Count();
     var sites = siteManager.All().Select(it => it.AsActual()).Where(it => it.Repository.EqualsOrNullEmpty(Model.Name, StringComparison.OrdinalIgnoreCase)).Count();
 }

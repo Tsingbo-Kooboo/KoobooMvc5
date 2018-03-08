@@ -4358,4 +4358,22 @@
   <data name="Report" xml:space="preserve">
     <value>Report</value>
   </data>
+  <data name="The Require HTTPS field is required." xml:space="preserve">
+    <value>The Require HTTPS field is required.</value>
+  </data>
+  <data name="The Cache to disk field is required." xml:space="preserve">
+    <value>The Cache to disk field is required.</value>
+  </data>
+  <data name="The Duration field is required." xml:space="preserve">
+    <value>The Duration field is required.</value>
+  </data>
+  <data name="The Expiration policy field is required." xml:space="preserve">
+    <value>The Expiration policy field is required.</value>
+  </data>
+  <data name="The Require membership authentication field is required." xml:space="preserve">
+    <value>The Require membership authentication field is required.</value>
+  </data>
+  <data name="The Apply to menu generation field is required." xml:space="preserve">
+    <value>The Apply to menu generation field is required.</value>
+  </data>
 </root>
