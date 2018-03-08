@@ -945,7 +945,7 @@ namespace Kooboo.CMS.Web.Areas.Contents.Controllers
                         if (string.IsNullOrEmpty(doc)) continue;
 
                         TextContentManager.Update(Repository, schema, doc, new string[] { "FolderName" },
-                             new object[] { targetFolder }, User.Identity.Name);
+                             new object[] { targetFolder }, "");
                     }
 
                 }
